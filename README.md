@@ -62,19 +62,19 @@ Linux/MAC
 
 ## Paths
 
-##### Get all Products
+##### Get all Users
 ##### GET
 ```bash
 /api/catalogs/v1/user/all
 ```
 
-##### Get Product by Name or Category
+##### Get user by id
 ##### GET
 ```bash
 /api/catalogs/v1/user/2
 ```
 
-##### Add Card
+##### Add user
 ##### POST
 ```bash
 /api/catalogs/v1/user
@@ -94,19 +94,8 @@ Linux/MAC
 ]
  ```
 
-##### Get Detail Card
-##### GET
-```bash
-/api/marketplace/detail/cart?idCart=5c...
-```
 
-##### Remove Product in Card
-##### POST
-```bash
-/api/marketplace/remove/product-cart?idCart=5c...&idProduct=5c...
-```
-
-## Healt
+## Health
 The health was added to be able to verify the status of the api
 
 ##### Check the status of the api
