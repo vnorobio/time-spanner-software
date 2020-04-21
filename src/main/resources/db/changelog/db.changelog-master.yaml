@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200419-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: users
+  - changeSet:
+      id: 20200419-2-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: login
+            constraintName: uc_user_login
+            tableName: users
+  - changeSet:
+      id: 20200419-3-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uc_user_email
+            tableName: users
