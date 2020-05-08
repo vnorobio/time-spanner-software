@@ -1,6 +1,5 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.google.common.base.Supplier;
 import com.neytor.timespannersoftware.exception.NoneUserFoundException;
 import com.neytor.timespannersoftware.model.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
@@ -11,10 +10,16 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/catalogs")
