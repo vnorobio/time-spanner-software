@@ -23,6 +23,8 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
+	compile 'com.google.cloud.sql:postgres-socket-factory:1.0.16'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -33,7 +35,7 @@ sonarqube {
 		property "sonar.projectKey", "vnorobio_time-spanner-software"
 		property "sonar.organization", "vnorobio"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.login", "5a017f93663a727ce092630ef6885c8abbff5d99"
+		property "sonar.login", "d3cd041f99e4595a2bc9a6a5581b1adf155cfa54"
 	}
 }
 
