@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping(path = "/v1/user/{id}", produces = "application/json")
+    @GetMapping(path = "/v1/user/id/{id}", produces = "application/json")
     @ApiOperation(value = "Find a user by id", response = UserEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the user"),
@@ -59,7 +59,7 @@ public class UserController {
         return ResponseEntity.ok().body(service.findById(id).orElseThrow(() -> new NoneUserFoundException("Not user found with id: " + id)));
     }
 
-    @GetMapping(path = "/v1/user/{login}", produces = "application/json")
+    @GetMapping(path = "/v1/user/login/{login}", produces = "application/json")
     @ApiOperation(value = "Find a user by login", response = UserEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the user"),
@@ -67,11 +67,11 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<UserEntity> finByLogin(@PathVariable(value = "login") String login) throws RuntimeException {
+    public ResponseEntity<UserEntity> findByLogin(@PathVariable(value = "login") String login) throws RuntimeException {
         return ResponseEntity.ok().body(service.findByLogin(login).orElseThrow(() -> new NoneUserFoundException("Not user found with login: " + login)));
     }
 
-    @GetMapping(path = "/v1/user/{email}", produces = "application/json")
+    @GetMapping(path = "/v1/user/email/{email}", produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the user"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -79,7 +79,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @ApiOperation(value = "Find a user by email", response = UserEntity.class)
-    public ResponseEntity<UserEntity> finByEmail(@PathVariable(value = "email") String email) throws RuntimeException {
+    public ResponseEntity<UserEntity> findByEmail(@PathVariable(value = "email") String email) throws RuntimeException {
         return ResponseEntity.ok().body(service.findByEmail(email).orElseThrow(() -> new NoneUserFoundException("Not user found with email: " + email)));
     }
 
@@ -112,7 +112,7 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/v1/user/{id}", produces = "application/json")
-    @ApiOperation(value = "Delete user by email", response = UserEntity.class)
+    @ApiOperation(value = "Delete user by id", response = UserEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "User successfully deleted"),
             @ApiResponse(code = 401, message = "You are not authorized to delete users"),

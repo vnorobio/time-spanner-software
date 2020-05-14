@@ -1,10 +1,10 @@
 package com.neytor.timespannersoftware.service;
 
 import com.neytor.timespannersoftware.model.UserEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
  public interface UserService{
 
