@@ -1,7 +1,6 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.UserEntity;
-import org.springframework.stereotype.Service;
+import com.neytor.timespannersoftware.model.entity.UserEntity;
 
 import java.util.List;
 import java.util.Optional;

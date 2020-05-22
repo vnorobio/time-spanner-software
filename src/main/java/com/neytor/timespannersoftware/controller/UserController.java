@@ -1,12 +1,14 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.exception.NoneUserFoundException;
-import com.neytor.timespannersoftware.model.UserEntity;
+import com.neytor.timespannersoftware.exception.EntityNotFoundException;
+import com.neytor.timespannersoftware.model.dto.User;
+import com.neytor.timespannersoftware.model.entity.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +22,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalogs")
 @Api("users")
 public class UserController {
 
+    public static final String NOT_USER_FOUND_WITH_ID = "Not user found with id: ";
     private final UserService service;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public UserController(UserService service) {
+    public UserController(UserService service, ModelMapper modelMapper) {
         this.service = service;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping(path = "/v1/user/all", produces = "application/json")
@@ -41,10 +47,8 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<List<UserEntity>> findAll() throws RuntimeException {
-        List<UserEntity> users = service.findAll();
-        if(users.isEmpty()) throw new NoneUserFoundException("None users where found");
-        return ResponseEntity.ok().body(users);
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok().body(service.findAll().stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping(path = "/v1/user/id/{id}", produces = "application/json")
@@ -55,8 +59,8 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<UserEntity> finById(@PathVariable(value = "id") Long id) throws RuntimeException {
-        return ResponseEntity.ok().body(service.findById(id).orElseThrow(() -> new NoneUserFoundException("Not user found with id: " + id)));
+    public ResponseEntity<User> finById(@PathVariable(value = "id") Long id) {
+        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_USER_FOUND_WITH_ID + id))));
     }
 
     @GetMapping(path = "/v1/user/login/{login}", produces = "application/json")
@@ -67,8 +71,8 @@ public class UserController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<UserEntity> findByLogin(@PathVariable(value = "login") String login) throws RuntimeException {
-        return ResponseEntity.ok().body(service.findByLogin(login).orElseThrow(() -> new NoneUserFoundException("Not user found with login: " + login)));
+    public ResponseEntity<User> findByLogin(@PathVariable(value = "login") String login) {
+        return ResponseEntity.ok().body(convertToDto(service.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("Not user found with login: " + login))));
     }
 
     @GetMapping(path = "/v1/user/email/{email}", produces = "application/json")
@@ -79,8 +83,8 @@ public class UserController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     @ApiOperation(value = "Find a user by email", response = UserEntity.class)
-    public ResponseEntity<UserEntity> findByEmail(@PathVariable(value = "email") String email) throws RuntimeException {
-        return ResponseEntity.ok().body(service.findByEmail(email).orElseThrow(() -> new NoneUserFoundException("Not user found with email: " + email)));
+    public ResponseEntity<User> findByEmail(@PathVariable(value = "email") String email) {
+        return ResponseEntity.ok().body(convertToDto(service.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("Not user found with email: " + email))));
     }
 
     @PostMapping(path = "/v1/user", produces = "application/json")
@@ -90,8 +94,9 @@ public class UserController {
             @ApiResponse(code = 401, message = "You are not authorized to create users"),
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden")
     })
-    public ResponseEntity<UserEntity> create(@RequestBody UserEntity entity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(entity));
+    public ResponseEntity<User> create(@RequestBody User dto) {
+        UserEntity entity = convertToEntity(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.create(entity)));
     }
 
     @PutMapping(path = "/v1/user", produces = "application/json")
@@ -102,28 +107,36 @@ public class UserController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<UserEntity> update(@RequestBody UserEntity UpdateEntity) throws RuntimeException {
-        UserEntity entity = service.findById(UpdateEntity.getId()).orElseThrow(() -> new NoneUserFoundException("Not user found with id: " + UpdateEntity.getId()));
-        entity.setName(UpdateEntity.getName());
-        entity.setEmail(UpdateEntity.getEmail());
-        entity.setPassword(UpdateEntity.getPassword());
-        entity.setActive(UpdateEntity.getActive());
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.update(entity));
+    public ResponseEntity<User> update(@RequestBody User Updatedto) {
+        UserEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_USER_FOUND_WITH_ID + Updatedto.getId()));
+        entity.setName(Updatedto.getName());
+        entity.setEmail(Updatedto.getEmail());
+        entity.setPassword(Updatedto.getPassword());
+        entity.setActive(Updatedto.getActive());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 
     @DeleteMapping(path = "/v1/user/{id}", produces = "application/json")
-    @ApiOperation(value = "Delete user by id", response = UserEntity.class)
+    @ApiOperation(value = "Delete user by id", response = User.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "User successfully deleted"),
             @ApiResponse(code = 401, message = "You are not authorized to delete users"),
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<UserEntity> delete(@PathVariable(value = "id") Long id) throws RuntimeException {
+    public ResponseEntity<User> delete(@PathVariable(value = "id") Long id) {
         if (!service.existsById(id)) {
-            throw new NoneUserFoundException("Not user found with id: " + id);
+            throw new EntityNotFoundException(NOT_USER_FOUND_WITH_ID + id);
         }
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    private User convertToDto(UserEntity entity) {
+        return modelMapper.map(entity, User.class);
+    }
+
+    private UserEntity convertToEntity(User dto) {
+        return modelMapper.map(dto, UserEntity.class);
     }
 }

@@ -1,18 +1,7 @@
-package com.neytor.timespannersoftware.model;
+package com.neytor.timespannersoftware.model.dto;
 
+public class User {
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;
@@ -25,11 +14,11 @@ public class UserEntity {
 
     private Boolean active;
 
-    public UserEntity() {
+    public User() {
         //Empty constructor
     }
 
-    public UserEntity(Long id, String login, String password, String name, String email, Boolean active) {
+    public User(Long id, String login, String password, String name, String email, Boolean active) {
         this.id = id;
         this.login = login;
         this.password = password;

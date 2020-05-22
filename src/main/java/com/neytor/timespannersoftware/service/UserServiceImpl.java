@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.UserEntity;
+import com.neytor.timespannersoftware.model.entity.UserEntity;
 import com.neytor.timespannersoftware.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,7 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.model.UserEntity;
+import com.neytor.timespannersoftware.model.dto.User;
+import com.neytor.timespannersoftware.model.entity.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,7 +49,6 @@ class UserControllerTest {
 
     @Test
     void findAll() throws Exception{
-
         // given
         UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
         UserEntity user2 = new UserEntity(2L, "java", "Gupta", "Lokesh", "Lokeshjava@gmail.com",true);
@@ -56,7 +57,7 @@ class UserControllerTest {
         given(service.findAll()).willReturn(users);
 
         // when
-        ResponseEntity<List<UserEntity>> responseEntity = controller.findAll();
+        ResponseEntity<List<User>> responseEntity = controller.findAll();
 
         // then
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/user/all"))
@@ -65,7 +66,6 @@ class UserControllerTest {
 
         assertNotNull(result.getResponse().getContentAsString());
 
-
     }
 
    @Test
@@ -73,7 +73,7 @@ class UserControllerTest {
        UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
        given(service.findById(2L)).willReturn(Optional.of(user1));
 
-       ResponseEntity<UserEntity> responseEntity = controller.finById(2L);
+       ResponseEntity<User> responseEntity = controller.finById(2L);
 
        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/user/id/{id}",2))
                .andExpect(status().isOk())
@@ -88,7 +88,7 @@ class UserControllerTest {
         UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
         given(service.findByLogin("howtodoinjava")).willReturn(Optional.of(user1));
 
-        ResponseEntity<UserEntity> responseEntity = controller.findByLogin("howtodoinjava");
+        ResponseEntity<User> responseEntity = controller.findByLogin("howtodoinjava");
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/user/login/{login}","howtodoinjava"))
                 .andExpect(status().isOk())
@@ -102,7 +102,7 @@ class UserControllerTest {
         UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
         given(service.findByEmail("howtodoinjava@gmail.com")).willReturn(Optional.of(user1));
 
-        ResponseEntity<UserEntity> responseEntity = controller.findByEmail("howtodoinjava@gmail.com");
+        ResponseEntity<User> responseEntity = controller.findByEmail("howtodoinjava@gmail.com");
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/user/email/{email}","howtodoinjava@gmail.com"))
                 .andExpect(status().isOk())
@@ -113,6 +113,9 @@ class UserControllerTest {
 
     @Test
     void create() throws Exception{
+        UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        given(service.create(any(UserEntity.class))).willReturn(user1);
+
        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/user/").content(USER_JSON)
                .contentType(MediaType.APPLICATION_JSON)
                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
@@ -124,10 +127,11 @@ class UserControllerTest {
     @Test
     void update() throws Exception {
         UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        User userDto = new User(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
         given(service.findById(1L)).willReturn(Optional.of(user1));
         given(service.update(user1)).willReturn(user1);
 
-        ResponseEntity<UserEntity> responseEntity = controller.update(user1);
+        ResponseEntity<User> responseEntity = controller.update(userDto);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/catalogs/v1/user/").content(USER_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
