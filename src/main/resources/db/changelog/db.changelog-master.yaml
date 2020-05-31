@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: id
+                  name: user_id
                   type: int
                   autoIncrement: true
                   constraints:
@@ -57,3 +57,102 @@ databaseChangeLog:
             columnNames: email
             constraintName: uc_user_email
             tableName: users
+  - changeSet:
+      id: 20200526-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: profiles
+            columns:
+              - column:
+                  name: profile_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: profiles
+  - changeSet:
+      id: 20200526-2-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: users_profiles
+            columns:
+              - column:
+                  name: user_profile_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profile_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: user_profiles
+  - changeSet:
+      id: 20200526-3-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: users_profiles
+            constraintName: fk_profile_user
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 20200526-4-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: profile_id
+            baseTableName: users_profiles
+            constraintName: fk_user_profile
+            referencedColumnNames: profile_id
+            referencedTableName: profiles
+  - changeSet:
+      id: 20200526-5-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: user_id, profile_id
+            constraintName: uc_user_profile
+            tableName: users_profiles
+  - changeSet:
+      id: 20200526-6-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: companies
+            columns:
+              - column:
+                  name: company_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: companies

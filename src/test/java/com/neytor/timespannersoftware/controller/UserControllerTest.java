@@ -1,7 +1,7 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.model.dto.User;
-import com.neytor.timespannersoftware.model.entity.UserEntity;
+import com.neytor.timespannersoftware.dto.User;
+import com.neytor.timespannersoftware.model.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.entity.UserEntity;
+import com.neytor.timespannersoftware.model.UserEntity;
 
 import java.util.List;
 import java.util.Optional;

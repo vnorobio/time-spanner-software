@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.repository;
 
-import com.neytor.timespannersoftware.model.entity.UserEntity;
+import com.neytor.timespannersoftware.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
