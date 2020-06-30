@@ -149,6 +149,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: company_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: description
                   type: varchar(255)
                   constraints:
@@ -156,3 +161,223 @@ databaseChangeLog:
       rollback:
         - dropTable:
             tableName: companies
+  - changeSet:
+      id: 20200616-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: country_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: country_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: numeric_code
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alpha_2_code
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alpha_3_code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: countries
+  - changeSet:
+      id: 20200616-2-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: country_name
+            constraintName: uc_country_name
+            tableName: countries
+  - changeSet:
+      id: 20200616-3-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: country_name
+            constraintName: uc_numeric_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-4-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: alpha_2_code
+            constraintName: uc_alpha_2_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-5-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: alpha_3_code
+            constraintName: uc_alpha_3_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-6-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: persons
+            columns:
+              - column:
+                  name: person_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: first_surname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_surname
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: gender
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: marital_status
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: persons
+  - changeSet:
+      id: 20200616-7-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: identification_type
+            columns:
+              - column:
+                  name: identification_type_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(127)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: shortened_form
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: identification_type
+  - changeSet:
+      id: 20200616-8-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: identifications
+            columns:
+              - column:
+                  name: identification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_type
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: identifications
+  - changeSet:
+      id: 20200616-9-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: identifications
+            constraintName: fk_identification_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200616-10-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: country_id
+            baseTableName: identifications
+            constraintName: fk_identification_country
+            referencedColumnNames: country_id
+            referencedTableName: countries
