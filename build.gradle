@@ -4,7 +4,6 @@ plugins {
 	id 'java'
 	id "org.sonarqube" version "2.8"
 	id 'jacoco'
-	id 'nu.studer.jooq' version '4.2'
 }
 
 group = 'com.neytor'
@@ -22,13 +21,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'org.jooq:jooq'
 	runtimeOnly 'org.postgresql:postgresql'
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
 	compile 'com.google.cloud.sql:postgres-socket-factory:1.0.16'
 	compile 'org.modelmapper:modelmapper:2.3.7'
-	jooqRuntime 'org.postgresql:postgresql:42.2.12'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -63,45 +60,5 @@ jacocoTestReport {
 		xml.enabled true
 		csv.enabled true
 		html.enabled true
-	}
-}
-
-jooq {
-	//version = '3.13.1'
-	//edition = 'OSS'
-	generateSchemaSourceOnCompilation = true
-	sample(sourceSets.main) {
-		jdbc {
-			driver = 'org.postgresql.Driver'
-			url = 'jdbc:postgresql://ls-4a27d94e305b9294ffca3e85de3f37488c30d2f8.cnvyfjxtyz4f.us-east-1.rds.amazonaws.com:5432/db_time_spanner?currentSchema=public'
-			user = 'postgres'
-			password = 'S3nc1ll4'
-		}
-		generator {
-			name = 'org.jooq.codegen.DefaultGenerator'
-			strategy {
-				name = 'org.jooq.codegen.DefaultGeneratorStrategy'
-				// ...
-			}
-			database {
-				name = 'org.jooq.meta.postgres.PostgresDatabase'
-				inputSchema = 'public'
-				includes = '.*'
-				excludes = ''
-				// ...
-			}
-			generate {
-				relations = true
-				deprecated = false
-				records = true
-				immutablePojos = true
-				fluentSetters = true
-				// ...
-			}
-			target {
-				packageName = 'com.neytor.timespannersoftware.jooq'
-				// directory = ...
-			}
-		}
 	}
 }
