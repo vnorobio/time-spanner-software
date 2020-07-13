@@ -246,22 +246,27 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: first_name
-                  type: varchar(255)
+                  type: varchar(200)
                   constraints:
                     nullable: false
               - column:
                   name: second_name
-                  type: varchar(255)
+                  type: varchar(200)
                   constraints:
                     nullable: true
               - column:
                   name: first_surname
-                  type: varchar(255)
+                  type: varchar(200)
                   constraints:
                     nullable: false
               - column:
                   name: second_surname
-                  type: varchar(255)
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: full_name
+                  type: varchar(1000)
                   constraints:
                     nullable: true
               - column:

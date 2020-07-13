@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Api("companies")
 public class CompanyController {
 
-    public static final String NOT_CITY_FOUND_WITH_ID = "Not company found with id: ";
+    public static final String NOT_COMPANY_FOUND_WITH_ID = "Not company found with id: ";
     private final CompanyService service;
     private ModelMapper modelMapper;
 
@@ -53,10 +53,10 @@ public class CompanyController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Company> finById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_CITY_FOUND_WITH_ID + id))));
+        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_COMPANY_FOUND_WITH_ID + id))));
     }
 
-    @GetMapping(path = "/v1/company/login/{login}", produces = "application/json")
+    @GetMapping(path = "/v1/company/description/{description}", produces = "application/json")
     @ApiOperation(value = "Find a company by login", response = CompanyEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the company"),
@@ -64,7 +64,7 @@ public class CompanyController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Company> findByLogin(@PathVariable(value = "login") String description) {
+    public ResponseEntity<Company> findByDescription(@PathVariable(value = "login") String description) {
         return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not company found with login: " + description))));
     }
 
@@ -89,7 +89,7 @@ public class CompanyController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Company> update(@RequestBody Company Updatedto) {
-        CompanyEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_CITY_FOUND_WITH_ID + Updatedto.getId()));
+        CompanyEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_COMPANY_FOUND_WITH_ID + Updatedto.getId()));
         entity.setDescription(Updatedto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
@@ -104,7 +104,7 @@ public class CompanyController {
     })
     public ResponseEntity<Company> delete(@PathVariable(value = "id") Long id) {
         if (!service.existsById(id)) {
-            throw new EntityNotFoundException(NOT_CITY_FOUND_WITH_ID + id);
+            throw new EntityNotFoundException(NOT_COMPANY_FOUND_WITH_ID + id);
         }
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

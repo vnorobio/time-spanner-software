@@ -56,16 +56,16 @@ public class ProfileController {
         return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_PROFILE_FOUND_WITH_ID + id))));
     }
 
-    @GetMapping(path = "/v1/profile/login/{login}", produces = "application/json")
-    @ApiOperation(value = "Find a profile by login", response = ProfileEntity.class)
+    @GetMapping(path = "/v1/profile/description/{description}", produces = "application/json")
+    @ApiOperation(value = "Find a profile by description", response = ProfileEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the profile"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Profile> findByLogin(@PathVariable(value = "login") String description) {
-        return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not profile found with login: " + description))));
+    public ResponseEntity<Profile> findByDescription(@PathVariable(value = "description") String description) {
+        return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not profile found with description: " + description))));
     }
 
     @PostMapping(path = "/v1/profile", produces = "application/json")
