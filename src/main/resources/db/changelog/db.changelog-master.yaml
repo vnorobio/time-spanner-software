@@ -363,6 +363,11 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: false
       rollback:
         - dropTable:
             tableName: identifications
