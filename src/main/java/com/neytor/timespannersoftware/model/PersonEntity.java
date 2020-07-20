@@ -1,6 +1,13 @@
 package com.neytor.timespannersoftware.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "persons")
@@ -26,6 +33,13 @@ public class PersonEntity {
     @Column(name = "full_name")
     private String fullName;
 
+    @ManyToOne
+    @JoinColumn(name = "identification_type", referencedColumnName = "identification_type_id", insertable = false, updatable = false)
+    private IdentificationTypeEntity identificationType;
+
+    @Column(name = "identification_number")
+    private String identificationNumber;
+
     private Integer gender;
 
     @Column(name = "marital_status")
@@ -42,18 +56,20 @@ public class PersonEntity {
         // Empty constructor
     }
 
-    public PersonEntity(Long id, String firstName, String secondName, String firstSurname, String secondSurname, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
+    public PersonEntity(Long id, String firstName, String secondName, String firstSurname, String secondSurname, String fullName, IdentificationTypeEntity identificationType, String identificationNumber, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
+        this.fullName = fullName;
+        this.identificationType = identificationType;
+        this.identificationNumber = identificationNumber;
         this.gender = gender;
         this.maritalStatus = maritalStatus;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.setFullName();
     }
 
     public Long getId() {
@@ -100,6 +116,10 @@ public class PersonEntity {
         this.setFullName();
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     public void setFullName(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.firstSurname);
@@ -113,8 +133,20 @@ public class PersonEntity {
         this.fullName =  stringBuilder.toString();
     }
 
-    public String getFullName() {
-        return this.fullName;
+    public IdentificationTypeEntity getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(IdentificationTypeEntity identificationType) {
+        this.identificationType = identificationType;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
     }
 
     public Integer getGender() {

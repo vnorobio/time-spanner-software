@@ -1,5 +1,7 @@
 package com.neytor.timespannersoftware.dto;
 
+import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
+
 public class Person {
 
     private Long id;
@@ -13,6 +15,10 @@ public class Person {
     private String secondSurname;
 
     private String fullName;
+
+    private IdentificationTypeEntity identificationType;
+
+    private String identificationNumber;
 
     private Integer gender;
 
@@ -28,12 +34,15 @@ public class Person {
         // Empty constructor
     }
 
-    public Person(Long id, String firstName, String secondName, String firstSurname, String secondSurname, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
+    public Person(Long id, String firstName, String secondName, String firstSurname, String secondSurname, String fullName, IdentificationTypeEntity identificationType, String identificationNumber, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.firstSurname = firstSurname;
         this.secondSurname = secondSurname;
+        this.fullName = fullName;
+        this.identificationType = identificationType;
+        this.identificationNumber = identificationNumber;
         this.gender = gender;
         this.maritalStatus = maritalStatus;
         this.address = address;
@@ -55,6 +64,7 @@ public class Person {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        this.setFullName();
     }
 
     public String getSecondName() {
@@ -63,6 +73,7 @@ public class Person {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+        this.setFullName();
     }
 
     public String getFirstSurname() {
@@ -71,6 +82,7 @@ public class Person {
 
     public void setFirstSurname(String firstSurname) {
         this.firstSurname = firstSurname;
+        this.setFullName();
     }
 
     public String getSecondSurname() {
@@ -79,9 +91,14 @@ public class Person {
 
     public void setSecondSurname(String secondSurname) {
         this.secondSurname = secondSurname;
+        this.setFullName();
     }
 
     public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(this.firstSurname);
         if (!this.secondSurname.isEmpty()) {
@@ -91,7 +108,23 @@ public class Person {
         if (!this.secondName.isEmpty()) {
             stringBuilder.append( " " + this.secondName);
         }
-        return stringBuilder.toString();
+        this.fullName =  stringBuilder.toString();
+    }
+
+    public IdentificationTypeEntity getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(IdentificationTypeEntity identificationType) {
+        this.identificationType = identificationType;
+    }
+
+    public String getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
     }
 
     public Integer getGender() {
