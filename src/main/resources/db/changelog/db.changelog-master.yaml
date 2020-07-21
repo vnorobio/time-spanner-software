@@ -364,3 +364,262 @@ databaseChangeLog:
             constraintName: fk_identification_person
             referencedColumnNames: identification_type_id
             referencedTableName: identification_type
+  - changeSet:
+      id: 20200720-10-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: employees_groups
+            columns:
+              - column:
+                  name: employees_group_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: employees_groups
+  - changeSet:
+      id: 20200720-11-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: operating_centers
+            columns:
+              - column:
+                  name: operating_center_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: operating_centers
+  - changeSet:
+      id: 20200720-12-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: costs_centers
+            columns:
+              - column:
+                  name: cost_center_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: costs_centers
+  - changeSet:
+      id: 20200720-13-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: business_units
+            columns:
+              - column:
+                  name: business_unit_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: business_units
+  - changeSet:
+      id: 20200720-14-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: projects
+            columns:
+              - column:
+                  name: project_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: projects
+  - changeSet:
+      id: 20200720-15-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: contracts
+            columns:
+              - column:
+                  name: contract_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: reference
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: salary
+                  type: decimal(20,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payroll_periodicity
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employees_group_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: operating_center_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cost_center_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: business_unit_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: project_id
+                  type: int
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 20200720-16-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: employees_group_id
+            baseTableName: contracts
+            constraintName: fk_employees_group_contract
+            referencedColumnNames: employees_group_id
+            referencedTableName: employees_groups
+  - changeSet:
+      id: 20200720-17-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: operating_center_id
+            baseTableName: contracts
+            constraintName: fk_operating_center_contract
+            referencedColumnNames: operating_center_id
+            referencedTableName: operating_centers
+  - changeSet:
+      id: 20200720-18-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: cost_center_id
+            baseTableName: contracts
+            constraintName: fk_cost_center_contract
+            referencedColumnNames: cost_center_id
+            referencedTableName: costs_centers
+  - changeSet:
+      id: 20200720-19-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: business_unit_id
+            baseTableName: contracts
+            constraintName: fk_business_unit_contract
+            referencedColumnNames: business_unit_id
+            referencedTableName: business_units
+  - changeSet:
+      id: 20200720-20-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: contracts
+            constraintName: fk_project_contract
+            referencedColumnNames: project_id
+            referencedTableName: projects
