@@ -1,7 +1,7 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.BusinessUnitEntity;
-import com.neytor.timespannersoftware.repository.BusinessUnitRepository;
+import com.neytor.timespannersoftware.model.CostsCenterEntity;
+import com.neytor.timespannersoftware.repository.CostsCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,48 +9,48 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BusinessUnitServiceImpl implements BusinessUnitService{
+public class CostsCenterServiceImpl implements CostsCenterService{
 
-    private final BusinessUnitRepository repository;
+    private final CostsCenterRepository repository;
 
     @Autowired
-    public BusinessUnitServiceImpl(BusinessUnitRepository repository) {
+    public CostsCenterServiceImpl(CostsCenterRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public List<BusinessUnitEntity> findAll() {
+    public List<CostsCenterEntity> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<BusinessUnitEntity> findById(Long id) {
+    public Optional<CostsCenterEntity> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Optional<BusinessUnitEntity> findByCode(String code) {
+    public Optional<CostsCenterEntity> findByCode(String code) {
         return repository.findByCode(code);
     }
 
     @Override
-    public List<BusinessUnitEntity> findByCodeContaining(String code) {
+    public List<CostsCenterEntity> findByCodeContaining(String code) {
         return repository.findByCodeContaining(code);
     }
 
     @Override
-    public List<BusinessUnitEntity> findByDescriptionContaining(String description) {
+    public List<CostsCenterEntity> findByDescriptionContaining(String description) {
         return repository.findByDescriptionContaining(description);
     }
 
     @Override
-    public BusinessUnitEntity create(BusinessUnitEntity businessUnit) {
-        return repository.save(businessUnit);
+    public CostsCenterEntity create(CostsCenterEntity costsCenter) {
+        return repository.save(costsCenter);
     }
 
     @Override
-    public BusinessUnitEntity update(BusinessUnitEntity businessUnit) {
-        return repository.save(businessUnit);
+    public CostsCenterEntity update(CostsCenterEntity costsCenter) {
+        return repository.save(costsCenter);
     }
 
     @Override

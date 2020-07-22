@@ -16,9 +16,9 @@ public interface BusinessUnitService {
 
     List<BusinessUnitEntity> findByDescriptionContaining(String description);
 
-    BusinessUnitEntity create(BusinessUnitEntity BusinessUnit);
+    BusinessUnitEntity create(BusinessUnitEntity businessUnit);
 
-    BusinessUnitEntity update(BusinessUnitEntity BusinessUnit);
+    BusinessUnitEntity update(BusinessUnitEntity businessUnit);
 
     void delete(Long id);
 
