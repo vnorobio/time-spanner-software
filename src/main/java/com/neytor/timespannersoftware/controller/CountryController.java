@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalogs")
-@Api("companies")
+@Api("countries")
 public class CountryController {
 
     public static final String NOT_CITY_FOUND_WITH_ID = "Not country found with id: ";

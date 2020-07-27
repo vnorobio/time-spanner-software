@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalogs")
-@Api("companies")
+@Api("identification_types")
 public class IdentificationTypeController {
 
     public static final String NOT_TYPE_FOUND_WITH_ID = "Not identification type found with id: ";

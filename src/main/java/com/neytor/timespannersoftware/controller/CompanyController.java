@@ -57,15 +57,15 @@ public class CompanyController {
     }
 
     @GetMapping(path = "/v1/company/description/{description}", produces = "application/json")
-    @ApiOperation(value = "Find a company by login", response = CompanyEntity.class)
+    @ApiOperation(value = "Find a company by description", response = CompanyEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the company"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Company> findByDescription(@PathVariable(value = "login") String description) {
-        return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not company found with login: " + description))));
+    public ResponseEntity<Company> findByDescription(@PathVariable(value = "description") String description) {
+        return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not company found with description: " + description))));
     }
 
     @PostMapping(path = "/v1/company", produces = "application/json")

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalogs")
-@Api("companies")
+@Api("persons")
 public class PersonController {
 
     public static final String NOT_PERSON_FOUND_WITH_ID = "Not Person found with id: ";
