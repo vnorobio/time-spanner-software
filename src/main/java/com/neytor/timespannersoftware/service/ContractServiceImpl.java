@@ -35,17 +35,17 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public List<ContractEntity> findByIdentificationNumber(String identificationNumber) {
-        return repository.findByIdentificationNumber(identificationNumber);
+        return repository.findByPersonIdentificationNumber(identificationNumber);
     }
 
     @Override
     public List<ContractEntity> findByIdentificationNumberContaining(String identificationNumber) {
-        return repository.findByIdentificationNumberContaining(identificationNumber);
+        return repository.findByPersonIdentificationNumberContaining(identificationNumber);
     }
 
     @Override
     public List<ContractEntity> findByFullNameContaining(String fullName) {
-        return repository.findByFullNameContaining(fullName);
+        return repository.findByPersonFullNameContaining(fullName);
     }
 
     @Override

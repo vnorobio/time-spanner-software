@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "contracts")
@@ -33,11 +33,11 @@ public class ContractEntity {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date")
-    private ZonedDateTime startDate;
+    private Date startDate;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ending_date")
-    private ZonedDateTime endingDate;
+    private Date endingDate;
 
     private BigDecimal salary;
 
@@ -68,7 +68,7 @@ public class ContractEntity {
         // Empty constructor
     }
 
-    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, ZonedDateTime startDate, ZonedDateTime endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, OperatingCenterEntity operatingCenter, CostsCenterEntity costsCenter, BusinessUnitEntity businessUnit, ProjectEntity project) {
+    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, OperatingCenterEntity operatingCenter, CostsCenterEntity costsCenter, BusinessUnitEntity businessUnit, ProjectEntity project) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -116,19 +116,19 @@ public class ContractEntity {
         this.contractType = contractType;
     }
 
-    public ZonedDateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(ZonedDateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public ZonedDateTime getEndingDate() {
+    public Date getEndingDate() {
         return endingDate;
     }
 
-    public void setEndingDate(ZonedDateTime endingDate) {
+    public void setEndingDate(Date endingDate) {
         this.endingDate = endingDate;
     }
 

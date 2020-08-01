@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ContractRepository extends JpaRepository<ContractEntity, Long> {
     Optional<ContractEntity> findByReference(String reference);
-    List<ContractEntity> findByIdentificationNumber(String identificationNumber);
-    List<ContractEntity> findByIdentificationNumberContaining(String identificationNumber);
-    List<ContractEntity> findByFullNameContaining(String fullName);
+    List<ContractEntity> findByPersonIdentificationNumber(String identificationNumber);
+    List<ContractEntity> findByPersonIdentificationNumberContaining(String identificationNumber);
+    List<ContractEntity> findByPersonFullNameContaining(String fullName);
 }
