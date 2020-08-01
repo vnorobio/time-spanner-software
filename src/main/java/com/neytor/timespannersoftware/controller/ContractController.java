@@ -125,18 +125,18 @@ public class ContractController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Contract> update(@RequestBody Contract Updatedto) {
-        ContractEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_CONTRACT_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setContractType(Updatedto.getContractType());
-        entity.setStartDate(Updatedto.getStartDate());
-        entity.setEndingDate(Updatedto.getEndingDate());
-        entity.setSalary(Updatedto.getSalary());
-        entity.setPayrollPeriodicity(Updatedto.getPayrollPeriodicity());
-        entity.setEmployeesGroup(modelMapper.map(Updatedto.getEmployeesGroup(), EmployeesGroupEntity.class));
-        entity.setOperatingCenter(modelMapper.map(Updatedto.getOperatingCenter(), OperatingCenterEntity.class));
-        entity.setCostsCenter(modelMapper.map(Updatedto.getCostsCenter(), CostsCenterEntity.class));
-        entity.setBusinessUnit(modelMapper.map(Updatedto.getBusinessUnit(), BusinessUnitEntity.class));
-        entity.setProject(modelMapper.map(Updatedto.getProject(), ProjectEntity.class));
+    public ResponseEntity<Contract> update(@RequestBody Contract updateDto) {
+        ContractEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_CONTRACT_FOUND_WITH_ID + updateDto.getId()));
+        entity.setContractType(updateDto.getContractType());
+        entity.setStartDate(updateDto.getStartDate());
+        entity.setEndingDate(updateDto.getEndingDate());
+        entity.setSalary(updateDto.getSalary());
+        entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
+        entity.setEmployeesGroup(modelMapper.map(updateDto.getEmployeesGroup(), EmployeesGroupEntity.class));
+        entity.setOperatingCenter(modelMapper.map(updateDto.getOperatingCenter(), OperatingCenterEntity.class));
+        entity.setCostsCenter(modelMapper.map(updateDto.getCostsCenter(), CostsCenterEntity.class));
+        entity.setBusinessUnit(modelMapper.map(updateDto.getBusinessUnit(), BusinessUnitEntity.class));
+        entity.setProject(modelMapper.map(updateDto.getProject(), ProjectEntity.class));
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

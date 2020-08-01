@@ -107,12 +107,12 @@ public class UserController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<User> update(@RequestBody User Updatedto) {
-        UserEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_USER_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setName(Updatedto.getName());
-        entity.setEmail(Updatedto.getEmail());
-        entity.setPassword(Updatedto.getPassword());
-        entity.setActive(Updatedto.getActive());
+    public ResponseEntity<User> update(@RequestBody User updateDto) {
+        UserEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_USER_FOUND_WITH_ID + updateDto.getId()));
+        entity.setName(updateDto.getName());
+        entity.setEmail(updateDto.getEmail());
+        entity.setPassword(updateDto.getPassword());
+        entity.setActive(updateDto.getActive());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

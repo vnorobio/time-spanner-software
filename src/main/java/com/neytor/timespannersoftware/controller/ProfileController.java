@@ -88,9 +88,9 @@ public class ProfileController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Profile> update(@RequestBody Profile Updatedto) {
-        ProfileEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PROFILE_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setDescription(Updatedto.getDescription());
+    public ResponseEntity<Profile> update(@RequestBody Profile updateDto) {
+        ProfileEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PROFILE_FOUND_WITH_ID + updateDto.getId()));
+        entity.setDescription(updateDto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

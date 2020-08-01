@@ -120,11 +120,11 @@ public class IdentificationTypeController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<IdentificationType> update(@RequestBody IdentificationType Updatedto) {
-        IdentificationTypeEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_TYPE_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setCode(Updatedto.getCode());
-        entity.setDescription(Updatedto.getDescription());
-        entity.setShortenedForm(Updatedto.getShortenedForm());
+    public ResponseEntity<IdentificationType> update(@RequestBody IdentificationType updateDto) {
+        IdentificationTypeEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_TYPE_FOUND_WITH_ID + updateDto.getId()));
+        entity.setCode(updateDto.getCode());
+        entity.setDescription(updateDto.getDescription());
+        entity.setShortenedForm(updateDto.getShortenedForm());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

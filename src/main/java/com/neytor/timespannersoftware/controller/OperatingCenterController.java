@@ -107,9 +107,9 @@ public class OperatingCenterController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<OperatingCenter> update(@RequestBody OperatingCenter Updatedto) {
-        OperatingCenterEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_OPERATING_CENTER_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setDescription(Updatedto.getDescription());
+    public ResponseEntity<OperatingCenter> update(@RequestBody OperatingCenter updateDto) {
+        OperatingCenterEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_OPERATING_CENTER_FOUND_WITH_ID + updateDto.getId()));
+        entity.setDescription(updateDto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

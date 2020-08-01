@@ -107,9 +107,9 @@ public class ProjectController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Project> update(@RequestBody Project Updatedto) {
-        ProjectEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PROJECT_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setDescription(Updatedto.getDescription());
+    public ResponseEntity<Project> update(@RequestBody Project updateDto) {
+        ProjectEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PROJECT_FOUND_WITH_ID + updateDto.getId()));
+        entity.setDescription(updateDto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

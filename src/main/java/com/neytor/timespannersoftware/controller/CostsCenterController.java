@@ -107,9 +107,9 @@ public class CostsCenterController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<CostsCenter> update(@RequestBody CostsCenter Updatedto) {
-        CostsCenterEntity entity = service.findById(Updatedto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_COST_CENTER_FOUND_WITH_ID + Updatedto.getId()));
-        entity.setDescription(Updatedto.getDescription());
+    public ResponseEntity<CostsCenter> update(@RequestBody CostsCenter updateDto) {
+        CostsCenterEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_COST_CENTER_FOUND_WITH_ID + updateDto.getId()));
+        entity.setDescription(updateDto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 
