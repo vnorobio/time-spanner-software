@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface CompanyService {
     List<CompanyEntity> findAll();
 
+    List<CompanyEntity> findByDescriptionContaining(String description);
+
     Optional<CompanyEntity> findById(Long id);
 
     Optional<CompanyEntity> findByDescription(String description);

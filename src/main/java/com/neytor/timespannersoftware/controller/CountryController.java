@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 @Api("countries")
 public class CountryController {
 
-    public static final String NOT_COUNTRYFOUND_WITH_ID = "Not country found with id: ";
-    public static final String NOT_COUNTRYFOUND_WITH_NAME = "Not country found with name: ";
+    public static final String NOT_COUNTRY_FOUND_WITH_ID = "Not country found with id: ";
+    public static final String NOT_COUNTRY_FOUND_WITH_NAME = "Not country found with name: ";
     private final CountryService service;
     private ModelMapper modelMapper;
 
@@ -54,7 +54,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> finById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRYFOUND_WITH_ID + id))));
+        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_ID + id))));
     }
 
     @GetMapping(path = "/v1/country/name/{name}", produces = "application/json")
@@ -66,7 +66,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> findByName(@PathVariable(value = "name") String name) {
-        return ResponseEntity.ok().body(convertToDto(service.findByName(name).orElseThrow(() -> new EntityNotFoundException("Not country found with name: " + name))));
+        return ResponseEntity.ok().body(convertToDto(service.findByName(name).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_NAME + name))));
     }
 
     @GetMapping(path = "/v1/country/code/{code}", produces = "application/json")
@@ -78,7 +78,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> findByNumericCode(@PathVariable(value = "code") Integer code) {
-        return ResponseEntity.ok().body(convertToDto(service.findByNumericCode(code).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRYFOUND_WITH_ID + code))));
+        return ResponseEntity.ok().body(convertToDto(service.findByNumericCode(code).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_ID + code))));
     }
 
     @GetMapping(path = "/v1/country/alpha2code/{code}", produces = "application/json")
@@ -90,7 +90,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> findByAlpha2Code(@PathVariable(value = "code") String code) {
-        return ResponseEntity.ok().body(convertToDto(service.findByAlpha2Code(code).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRYFOUND_WITH_NAME + code))));
+        return ResponseEntity.ok().body(convertToDto(service.findByAlpha2Code(code).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_NAME + code))));
     }
 
     @GetMapping(path = "/v1/country/alpha3code/{code}", produces = "application/json")
@@ -102,7 +102,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> findByAlpha3Code(@PathVariable(value = "code") String code) {
-        return ResponseEntity.ok().body(convertToDto(service.findByAlpha3Code(code).orElseThrow(() -> new EntityNotFoundException("Not country found with name: " + code))));
+        return ResponseEntity.ok().body(convertToDto(service.findByAlpha3Code(code).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_NAME + code))));
     }
 
 
@@ -127,7 +127,7 @@ public class CountryController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<Country> update(@RequestBody Country updateDto) {
-        CountryEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRYFOUND_WITH_ID+ updateDto.getId()));
+        CountryEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_ID+ updateDto.getId()));
         entity.setName(updateDto.getName());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
@@ -142,7 +142,7 @@ public class CountryController {
     })
     public ResponseEntity<Country> delete(@PathVariable(value = "id") Long id) {
         if (!service.existsById(id)) {
-            throw new EntityNotFoundException(NOT_COUNTRYFOUND_WITH_ID + id);
+            throw new EntityNotFoundException(NOT_COUNTRY_FOUND_WITH_ID + id);
         }
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

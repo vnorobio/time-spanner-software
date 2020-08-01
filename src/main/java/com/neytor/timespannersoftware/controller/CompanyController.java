@@ -64,8 +64,8 @@ public class CompanyController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Company> findByDescription(@PathVariable(value = "description") String description) {
-        return ResponseEntity.ok().body(convertToDto(service.findByDescription(description).orElseThrow(() -> new EntityNotFoundException("Not company found with description: " + description))));
+    public ResponseEntity<List<Company>> findByDescription(@PathVariable(value = "description") String description) {
+        return ResponseEntity.ok().body(service.findByDescriptionContaining(description).stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @PostMapping(path = "/v1/company", produces = "application/json")

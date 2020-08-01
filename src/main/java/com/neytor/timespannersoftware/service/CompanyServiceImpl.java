@@ -24,6 +24,11 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
+    public List<CompanyEntity> findByDescriptionContaining(String description) {
+        return repository.findByDescriptionContaining(description);
+    }
+
+    @Override
     public Optional<CompanyEntity> findById(Long id) {
         return repository.findById(id);
     }

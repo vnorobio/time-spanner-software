@@ -88,16 +88,16 @@ public class PersonController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Person> update(@RequestBody Person UpdateDto) {
-        PersonEntity entity = service.findById(UpdateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PERSON_FOUND_WITH_ID + UpdateDto.getId()));
-        entity.setAddress(UpdateDto.getAddress());
-        entity.setEmail(UpdateDto.getEmail());
-        entity.setFirstName(UpdateDto.getFirstName());
-        entity.setSecondName(UpdateDto.getSecondName());
-        entity.setFirstSurname(UpdateDto.getFirstSurname());
-        entity.setSecondSurname(UpdateDto.getSecondSurname());
-        entity.setGender(UpdateDto.getGender());
-        entity.setMaritalStatus(UpdateDto.getMaritalStatus());
+    public ResponseEntity<Person> update(@RequestBody Person updateDto) {
+        PersonEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_PERSON_FOUND_WITH_ID + updateDto.getId()));
+        entity.setAddress(updateDto.getAddress());
+        entity.setEmail(updateDto.getEmail());
+        entity.setFirstName(updateDto.getFirstName());
+        entity.setSecondName(updateDto.getSecondName());
+        entity.setFirstSurname(updateDto.getFirstSurname());
+        entity.setSecondSurname(updateDto.getSecondSurname());
+        entity.setGender(updateDto.getGender());
+        entity.setMaritalStatus(updateDto.getMaritalStatus());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 
