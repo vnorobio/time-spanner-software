@@ -1,7 +1,5 @@
 package com.neytor.timespannersoftware.dto;
 
-import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
-
 public class Person {
 
     private Long id;
@@ -16,7 +14,7 @@ public class Person {
 
     private String fullName;
 
-    private IdentificationTypeEntity identificationType;
+    private IdentificationType identificationType;
 
     private String identificationNumber;
 
@@ -34,7 +32,7 @@ public class Person {
         // Empty constructor
     }
 
-    public Person(Long id, String firstName, String secondName, String firstSurname, String secondSurname, String fullName, IdentificationTypeEntity identificationType, String identificationNumber, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
+    public Person(Long id, String firstName, String secondName, String firstSurname, String secondSurname, String fullName, IdentificationType identificationType, String identificationNumber, Integer gender, Integer maritalStatus, String address, String email, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -111,11 +109,11 @@ public class Person {
         this.fullName =  stringBuilder.toString();
     }
 
-    public IdentificationTypeEntity getIdentificationType() {
+    public IdentificationType getIdentificationType() {
         return identificationType;
     }
 
-    public void setIdentificationType(IdentificationTypeEntity identificationType) {
+    public void setIdentificationType(IdentificationType identificationType) {
         this.identificationType = identificationType;
     }
 

@@ -1,7 +1,7 @@
 package com.neytor.timespannersoftware.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Contract {
 
@@ -13,9 +13,9 @@ public class Contract {
 
     private int contractType;
 
-    private Date startDate;
+    private LocalDate startDate;
 
-    private Date endingDate;
+    private LocalDate endingDate;
 
     private BigDecimal salary;
 
@@ -35,7 +35,7 @@ public class Contract {
         // Empty constructor
     }
 
-    public Contract(Long id, String reference, Person person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, OperatingCenter operatingCenter, CostsCenter costsCenter, BusinessUnit businessUnit, Project project) {
+    public Contract(Long id, String reference, Person person, int contractType, LocalDate startDate, LocalDate endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, OperatingCenter operatingCenter, CostsCenter costsCenter, BusinessUnit businessUnit, Project project) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -83,19 +83,19 @@ public class Contract {
         this.contractType = contractType;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndingDate() {
+    public LocalDate getEndingDate() {
         return endingDate;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDate endingDate) {
         this.endingDate = endingDate;
     }
 

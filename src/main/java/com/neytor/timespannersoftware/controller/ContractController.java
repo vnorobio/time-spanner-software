@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,8 +129,8 @@ public class ContractController {
     public ResponseEntity<Contract> update(@RequestBody Contract updateDto) {
         ContractEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_CONTRACT_FOUND_WITH_ID + updateDto.getId()));
         entity.setContractType(updateDto.getContractType());
-        entity.setStartDate(updateDto.getStartDate());
-        entity.setEndingDate(updateDto.getEndingDate());
+        entity.setStartDate(Date.valueOf(updateDto.getStartDate()));
+        entity.setEndingDate(Date.valueOf(updateDto.getEndingDate()));
         entity.setSalary(updateDto.getSalary());
         entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
         entity.setEmployeesGroup(modelMapper.map(updateDto.getEmployeesGroup(), EmployeesGroupEntity.class));
