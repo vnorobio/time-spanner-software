@@ -1,25 +1,18 @@
-package com.neytor.timespannersoftware.model;
+package com.neytor.timespannersoftware.dto;
 
-import javax.persistence.*;
+public class TerrirorialDivision {
 
-@Entity
-@Table(name = "projects")
-public class ProjectEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_id")
     private Long id;
 
     private String code;
 
     private String description;
 
-    public ProjectEntity() {
+    public TerrirorialDivision() {
         // Empty constructor
     }
 
-    public ProjectEntity(Long id, String code, String description) {
+    public TerrirorialDivision(Long id, String code, String description) {
         this.id = id;
         this.code = code;
         this.description = description;

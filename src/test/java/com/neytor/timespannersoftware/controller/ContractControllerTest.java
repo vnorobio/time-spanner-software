@@ -2,15 +2,11 @@ package com.neytor.timespannersoftware.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neytor.timespannersoftware.dto.BusinessUnit;
+import com.neytor.timespannersoftware.dto.TerrirorialDivision;
 import com.neytor.timespannersoftware.dto.Contract;
-import com.neytor.timespannersoftware.dto.Contract;
-import com.neytor.timespannersoftware.dto.CostsCenter;
 import com.neytor.timespannersoftware.dto.EmployeesGroup;
 import com.neytor.timespannersoftware.dto.IdentificationType;
-import com.neytor.timespannersoftware.dto.OperatingCenter;
 import com.neytor.timespannersoftware.dto.Person;
-import com.neytor.timespannersoftware.dto.Project;
 import com.neytor.timespannersoftware.model.ContractEntity;
 import com.neytor.timespannersoftware.service.ContractService;
 import org.junit.jupiter.api.Test;
@@ -30,7 +26,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,13 +45,8 @@ public class ContractControllerTest {
 
     private EmployeesGroup employeesGroup;
 
-    private OperatingCenter operatingCenter;
+    private TerrirorialDivision terrirorialDivision;
 
-    private CostsCenter costsCenter;
-
-    private BusinessUnit businessUnit;
-
-    private Project project;
 
     @InjectMocks
     private ContractController controller;
@@ -71,11 +61,8 @@ public class ContractControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         Person person = new Person(1l,"Jhon",null,"Doe",null,"Doe Jhon",new IdentificationType(),"1234567890",1,0,"Some address","jhon@somedomain.com","444444");
         EmployeesGroup employeesGroup = new EmployeesGroup(1l,"EG Code","EG Description");
-        BusinessUnit businessUnit = new BusinessUnit(1L,"BU Code","BU description");
-        CostsCenter costsCenter = new CostsCenter(1L,"CC Code","CC description");
-        OperatingCenter operatingCenter = new OperatingCenter(1L,"OC Code","OC description");
-        Project project = new Project(1L,"P Code","P description");
-        Contract contract = new Contract(1l,"DoeJhon-1",person,1, LocalDate.of(2020,1,1),LocalDate.of(2020,1,31),new BigDecimal(2000000),1,employeesGroup,operatingCenter,costsCenter,businessUnit,project);
+        TerrirorialDivision terrirorialDivision = new TerrirorialDivision(1L,"BU Code","BU description");
+        Contract contract = new Contract(1l,"DoeJhon-1",person,1, LocalDate.of(2020,1,1),LocalDate.of(2020,1,31),new BigDecimal(2000000),1,employeesGroup, terrirorialDivision);
         CONTRACT_JSON = mapper.writeValueAsString(contract);
     }
 

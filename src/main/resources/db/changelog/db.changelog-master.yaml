@@ -396,10 +396,10 @@ databaseChangeLog:
       author: vnorobio
       changes:
         - createTable:
-            tableName: operating_centers
+            tableName: territorial_divisions
             columns:
               - column:
-                  name: operating_center_id
+                  name: territorial_division_id
                   type: int
                   autoIncrement: true
                   constraints:
@@ -415,92 +415,16 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: level
+                  type: smallint
+                  constraints:
+                    nullable: false
       rollback:
         - dropTable:
-            tableName: operating_centers
+            tableName: territorial_divisions
   - changeSet:
       id: 20200720-12-vno
-      author: vnorobio
-      changes:
-        - createTable:
-            tableName: costs_centers
-            columns:
-              - column:
-                  name: cost_center_id
-                  type: int
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: code
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: description
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-      rollback:
-        - dropTable:
-            tableName: costs_centers
-  - changeSet:
-      id: 20200720-13-vno
-      author: vnorobio
-      changes:
-        - createTable:
-            tableName: business_units
-            columns:
-              - column:
-                  name: business_unit_id
-                  type: int
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: code
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: description
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-      rollback:
-        - dropTable:
-            tableName: business_units
-  - changeSet:
-      id: 20200720-14-vno
-      author: vnorobio
-      changes:
-        - createTable:
-            tableName: projects
-            columns:
-              - column:
-                  name: project_id
-                  type: int
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: code
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: description
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-      rollback:
-        - dropTable:
-            tableName: projects
-  - changeSet:
-      id: 20200720-15-vno
       author: vnorobio
       changes:
         - createTable:
@@ -554,22 +478,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: operating_center_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: cost_center_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: business_unit_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: project_id
+                  name: territorial_division_id
                   type: int
                   constraints:
                     nullable: false
@@ -577,7 +486,7 @@ databaseChangeLog:
         - dropTable:
             tableName: contracts
   - changeSet:
-      id: 20200720-16-vno
+      id: 20200720-13-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -587,47 +496,17 @@ databaseChangeLog:
             referencedColumnNames: employees_group_id
             referencedTableName: employees_groups
   - changeSet:
-      id: 20200720-17-vno
+      id: 20200720-14-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: operating_center_id
+            baseColumnNames: territorial_division_id
             baseTableName: contracts
-            constraintName: fk_operating_center_contract
-            referencedColumnNames: operating_center_id
-            referencedTableName: operating_centers
+            constraintName: fk_territorial_division_contract
+            referencedColumnNames: territorial_division_id
+            referencedTableName: territorial_divisions
   - changeSet:
-      id: 20200720-18-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: cost_center_id
-            baseTableName: contracts
-            constraintName: fk_cost_center_contract
-            referencedColumnNames: cost_center_id
-            referencedTableName: costs_centers
-  - changeSet:
-      id: 20200720-19-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: business_unit_id
-            baseTableName: contracts
-            constraintName: fk_business_unit_contract
-            referencedColumnNames: business_unit_id
-            referencedTableName: business_units
-  - changeSet:
-      id: 20200720-20-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: project_id
-            baseTableName: contracts
-            constraintName: fk_project_contract
-            referencedColumnNames: project_id
-            referencedTableName: projects
-  - changeSet:
-      id: 20200816-21-vno
+      id: 20200816-15-vno
       author: vnorobio
       changes:
         - createTable:
@@ -709,7 +588,7 @@ databaseChangeLog:
         - dropTable:
             tableName: dates
   - changeSet:
-      id: 20200816-22-vno
+      id: 20200816-16-vno
       author: vnorobio
       changes:
         - addDefaultValue:
@@ -717,7 +596,7 @@ databaseChangeLog:
             columnName:  is_holiday
             defaultValueBoolean:  false
   - changeSet:
-      id: 20200816-23-vno
+      id: 20200816-17-vno
       author: vnorobio
       changes:
         - createTable:
@@ -779,7 +658,7 @@ databaseChangeLog:
         - dropTable:
             tableName: periods
   - changeSet:
-      id: 20200816-24-vno
+      id: 20200816-18-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -789,7 +668,7 @@ databaseChangeLog:
             referencedColumnNames: period_id
             referencedTableName: periods
   - changeSet:
-      id: 20200816-25-vno
+      id: 20200816-19-vno
       author: vnorobio
       changes:
         - createTable:
@@ -826,7 +705,7 @@ databaseChangeLog:
         - dropTable:
             tableName: locations
   - changeSet:
-      id: 20200816-26-vno
+      id: 20200816-20-vno
       author: vnorobio
       changes:
         - createTable:
@@ -855,22 +734,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: operating_center_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: cost_center_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: business_unit_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
-                  name: project_id
+                  name: territorial_division_id
                   type: int
                   constraints:
                     nullable: false
@@ -878,47 +742,17 @@ databaseChangeLog:
         - dropTable:
             tableName: spots
   - changeSet:
-      id: 20200816-27-vno
+      id: 20200816-21-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: operating_center_id
+            baseColumnNames: territorial_division_id
             baseTableName: spots
-            constraintName: fk_operating_center_spot
-            referencedColumnNames: operating_center_id
-            referencedTableName: operating_centers
+            constraintName: fk_territorial_division_spot
+            referencedColumnNames: territorial_division_id
+            referencedTableName: territorial_divisions
   - changeSet:
-      id: 20200816-28-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: cost_center_id
-            baseTableName: spots
-            constraintName: fk_cost_center_spot
-            referencedColumnNames: cost_center_id
-            referencedTableName: costs_centers
-  - changeSet:
-      id: 20200816-29-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: business_unit_id
-            baseTableName: spots
-            constraintName: fk_business_unit_spot
-            referencedColumnNames: business_unit_id
-            referencedTableName: business_units
-  - changeSet:
-      id: 20200816-30-vno
-      author: vnorobio
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: project_id
-            baseTableName: spots
-            constraintName: fk_project_spot
-            referencedColumnNames: project_id
-            referencedTableName: projects
-  - changeSet:
-      id: 20200816-31-vno
+      id: 20200816-22-vno
       author: vnorobio
       changes:
         - createTable:
@@ -945,7 +779,7 @@ databaseChangeLog:
         - dropTable:
             tableName: programmation_templates
   - changeSet:
-      id: 20200816-32-vno
+      id: 20200816-23-vno
       author: vnorobio
       changes:
         - createTable:
@@ -1002,7 +836,7 @@ databaseChangeLog:
         - dropTable:
             tableName: time_spans
   - changeSet:
-      id: 20200816-33-vno
+      id: 20200816-24-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:

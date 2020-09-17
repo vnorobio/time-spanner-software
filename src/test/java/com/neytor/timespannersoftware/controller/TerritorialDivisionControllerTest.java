@@ -1,8 +1,8 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.CostsCenter;
-import com.neytor.timespannersoftware.model.CostsCenterEntity;
-import com.neytor.timespannersoftware.service.CostsCenterService;
+import com.neytor.timespannersoftware.dto.TerrirorialDivision;
+import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
+import com.neytor.timespannersoftware.service.TerritorialDivisionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,21 +28,21 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = CostsCenterController.class)
-public class CostsCenterControllerTest {
+@WebMvcTest(controllers = TerritorialDivisionController.class)
+public class TerritorialDivisionControllerTest {
 
     private final MockMvc mockMvc;
 
-    private static final String COST_CENTER_JSON = "{ \"id\": 1, \"code\": \"codigo1\", \"description\": \"descripcion1\"}";
+    private static final String BUSINESSUNIT_JSON = "{ \"id\": 1, \"code\": \"codigo1\", \"description\": \"descripcion1\"}";
 
     @InjectMocks
-    private CostsCenterController controller;
+    private TerritorialDivisionController controller;
 
     @MockBean
-    private CostsCenterService service;
+    private TerritorialDivisionService service;
 
     @Autowired
-    public CostsCenterControllerTest(MockMvc mockMvc, CostsCenterController controller) {
+    public TerritorialDivisionControllerTest(MockMvc mockMvc, TerritorialDivisionController controller) {
         this.mockMvc = mockMvc;
         this.controller = controller;
     }
@@ -50,17 +50,17 @@ public class CostsCenterControllerTest {
     @Test
     void findAll() throws Exception{
         // given
-        CostsCenterEntity entity1 = new CostsCenterEntity();
-        CostsCenterEntity entity2 = new CostsCenterEntity();
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity();
+        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity();
         List entities = Arrays.asList(entity1,entity2);
 
         given(service.findAll()).willReturn(entities);
 
         // when
-        ResponseEntity<List<CostsCenter>> responseEntity = controller.findAll();
+        ResponseEntity<List<TerrirorialDivision>> responseEntity = controller.findAll();
 
         // then
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/costs_center/all"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/all"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -69,12 +69,12 @@ public class CostsCenterControllerTest {
 
     @Test
     void finById() throws Exception{
-        CostsCenterEntity entity1 = new CostsCenterEntity(1L,"codigo","descripcion" );
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo","descripcion" , 1);
         given(service.findById(2L)).willReturn(Optional.of(entity1));
 
-        ResponseEntity<CostsCenter> responseEntity = controller.finById(2L);
+        ResponseEntity<TerrirorialDivision> responseEntity = controller.finById(2L);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/costs_center/id/{id}",2))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/id/{id}",2))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -84,14 +84,14 @@ public class CostsCenterControllerTest {
 
     @Test
     void findByDescription() throws Exception{
-        CostsCenterEntity entity1 = new CostsCenterEntity(1L,"codigo1","descripcion1" );
-        CostsCenterEntity entity2 = new CostsCenterEntity(2L,"codigo2","descripcion2" );
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1" , 1);
+        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity(2L,"codigo2","descripcion2" , 1);
         List entities = Arrays.asList(entity1,entity2);
         given(service.findByDescriptionContaining("descripcion")).willReturn(entities);
 
-        ResponseEntity<List<CostsCenter>> response = (controller.findByDescription("descripcion"));
+        ResponseEntity<List<TerrirorialDivision>> response = (controller.findByDescription("descripcion"));
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/costs_center/description/{description}","descripcion"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/description/{description}","descripcion"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -100,10 +100,10 @@ public class CostsCenterControllerTest {
 
     @Test
     void create() throws Exception{
-        CostsCenterEntity entity1 = new CostsCenterEntity(1L,"codigo1","descripcion1" );
-        given(service.create(any(CostsCenterEntity.class))).willReturn(entity1);
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", 1 );
+        given(service.create(any(TerritorialDivisionEntity.class))).willReturn(entity1);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/costs_center/").content(COST_CENTER_JSON)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
                 .andReturn();
@@ -113,14 +113,14 @@ public class CostsCenterControllerTest {
 
     @Test
     void update() throws Exception {
-        CostsCenterEntity entity1 = new CostsCenterEntity(1L,"codigo1","descripcion1" );
-        CostsCenter costsCenterDto = new CostsCenter(1L,"codigo1","descripcion1" );
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", 1 );
+        TerrirorialDivision terrirorialDivisionDto = new TerrirorialDivision(1L,"codigo1","descripcion1" );
         given(service.findById(1L)).willReturn(Optional.of(entity1));
         given(service.update(entity1)).willReturn(entity1);
 
-        ResponseEntity<CostsCenter> responseEntity = controller.update(costsCenterDto);
+        ResponseEntity<TerrirorialDivision> responseEntity = controller.update(terrirorialDivisionDto);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/catalogs/v1/costs_center/").content(COST_CENTER_JSON)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)).andExpect(status().is2xxSuccessful())
                 .andReturn();
@@ -135,7 +135,7 @@ public class CostsCenterControllerTest {
         doNothing().when(service).delete(1L);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/catalogs/v1/costs_center/{id}",1))
+                .delete("/catalogs/v1/business_unit/{id}",1))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
     }

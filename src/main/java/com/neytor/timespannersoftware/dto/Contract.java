@@ -23,19 +23,13 @@ public class Contract {
 
     private EmployeesGroup employeesGroup;
 
-    private OperatingCenter operatingCenter;
-
-    private CostsCenter costsCenter;
-
-    private BusinessUnit businessUnit;
-
-    private Project project;
+    private  TerrirorialDivision terrirorialDivision;
 
     public Contract() {
         // Empty constructor
     }
 
-    public Contract(Long id, String reference, Person person, int contractType, LocalDate startDate, LocalDate endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, OperatingCenter operatingCenter, CostsCenter costsCenter, BusinessUnit businessUnit, Project project) {
+    public Contract(Long id, String reference, Person person, int contractType, LocalDate startDate, LocalDate endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, TerrirorialDivision terrirorialDivision) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -45,10 +39,7 @@ public class Contract {
         this.salary = salary;
         this.payrollPeriodicity = payrollPeriodicity;
         this.employeesGroup = employeesGroup;
-        this.operatingCenter = operatingCenter;
-        this.costsCenter = costsCenter;
-        this.businessUnit = businessUnit;
-        this.project = project;
+        this.terrirorialDivision = terrirorialDivision;
     }
 
     public Long getId() {
@@ -123,35 +114,11 @@ public class Contract {
         this.employeesGroup = employeesGroup;
     }
 
-    public OperatingCenter getOperatingCenter() {
-        return operatingCenter;
+    public TerrirorialDivision getTerrirorialDivision() {
+        return terrirorialDivision;
     }
 
-    public void setOperatingCenter(OperatingCenter operatingCenter) {
-        this.operatingCenter = operatingCenter;
-    }
-
-    public CostsCenter getCostsCenter() {
-        return costsCenter;
-    }
-
-    public void setCostsCenter(CostsCenter costsCenter) {
-        this.costsCenter = costsCenter;
-    }
-
-    public BusinessUnit getBusinessUnit() {
-        return businessUnit;
-    }
-
-    public void setBusinessUnit(BusinessUnit businessUnit) {
-        this.businessUnit = businessUnit;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
+    public void setTerrirorialDivision(TerrirorialDivision terrirorialDivision) {
+        this.terrirorialDivision = terrirorialDivision;
     }
 }

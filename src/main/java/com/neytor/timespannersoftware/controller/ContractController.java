@@ -2,12 +2,9 @@ package com.neytor.timespannersoftware.controller;
 
 import com.neytor.timespannersoftware.dto.Contract;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
-import com.neytor.timespannersoftware.model.BusinessUnitEntity;
+import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
 import com.neytor.timespannersoftware.model.ContractEntity;
-import com.neytor.timespannersoftware.model.CostsCenterEntity;
 import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
-import com.neytor.timespannersoftware.model.OperatingCenterEntity;
-import com.neytor.timespannersoftware.model.ProjectEntity;
 import com.neytor.timespannersoftware.service.ContractService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -134,10 +131,8 @@ public class ContractController {
         entity.setSalary(updateDto.getSalary());
         entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
         entity.setEmployeesGroup(modelMapper.map(updateDto.getEmployeesGroup(), EmployeesGroupEntity.class));
-        entity.setOperatingCenter(modelMapper.map(updateDto.getOperatingCenter(), OperatingCenterEntity.class));
-        entity.setCostsCenter(modelMapper.map(updateDto.getCostsCenter(), CostsCenterEntity.class));
-        entity.setBusinessUnit(modelMapper.map(updateDto.getBusinessUnit(), BusinessUnitEntity.class));
-        entity.setProject(modelMapper.map(updateDto.getProject(), ProjectEntity.class));
+        entity.setTerritorialDivision(modelMapper.map(updateDto.getTerrirorialDivision(), TerritorialDivisionEntity.class));
+
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 

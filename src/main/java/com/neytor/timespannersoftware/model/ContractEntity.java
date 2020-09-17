@@ -49,26 +49,14 @@ public class ContractEntity {
     private EmployeesGroupEntity employeesGroup;
 
     @ManyToOne
-    @JoinColumn(name = "operating_center_id", referencedColumnName = "operating_center_id", insertable = false, updatable = false)
-    private OperatingCenterEntity operatingCenter;
-
-    @ManyToOne
-    @JoinColumn(name = "cost_center_id", referencedColumnName = "cost_center_id", insertable = false, updatable = false)
-    private CostsCenterEntity costsCenter;
-
-    @ManyToOne
-    @JoinColumn(name = "business_unit_id", referencedColumnName = "business_unit_id", insertable = false, updatable = false)
-    private BusinessUnitEntity businessUnit;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id", referencedColumnName = "project_id", insertable = false, updatable = false)
-    private ProjectEntity project;
+    @JoinColumn(name = "territorial_division_id", referencedColumnName = "territorial_division_id", insertable = false, updatable = false)
+    private TerritorialDivisionEntity territorialDivision;
 
     public ContractEntity() {
         // Empty constructor
     }
 
-    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, OperatingCenterEntity operatingCenter, CostsCenterEntity costsCenter, BusinessUnitEntity businessUnit, ProjectEntity project) {
+    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, TerritorialDivisionEntity territorialDivision) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -78,10 +66,7 @@ public class ContractEntity {
         this.salary = salary;
         this.payrollPeriodicity = payrollPeriodicity;
         this.employeesGroup = employeesGroup;
-        this.operatingCenter = operatingCenter;
-        this.costsCenter = costsCenter;
-        this.businessUnit = businessUnit;
-        this.project = project;
+        this.territorialDivision = territorialDivision;
     }
 
     public Long getId() {
@@ -156,35 +141,11 @@ public class ContractEntity {
         this.employeesGroup = employeesGroup;
     }
 
-    public OperatingCenterEntity getOperatingCenter() {
-        return operatingCenter;
+    public TerritorialDivisionEntity getTerritorialDivision() {
+        return territorialDivision;
     }
 
-    public void setOperatingCenter(OperatingCenterEntity operatingCenter) {
-        this.operatingCenter = operatingCenter;
-    }
-
-    public CostsCenterEntity getCostsCenter() {
-        return costsCenter;
-    }
-
-    public void setCostsCenter(CostsCenterEntity costsCenter) {
-        this.costsCenter = costsCenter;
-    }
-
-    public BusinessUnitEntity getBusinessUnit() {
-        return businessUnit;
-    }
-
-    public void setBusinessUnit(BusinessUnitEntity businessUnit) {
-        this.businessUnit = businessUnit;
-    }
-
-    public ProjectEntity getProject() {
-        return project;
-    }
-
-    public void setProject(ProjectEntity project) {
-        this.project = project;
+    public void setTerritorialDivision(TerritorialDivisionEntity territorialDivision) {
+        this.territorialDivision = territorialDivision;
     }
 }

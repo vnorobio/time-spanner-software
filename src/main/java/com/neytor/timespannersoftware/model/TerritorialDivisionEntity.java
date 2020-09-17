@@ -1,21 +1,31 @@
-package com.neytor.timespannersoftware.dto;
+package com.neytor.timespannersoftware.model;
 
-public class Project {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "territorial_divisions")
+public class TerritorialDivisionEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "territorial_division_id")
     private Long id;
 
     private String code;
 
     private String description;
 
-    public Project() {
+    private int level;
+
+    public TerritorialDivisionEntity() {
         // Empty constructor
     }
 
-    public Project(Long id, String code, String description) {
+    public TerritorialDivisionEntity(Long id, String code, String description, int level) {
         this.id = id;
         this.code = code;
         this.description = description;
+        this.level = level;
     }
 
     public Long getId() {
@@ -40,5 +50,13 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
