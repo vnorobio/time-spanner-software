@@ -1,6 +1,7 @@
 package com.neytor.timespannersoftware.controller;
 
 import com.neytor.timespannersoftware.dto.TerrirorialDivision;
+import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
 import com.neytor.timespannersoftware.service.TerritorialDivisionService;
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,8 @@ public class TerritorialDivisionControllerTest {
 
     @Test
     void finById() throws Exception{
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo","descripcion" , 1);
+        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo","descripcion" , countryEntity, 1);
         given(service.findById(2L)).willReturn(Optional.of(entity1));
 
         ResponseEntity<TerrirorialDivision> responseEntity = controller.finById(2L);
@@ -84,8 +86,9 @@ public class TerritorialDivisionControllerTest {
 
     @Test
     void findByDescription() throws Exception{
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1" , 1);
-        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity(2L,"codigo2","descripcion2" , 1);
+        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1" , countryEntity,1);
+        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity(2L,"codigo2","descripcion2" , countryEntity, 1);
         List entities = Arrays.asList(entity1,entity2);
         given(service.findByDescriptionContaining("descripcion")).willReturn(entities);
 
@@ -100,7 +103,8 @@ public class TerritorialDivisionControllerTest {
 
     @Test
     void create() throws Exception{
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", 1 );
+        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", countryEntity, 1 );
         given(service.create(any(TerritorialDivisionEntity.class))).willReturn(entity1);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
@@ -113,7 +117,8 @@ public class TerritorialDivisionControllerTest {
 
     @Test
     void update() throws Exception {
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", 1 );
+        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
+        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", countryEntity, 1 );
         TerrirorialDivision terrirorialDivisionDto = new TerrirorialDivision(1L,"codigo1","descripcion1" );
         given(service.findById(1L)).willReturn(Optional.of(entity1));
         given(service.update(entity1)).willReturn(entity1);

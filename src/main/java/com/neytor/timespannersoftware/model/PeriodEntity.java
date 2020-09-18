@@ -30,7 +30,7 @@ public class PeriodEntity {
     private LocalDate endingDate;
 
     @Column(name = "projected_interval")
-    private int projected_interval;
+    private int projectedInterval;
 
     @Column(name = "projection_start_date")
     private LocalDate projectionStartDate;
@@ -39,7 +39,7 @@ public class PeriodEntity {
         // Empty constructor
     }
 
-    public PeriodEntity(Long id, String code, Long previousPeriod, Integer year, int periodicity, LocalDate startDate, int duration, LocalDate endingDate, int projected_interval, LocalDate projectionStartDate) {
+    public PeriodEntity(Long id, String code, Long previousPeriod, Integer year, int periodicity, LocalDate startDate, int duration, LocalDate endingDate, int projectedInterval, LocalDate projectionStartDate) {
         this.id = id;
         this.code = code;
         this.previousPeriod = previousPeriod;
@@ -48,7 +48,7 @@ public class PeriodEntity {
         this.startDate = startDate;
         this.duration = duration;
         this.endingDate = endingDate;
-        this.projected_interval = projected_interval;
+        this.projectedInterval = projectedInterval;
         this.projectionStartDate = projectionStartDate;
     }
 
@@ -117,11 +117,11 @@ public class PeriodEntity {
     }
 
     public int getProjected_interval() {
-        return projected_interval;
+        return projectedInterval;
     }
 
-    public void setProjected_interval(int projected_interval) {
-        this.projected_interval = projected_interval;
+    public void setProjected_interval(int projectedInterval) {
+        this.projectedInterval = projectedInterval;
     }
 
     public LocalDate getProjectionStartDate() {

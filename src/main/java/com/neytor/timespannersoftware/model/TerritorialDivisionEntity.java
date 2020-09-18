@@ -15,16 +15,21 @@ public class TerritorialDivisionEntity {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id", insertable = false, updatable = false)
+    private CountryEntity country;
+
     private int level;
 
     public TerritorialDivisionEntity() {
         // Empty constructor
     }
 
-    public TerritorialDivisionEntity(Long id, String code, String description, int level) {
+    public TerritorialDivisionEntity(Long id, String code, String description, CountryEntity country, int level) {
         this.id = id;
         this.code = code;
         this.description = description;
+        this.country = country;
         this.level = level;
     }
 
@@ -50,6 +55,14 @@ public class TerritorialDivisionEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public CountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryEntity country) {
+        this.country = country;
     }
 
     public int getLevel() {

@@ -420,11 +420,26 @@ databaseChangeLog:
                   type: smallint
                   constraints:
                     nullable: false
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
       rollback:
         - dropTable:
             tableName: territorial_divisions
   - changeSet:
       id: 20200720-12-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: country_id
+            baseTableName: territorial_divisions
+            constraintName: fk_territorial_division_country
+            referencedColumnNames: country_id
+            referencedTableName: countries
+  - changeSet:
+      id: 20200720-13-vno
       author: vnorobio
       changes:
         - createTable:
@@ -486,7 +501,7 @@ databaseChangeLog:
         - dropTable:
             tableName: contracts
   - changeSet:
-      id: 20200720-13-vno
+      id: 20200720-14-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -496,7 +511,7 @@ databaseChangeLog:
             referencedColumnNames: employees_group_id
             referencedTableName: employees_groups
   - changeSet:
-      id: 20200720-14-vno
+      id: 20200720-15-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -506,7 +521,7 @@ databaseChangeLog:
             referencedColumnNames: territorial_division_id
             referencedTableName: territorial_divisions
   - changeSet:
-      id: 20200816-15-vno
+      id: 20200816-16-vno
       author: vnorobio
       changes:
         - createTable:
@@ -588,7 +603,7 @@ databaseChangeLog:
         - dropTable:
             tableName: dates
   - changeSet:
-      id: 20200816-16-vno
+      id: 20200816-17-vno
       author: vnorobio
       changes:
         - addDefaultValue:
@@ -596,7 +611,7 @@ databaseChangeLog:
             columnName:  is_holiday
             defaultValueBoolean:  false
   - changeSet:
-      id: 20200816-17-vno
+      id: 20200816-18-vno
       author: vnorobio
       changes:
         - createTable:
@@ -658,7 +673,7 @@ databaseChangeLog:
         - dropTable:
             tableName: periods
   - changeSet:
-      id: 20200816-18-vno
+      id: 20200816-19-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -668,7 +683,7 @@ databaseChangeLog:
             referencedColumnNames: period_id
             referencedTableName: periods
   - changeSet:
-      id: 20200816-19-vno
+      id: 20200816-20-vno
       author: vnorobio
       changes:
         - createTable:
@@ -705,7 +720,7 @@ databaseChangeLog:
         - dropTable:
             tableName: locations
   - changeSet:
-      id: 20200816-20-vno
+      id: 20200816-21-vno
       author: vnorobio
       changes:
         - createTable:
@@ -742,7 +757,7 @@ databaseChangeLog:
         - dropTable:
             tableName: spots
   - changeSet:
-      id: 20200816-21-vno
+      id: 20200816-22-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -752,7 +767,7 @@ databaseChangeLog:
             referencedColumnNames: territorial_division_id
             referencedTableName: territorial_divisions
   - changeSet:
-      id: 20200816-22-vno
+      id: 20200816-23-vno
       author: vnorobio
       changes:
         - createTable:
@@ -779,7 +794,7 @@ databaseChangeLog:
         - dropTable:
             tableName: programmation_templates
   - changeSet:
-      id: 20200816-23-vno
+      id: 20200816-24-vno
       author: vnorobio
       changes:
         - createTable:
@@ -836,7 +851,7 @@ databaseChangeLog:
         - dropTable:
             tableName: time_spans
   - changeSet:
-      id: 20200816-24-vno
+      id: 20200816-25-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
