@@ -790,6 +790,21 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: time_off_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordinary_time_lapse
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rest_time
+                  type: bigint
+                  constraints:
+                    nullable: false
       rollback:
         - dropTable:
             tableName: programmation_templates
@@ -824,12 +839,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: start_time
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
                   name: duration
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -839,7 +854,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: ending_time
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -860,3 +875,398 @@ databaseChangeLog:
             constraintName: fk_time_span_template
             referencedColumnNames: programmation_template_id
             referencedTableName: programmation_templates
+  - changeSet:
+      id: 20200920-26-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedules
+            columns:
+              - column:
+                  name: schedule_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: template_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: schedules
+  - changeSet:
+      id: 20200920-27-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: schedules
+            constraintName: fk_schedule_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-28-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: schedules
+            constraintName: fk_schedule_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-29-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: schedules
+            constraintName: fk_schedule_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-30-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedule_details
+            columns:
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: span_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: schedule_details
+  - changeSet:
+      id: 20200920-31-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_schedule
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-32-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-33-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-34-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-35-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: time_classifications
+            columns:
+              - column:
+                  name: time_classification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: start_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_overtime
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_nigth
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_compensatory
+                  type: boolean
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: time_classifications
+  - changeSet:
+      id: 20200920-36-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: concepts
+            columns:
+              - column:
+                  name: concept_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ratio
+                  type: decimal(10,5)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: concepts
+  - changeSet:
+      id: 20200920-37-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: working_time_liquidations
+            columns:
+              - column:
+                  name: working_time_liquidation_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: concept_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: applied_ratio
+                  type: decimal(10,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_salary
+                  type: decimal(25,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount_of_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: liquidation_value
+                  type: decimal(25,5)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: working_time_liquidations
+  - changeSet:
+      id: 20200920-38-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_schedule
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-39-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_detail_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_schedule_detail
+            referencedColumnNames: schedule_detail_id
+            referencedTableName: schedule_details
+  - changeSet:
+      id: 20200920-40-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-41-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-42-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-43-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: concept_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts

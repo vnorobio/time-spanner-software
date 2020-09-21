@@ -14,8 +14,6 @@ public class TimeSpanEntity {
 
     private String code;
 
-    private Integer year;
-
     @Column(name = "span_type")
     private int spanType;
 
@@ -23,15 +21,15 @@ public class TimeSpanEntity {
     private int startDay;
 
     @Column(name = "start_time")
-    private int startTime;
+    private Long startTime;
 
-    private int duration;
+    private Long duration;
 
     @Column(name = "ending_day")
     private int endingDay;
 
     @Column(name = "ending_time")
-    private int endingTime;
+    private Long endingTime;
 
     @ManyToOne
     @JoinColumn(name = "programmation_template_id", referencedColumnName = "programmation_template_id", insertable = false, updatable = false)
@@ -41,10 +39,9 @@ public class TimeSpanEntity {
         // Empty constructor
     }
 
-    public TimeSpanEntity(Long id, String code, Integer year, int spanType, int startDay, int startTime, int duration, int endingDay, int endingTime, ProgrammationTemplateEntity programmationTemplate) {
+    public TimeSpanEntity(Long id, String code, int spanType, int startDay, Long startTime, Long duration, int endingDay, Long endingTime, ProgrammationTemplateEntity programmationTemplate) {
         this.id = id;
         this.code = code;
-        this.year = year;
         this.spanType = spanType;
         this.startDay = startDay;
         this.startTime = startTime;
@@ -70,14 +67,6 @@ public class TimeSpanEntity {
         this.code = code;
     }
 
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
     public int getSpanType() {
         return spanType;
     }
@@ -94,19 +83,19 @@ public class TimeSpanEntity {
         this.startDay = startDay;
     }
 
-    public int getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public int getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
@@ -118,11 +107,11 @@ public class TimeSpanEntity {
         this.endingDay = endingDay;
     }
 
-    public int getEndingTime() {
+    public Long getEndingTime() {
         return endingTime;
     }
 
-    public void setEndingTime(int endingTime) {
+    public void setEndingTime(Long endingTime) {
         this.endingTime = endingTime;
     }
 
