@@ -761,13 +761,23 @@ databaseChangeLog:
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: spots
+            constraintName: fk_spot_location
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 20200816-23-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
             baseColumnNames: territorial_division_id
             baseTableName: spots
-            constraintName: fk_territorial_division_spot
+            constraintName: fk_spot_territorial_division
             referencedColumnNames: territorial_division_id
             referencedTableName: territorial_divisions
   - changeSet:
-      id: 20200816-23-vno
+      id: 20200816-24-vno
       author: vnorobio
       changes:
         - createTable:
@@ -809,7 +819,7 @@ databaseChangeLog:
         - dropTable:
             tableName: programmation_templates
   - changeSet:
-      id: 20200816-24-vno
+      id: 20200816-25-vno
       author: vnorobio
       changes:
         - createTable:
@@ -821,11 +831,6 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    nullable: false
-              - column:
-                  name: code
-                  type: varchar(8)
-                  constraints:
                     nullable: false
               - column:
                   name: span_type
@@ -866,7 +871,7 @@ databaseChangeLog:
         - dropTable:
             tableName: time_spans
   - changeSet:
-      id: 20200816-25-vno
+      id: 20200816-26-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -876,7 +881,7 @@ databaseChangeLog:
             referencedColumnNames: programmation_template_id
             referencedTableName: programmation_templates
   - changeSet:
-      id: 20200920-26-vno
+      id: 20200920-27-vno
       author: vnorobio
       changes:
         - createTable:
@@ -910,6 +915,21 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: time_off_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordinary_time_lapse
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rest_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
                   name: template_code
                   type: varchar(255)
                   constraints:
@@ -918,7 +938,7 @@ databaseChangeLog:
         - dropTable:
             tableName: schedules
   - changeSet:
-      id: 20200920-27-vno
+      id: 20200920-28-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -928,7 +948,7 @@ databaseChangeLog:
             referencedColumnNames: spot_id
             referencedTableName: spots
   - changeSet:
-      id: 20200920-28-vno
+      id: 20200920-29-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -938,7 +958,7 @@ databaseChangeLog:
             referencedColumnNames: person_id
             referencedTableName: persons
   - changeSet:
-      id: 20200920-29-vno
+      id: 20200920-30-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -948,7 +968,7 @@ databaseChangeLog:
             referencedColumnNames: contract_id
             referencedTableName: contracts
   - changeSet:
-      id: 20200920-30-vno
+      id: 20200920-31-vno
       author: vnorobio
       changes:
         - createTable:
@@ -1015,7 +1035,7 @@ databaseChangeLog:
         - dropTable:
             tableName: schedule_details
   - changeSet:
-      id: 20200920-31-vno
+      id: 20200920-32-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1025,7 +1045,7 @@ databaseChangeLog:
             referencedColumnNames: schedule_id
             referencedTableName: schedules
   - changeSet:
-      id: 20200920-32-vno
+      id: 20200920-33-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1035,7 +1055,7 @@ databaseChangeLog:
             referencedColumnNames: spot_id
             referencedTableName: spots
   - changeSet:
-      id: 20200920-33-vno
+      id: 20200920-34-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1045,7 +1065,7 @@ databaseChangeLog:
             referencedColumnNames: person_id
             referencedTableName: persons
   - changeSet:
-      id: 20200920-34-vno
+      id: 20200920-35-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1055,7 +1075,7 @@ databaseChangeLog:
             referencedColumnNames: contract_id
             referencedTableName: contracts
   - changeSet:
-      id: 20200920-35-vno
+      id: 20200920-36-vno
       author: vnorobio
       changes:
         - createTable:
@@ -1112,7 +1132,7 @@ databaseChangeLog:
         - dropTable:
             tableName: time_classifications
   - changeSet:
-      id: 20200920-36-vno
+      id: 20200920-37-vno
       author: vnorobio
       changes:
         - createTable:
@@ -1144,7 +1164,7 @@ databaseChangeLog:
         - dropTable:
             tableName: concepts
   - changeSet:
-      id: 20200920-37-vno
+      id: 20200920-38-vno
       author: vnorobio
       changes:
         - createTable:
@@ -1211,7 +1231,7 @@ databaseChangeLog:
         - dropTable:
             tableName: working_time_liquidations
   - changeSet:
-      id: 20200920-38-vno
+      id: 20200920-39-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1221,7 +1241,7 @@ databaseChangeLog:
             referencedColumnNames: schedule_id
             referencedTableName: schedules
   - changeSet:
-      id: 20200920-39-vno
+      id: 20200920-40-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1231,7 +1251,7 @@ databaseChangeLog:
             referencedColumnNames: schedule_detail_id
             referencedTableName: schedule_details
   - changeSet:
-      id: 20200920-40-vno
+      id: 20200920-41-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1241,7 +1261,7 @@ databaseChangeLog:
             referencedColumnNames: spot_id
             referencedTableName: spots
   - changeSet:
-      id: 20200920-41-vno
+      id: 20200920-42-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1251,7 +1271,7 @@ databaseChangeLog:
             referencedColumnNames: person_id
             referencedTableName: persons
   - changeSet:
-      id: 20200920-42-vno
+      id: 20200920-43-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
@@ -1261,7 +1281,7 @@ databaseChangeLog:
             referencedColumnNames: contract_id
             referencedTableName: contracts
   - changeSet:
-      id: 20200920-43-vno
+      id: 20200920-44-vno
       author: vnorobio
       changes:
         - addForeignKeyConstraint:

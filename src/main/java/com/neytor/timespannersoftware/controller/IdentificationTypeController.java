@@ -1,6 +1,5 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.Company;
 import com.neytor.timespannersoftware.dto.IdentificationType;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
@@ -129,7 +128,7 @@ public class IdentificationTypeController {
     }
 
     @DeleteMapping(path = "/v1/identification/type/{id}", produces = "application/json")
-    @ApiOperation(value = "Delete identification type by id", response = Company.class)
+    @ApiOperation(value = "Delete identification type by id", response = IdentificationType.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "company successfully deleted"),
             @ApiResponse(code = 401, message = "You are not authorized to delete companys"),
