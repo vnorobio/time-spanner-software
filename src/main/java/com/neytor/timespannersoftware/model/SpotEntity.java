@@ -11,6 +11,8 @@ public class SpotEntity {
     @Column(name = "spot_id")
     private Long id;
 
+    private String code;
+
     private String description;
 
     @ManyToOne
@@ -25,8 +27,9 @@ public class SpotEntity {
         // Empty constructor
     }
 
-    public SpotEntity(Long id, String description, LocationEntity location, TerritorialDivisionEntity territorialDivision) {
+    public SpotEntity(Long id, String code, String description, LocationEntity location, TerritorialDivisionEntity territorialDivision) {
         this.id = id;
+        this.code = code;
         this.description = description;
         this.location = location;
         this.territorialDivision = territorialDivision;
@@ -38,6 +41,14 @@ public class SpotEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {

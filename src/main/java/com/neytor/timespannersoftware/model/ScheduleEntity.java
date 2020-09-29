@@ -1,6 +1,7 @@
 package com.neytor.timespannersoftware.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "schedules")
@@ -10,6 +11,8 @@ public class ScheduleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
     private Long id;
+
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "spot_id", referencedColumnName = "spot_id", insertable = false, updatable = false)

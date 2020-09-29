@@ -1290,3 +1290,94 @@ databaseChangeLog:
             constraintName: fk_liquidation_concept
             referencedColumnNames: concept_id
             referencedTableName: concepts
+  - changeSet:
+      id: 20200920-45-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedule_classifications
+            columns:
+              - column:
+                  name: schedule_classification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_classification_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: schedule_classifications
+  - changeSet:
+      id: 20200920-46-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_detail_id
+            baseTableName: schedule_classifications
+            constraintName: fk_classification_schedule_detail
+            referencedColumnNames: schedule_detail_id
+            referencedTableName: schedule_details
+  - changeSet:
+      id: 20200920-47-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: time_classification_id
+            baseTableName: schedule_classifications
+            constraintName: fk_schedule_detail_classification
+            referencedColumnNames: time_classification_id
+            referencedTableName: time_classifications
+  - changeSet:
+      id: 20200920-48-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: time_span_classifications
+            columns:
+              - column:
+                  name: time_span_classification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: time_span_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_classification_id
+                  type: int
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 20200920-49-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: time_span_id
+            baseTableName: time_span_classifications
+            constraintName: fk_classification_time_span
+            referencedColumnNames: time_span_id
+            referencedTableName: time_spans
+  - changeSet:
+      id: 20200920-50-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: time_classification_id
+            baseTableName: time_span_classifications
+            constraintName: fk_time_span_classification
+            referencedColumnNames: time_classification_id
+            referencedTableName: time_classifications
