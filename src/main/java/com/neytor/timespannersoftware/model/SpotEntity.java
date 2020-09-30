@@ -20,19 +20,19 @@ public class SpotEntity {
     private LocationEntity location;
 
     @ManyToOne
-    @JoinColumn(name = "territorial_division_id", referencedColumnName = "territorial_division_id", insertable = false, updatable = false)
-    private CityEntity territorialDivision;
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id", insertable = false, updatable = false)
+    private CityEntity city;
 
     public SpotEntity() {
         // Empty constructor
     }
 
-    public SpotEntity(Long id, String code, String description, LocationEntity location, CityEntity territorialDivision) {
+    public SpotEntity(Long id, String code, String description, LocationEntity location, CityEntity city) {
         this.id = id;
         this.code = code;
         this.description = description;
         this.location = location;
-        this.territorialDivision = territorialDivision;
+        this.city = city;
     }
 
     public Long getId() {
@@ -67,11 +67,11 @@ public class SpotEntity {
         this.location = location;
     }
 
-    public CityEntity getTerritorialDivision() {
-        return territorialDivision;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setTerritorialDivision(CityEntity territorialDivision) {
-        this.territorialDivision = territorialDivision;
+    public void setCity(CityEntity territorialDivision) {
+        this.city = territorialDivision;
     }
 }

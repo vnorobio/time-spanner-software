@@ -18,7 +18,6 @@ public class ScheduleClassificationEntity {
 
     @ManyToOne
     @JoinColumn(name = "time_classification_id", referencedColumnName = "time_classification_id", insertable = false, updatable = false)
-    @Column(name = "time_classification_id")
     private TimeClassificationEntity timeClassification;
 
     public ScheduleClassificationEntity() {

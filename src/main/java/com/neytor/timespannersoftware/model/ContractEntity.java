@@ -49,14 +49,14 @@ public class ContractEntity {
     private EmployeesGroupEntity employeesGroup;
 
     @ManyToOne
-    @JoinColumn(name = "territorial_division_id", referencedColumnName = "territorial_division_id", insertable = false, updatable = false)
-    private CityEntity territorialDivision;
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id", insertable = false, updatable = false)
+    private CityEntity city;
 
     public ContractEntity() {
         // Empty constructor
     }
 
-    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, CityEntity territorialDivision) {
+    public ContractEntity(Long id, String reference, PersonEntity person, int contractType, Date startDate, Date endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroupEntity employeesGroup, CityEntity city) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -66,7 +66,7 @@ public class ContractEntity {
         this.salary = salary;
         this.payrollPeriodicity = payrollPeriodicity;
         this.employeesGroup = employeesGroup;
-        this.territorialDivision = territorialDivision;
+        this.city = city;
     }
 
     public Long getId() {
@@ -141,11 +141,11 @@ public class ContractEntity {
         this.employeesGroup = employeesGroup;
     }
 
-    public CityEntity getTerritorialDivision() {
-        return territorialDivision;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setTerritorialDivision(CityEntity territorialDivision) {
-        this.territorialDivision = territorialDivision;
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 }

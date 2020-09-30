@@ -545,7 +545,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: territorial_division_id
+                  name: city_id
                   type: int
                   constraints:
                     nullable: false
@@ -567,11 +567,11 @@ databaseChangeLog:
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: territorial_division_id
+            baseColumnNames: city_id
             baseTableName: contracts
-            constraintName: fk_territorial_division_contract
-            referencedColumnNames: territorial_division_id
-            referencedTableName: territorial_divisions
+            constraintName: fk_city_contract
+            referencedColumnNames: city_id
+            referencedTableName: cities
   - changeSet:
       id: 20200816-19-vno
       author: vnorobio
@@ -801,7 +801,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: territorial_division_id
+                  name: city_id
                   type: int
                   constraints:
                     nullable: false
@@ -823,11 +823,11 @@ databaseChangeLog:
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: territorial_division_id
+            baseColumnNames: city_id
             baseTableName: spots
-            constraintName: fk_spot_territorial_division
-            referencedColumnNames: territorial_division_id
-            referencedTableName: territorial_divisions
+            constraintName: fk_spot_city
+            referencedColumnNames: city_id
+            referencedTableName: cities
   - changeSet:
       id: 20200816-27-vno
       author: vnorobio
