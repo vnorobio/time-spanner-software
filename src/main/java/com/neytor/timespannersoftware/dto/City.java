@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.dto;
 
-public class TerrirorialDivision {
+public class City {
 
     private Long id;
 
@@ -8,11 +8,11 @@ public class TerrirorialDivision {
 
     private String description;
 
-    public TerrirorialDivision() {
+    public City() {
         // Empty constructor
     }
 
-    public TerrirorialDivision(Long id, String code, String description) {
+    public City(Long id, String code, String description) {
         this.id = id;
         this.code = code;
         this.description = description;

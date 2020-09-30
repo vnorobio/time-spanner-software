@@ -2,7 +2,7 @@ package com.neytor.timespannersoftware.service;
 
 import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.SpotEntity;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
+import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.repository.SpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +52,8 @@ public class SpotServiceImpl implements SpotService{
     }
 
     @Override
-    public List<SpotEntity> findByTerritorialDivision(TerritorialDivisionEntity entity) {
-        return repository.findByTerritorialDivision(entity);
+    public List<SpotEntity> findByCity(CityEntity entity) {
+        return repository.findByCity(entity);
     }
 
     @Override

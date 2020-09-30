@@ -3,12 +3,12 @@ package com.neytor.timespannersoftware.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "territorial_divisions")
-public class TerritorialDivisionEntity {
+@Table(name = "estates")
+public class EstateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "territorial_division_id")
+    @Column(name = "estate_id")
     private Long id;
 
     private String code;
@@ -19,18 +19,15 @@ public class TerritorialDivisionEntity {
     @JoinColumn(name = "country_id", referencedColumnName = "country_id", insertable = false, updatable = false)
     private CountryEntity country;
 
-    private int level;
-
-    public TerritorialDivisionEntity() {
+    public EstateEntity() {
         // Empty constructor
     }
 
-    public TerritorialDivisionEntity(Long id, String code, String description, CountryEntity country, int level) {
+    public EstateEntity(Long id, String code, String description, CountryEntity country) {
         this.id = id;
         this.code = code;
         this.description = description;
         this.country = country;
-        this.level = level;
     }
 
     public Long getId() {
@@ -65,11 +62,4 @@ public class TerritorialDivisionEntity {
         this.country = country;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
 }

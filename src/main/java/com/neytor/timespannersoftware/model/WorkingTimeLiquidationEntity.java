@@ -13,6 +13,9 @@ public class WorkingTimeLiquidationEntity {
     @Column(name = "working_time_liquidation_id")
     private Long id;
 
+    @Column(name = "liquidation_date")
+    private LocalDate date;
+
     @ManyToOne
     @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id", insertable = false, updatable = false)
     private ScheduleEntity schedule;
@@ -53,8 +56,9 @@ public class WorkingTimeLiquidationEntity {
         // Empty constructor
     }
 
-    public WorkingTimeLiquidationEntity(Long id, ScheduleEntity schedule, ScheduleDetailEntity detail, SpotEntity spot, PersonEntity person, ContractEntity contract, ConceptEntity concept, BigDecimal appliedRatio, BigDecimal baseSalary, Long amountOfTime, BigDecimal liquidationValue) {
+    public WorkingTimeLiquidationEntity(Long id, LocalDate date, ScheduleEntity schedule, ScheduleDetailEntity detail, SpotEntity spot, PersonEntity person, ContractEntity contract, ConceptEntity concept, BigDecimal appliedRatio, BigDecimal baseSalary, Long amountOfTime, BigDecimal liquidationValue) {
         this.id = id;
+        this.date = date;
         this.schedule = schedule;
         this.detail = detail;
         this.spot = spot;
@@ -73,6 +77,14 @@ public class WorkingTimeLiquidationEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public ScheduleEntity getSchedule() {

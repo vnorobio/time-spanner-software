@@ -23,13 +23,13 @@ public class Contract {
 
     private EmployeesGroup employeesGroup;
 
-    private  TerrirorialDivision terrirorialDivision;
+    private City city;
 
     public Contract() {
         // Empty constructor
     }
 
-    public Contract(Long id, String reference, Person person, int contractType, LocalDate startDate, LocalDate endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, TerrirorialDivision terrirorialDivision) {
+    public Contract(Long id, String reference, Person person, int contractType, LocalDate startDate, LocalDate endingDate, BigDecimal salary, int payrollPeriodicity, EmployeesGroup employeesGroup, City city) {
         this.id = id;
         this.reference = reference;
         this.person = person;
@@ -39,7 +39,7 @@ public class Contract {
         this.salary = salary;
         this.payrollPeriodicity = payrollPeriodicity;
         this.employeesGroup = employeesGroup;
-        this.terrirorialDivision = terrirorialDivision;
+        this.city = city;
     }
 
     public Long getId() {
@@ -114,11 +114,11 @@ public class Contract {
         this.employeesGroup = employeesGroup;
     }
 
-    public TerrirorialDivision getTerrirorialDivision() {
-        return terrirorialDivision;
+    public City getTerrirorialDivision() {
+        return city;
     }
 
-    public void setTerrirorialDivision(TerrirorialDivision terrirorialDivision) {
-        this.terrirorialDivision = terrirorialDivision;
+    public void setTerrirorialDivision(City city) {
+        this.city = city;
     }
 }

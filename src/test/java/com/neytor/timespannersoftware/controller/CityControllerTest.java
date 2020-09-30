@@ -1,9 +1,10 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.TerrirorialDivision;
+import com.neytor.timespannersoftware.dto.City;
 import com.neytor.timespannersoftware.model.CountryEntity;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
-import com.neytor.timespannersoftware.service.TerritorialDivisionService;
+import com.neytor.timespannersoftware.model.CityEntity;
+import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.service.CityService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,21 +30,21 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = TerritorialDivisionController.class)
-public class TerritorialDivisionControllerTest {
+@WebMvcTest(controllers = CityController.class)
+public class CityControllerTest {
 
     private final MockMvc mockMvc;
 
     private static final String BUSINESSUNIT_JSON = "{ \"id\": 1, \"code\": \"codigo1\", \"description\": \"descripcion1\"}";
 
     @InjectMocks
-    private TerritorialDivisionController controller;
+    private CityController controller;
 
     @MockBean
-    private TerritorialDivisionService service;
+    private CityService service;
 
     @Autowired
-    public TerritorialDivisionControllerTest(MockMvc mockMvc, TerritorialDivisionController controller) {
+    public CityControllerTest(MockMvc mockMvc, CityController controller) {
         this.mockMvc = mockMvc;
         this.controller = controller;
     }
@@ -51,14 +52,14 @@ public class TerritorialDivisionControllerTest {
     @Test
     void findAll() throws Exception{
         // given
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity();
-        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity();
+        CityEntity entity1 = new CityEntity();
+        CityEntity entity2 = new CityEntity();
         List entities = Arrays.asList(entity1,entity2);
 
         given(service.findAll()).willReturn(entities);
 
         // when
-        ResponseEntity<List<TerrirorialDivision>> responseEntity = controller.findAll();
+        ResponseEntity<List<City>> responseEntity = controller.findAll();
 
         // then
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/all"))
@@ -71,10 +72,11 @@ public class TerritorialDivisionControllerTest {
     @Test
     void finById() throws Exception{
         CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo","descripcion" , countryEntity, 1);
+        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
+        CityEntity entity1 = new CityEntity(1L,"codigo","descripcion", estateEntity, countryEntity);
         given(service.findById(2L)).willReturn(Optional.of(entity1));
 
-        ResponseEntity<TerrirorialDivision> responseEntity = controller.finById(2L);
+        ResponseEntity<City> responseEntity = controller.finById(2L);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/id/{id}",2))
                 .andExpect(status().isOk())
@@ -87,12 +89,13 @@ public class TerritorialDivisionControllerTest {
     @Test
     void findByDescription() throws Exception{
         CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1" , countryEntity,1);
-        TerritorialDivisionEntity entity2 = new TerritorialDivisionEntity(2L,"codigo2","descripcion2" , countryEntity, 1);
+        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
+        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1" ,estateEntity, countryEntity);
+        CityEntity entity2 = new CityEntity(2L,"codigo2","descripcion2", estateEntity, countryEntity);
         List entities = Arrays.asList(entity1,entity2);
         given(service.findByDescriptionContaining("descripcion")).willReturn(entities);
 
-        ResponseEntity<List<TerrirorialDivision>> response = (controller.findByDescription("descripcion"));
+        ResponseEntity<List<City>> response = (controller.findByDescription("descripcion"));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/catalogs/v1/business_unit/description/{description}","descripcion"))
                 .andExpect(status().isOk())
@@ -104,8 +107,9 @@ public class TerritorialDivisionControllerTest {
     @Test
     void create() throws Exception{
         CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", countryEntity, 1 );
-        given(service.create(any(TerritorialDivisionEntity.class))).willReturn(entity1);
+        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
+        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1", estateEntity, countryEntity);
+        given(service.create(any(CityEntity.class))).willReturn(entity1);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -118,12 +122,13 @@ public class TerritorialDivisionControllerTest {
     @Test
     void update() throws Exception {
         CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        TerritorialDivisionEntity entity1 = new TerritorialDivisionEntity(1L,"codigo1","descripcion1", countryEntity, 1 );
-        TerrirorialDivision terrirorialDivisionDto = new TerrirorialDivision(1L,"codigo1","descripcion1" );
+        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
+        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1", estateEntity, countryEntity);
+        City cityDto = new City(1L,"codigo1","descripcion1" );
         given(service.findById(1L)).willReturn(Optional.of(entity1));
         given(service.update(entity1)).willReturn(entity1);
 
-        ResponseEntity<TerrirorialDivision> responseEntity = controller.update(terrirorialDivisionDto);
+        ResponseEntity<City> responseEntity = controller.update(cityDto);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -2,7 +2,7 @@ package com.neytor.timespannersoftware.repository;
 
 import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.SpotEntity;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
+import com.neytor.timespannersoftware.model.CityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +20,5 @@ public interface SpotRepository extends JpaRepository<SpotEntity, Long> {
 
     List<SpotEntity> findByLocation(LocationEntity entity);
 
-    List<SpotEntity> findByTerritorialDivision(TerritorialDivisionEntity entity);
+    List<SpotEntity> findByCity(CityEntity entity);
 }

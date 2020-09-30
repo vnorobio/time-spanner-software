@@ -2,7 +2,7 @@ package com.neytor.timespannersoftware.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neytor.timespannersoftware.dto.TerrirorialDivision;
+import com.neytor.timespannersoftware.dto.City;
 import com.neytor.timespannersoftware.dto.Contract;
 import com.neytor.timespannersoftware.dto.EmployeesGroup;
 import com.neytor.timespannersoftware.dto.IdentificationType;
@@ -45,7 +45,7 @@ public class ContractControllerTest {
 
     private EmployeesGroup employeesGroup;
 
-    private TerrirorialDivision terrirorialDivision;
+    private City city;
 
 
     @InjectMocks
@@ -61,8 +61,8 @@ public class ContractControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         Person person = new Person(1l,"Jhon",null,"Doe",null,"Doe Jhon",new IdentificationType(),"1234567890",1,0,"Some address","jhon@somedomain.com","444444");
         EmployeesGroup employeesGroup = new EmployeesGroup(1l,"EG Code","EG Description");
-        TerrirorialDivision terrirorialDivision = new TerrirorialDivision(1L,"BU Code","BU description");
-        Contract contract = new Contract(1l,"DoeJhon-1",person,1, LocalDate.of(2020,1,1),LocalDate.of(2020,1,31),new BigDecimal(2000000),1,employeesGroup, terrirorialDivision);
+        City city = new City(1L,"BU Code","BU description");
+        Contract contract = new Contract(1l,"DoeJhon-1",person,1, LocalDate.of(2020,1,1),LocalDate.of(2020,1,31),new BigDecimal(2000000),1,employeesGroup, city);
         CONTRACT_JSON = mapper.writeValueAsString(contract);
     }
 

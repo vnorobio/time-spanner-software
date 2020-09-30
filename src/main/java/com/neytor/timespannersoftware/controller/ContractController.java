@@ -2,7 +2,7 @@ package com.neytor.timespannersoftware.controller;
 
 import com.neytor.timespannersoftware.dto.Contract;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
+import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.ContractEntity;
 import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
 import com.neytor.timespannersoftware.service.ContractService;
@@ -131,7 +131,7 @@ public class ContractController {
         entity.setSalary(updateDto.getSalary());
         entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
         entity.setEmployeesGroup(modelMapper.map(updateDto.getEmployeesGroup(), EmployeesGroupEntity.class));
-        entity.setTerritorialDivision(modelMapper.map(updateDto.getTerrirorialDivision(), TerritorialDivisionEntity.class));
+        entity.setTerritorialDivision(modelMapper.map(updateDto.getTerrirorialDivision(), CityEntity.class));
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }

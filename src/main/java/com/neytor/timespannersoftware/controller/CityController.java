@@ -1,9 +1,9 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.TerrirorialDivision;
+import com.neytor.timespannersoftware.dto.City;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
-import com.neytor.timespannersoftware.service.TerritorialDivisionService;
+import com.neytor.timespannersoftware.model.CityEntity;
+import com.neytor.timespannersoftware.service.CityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,101 +27,101 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/catalogs")
 @Api("territorial_divisions")
-public class TerritorialDivisionController {
+public class CityController {
 
     public static final String NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID = "Not territorial division found with id: ";
-    private final TerritorialDivisionService service;
+    private final CityService service;
     private ModelMapper modelMapper;
 
     @Autowired
-    public TerritorialDivisionController(TerritorialDivisionService service, ModelMapper modelMapper) {
+    public CityController(CityService service, ModelMapper modelMapper) {
         this.service = service;
         this.modelMapper = modelMapper;
     }
 
     @GetMapping(path = "/v1/territorial_division/all", produces = "application/json")
-    @ApiOperation(value = "List all territorial divisions", response = TerritorialDivisionEntity[].class)
+    @ApiOperation(value = "List all territorial divisions", response = CityEntity[].class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<List<TerrirorialDivision>> findAll() {
+    public ResponseEntity<List<City>> findAll() {
         return ResponseEntity.ok().body(service.findAll().stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping(path = "/v1/territorial_division/id/{id}", produces = "application/json")
-    @ApiOperation(value = "Find a territorial division by id", response = TerritorialDivisionEntity.class)
+    @ApiOperation(value = "Find a territorial division by id", response = CityEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the territorial division"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<TerrirorialDivision> finById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<City> finById(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id))));
     }
 
     @GetMapping(path = "/v1/territorial_division/code/{code}", produces = "application/json")
-    @ApiOperation(value = "Find a territorial_division by code", response = TerritorialDivisionEntity.class)
+    @ApiOperation(value = "Find a territorial_division by code", response = CityEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the territorial division"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<List<TerrirorialDivision>>findByCode(@PathVariable(value = "code") String code) {
+    public ResponseEntity<List<City>>findByCode(@PathVariable(value = "code") String code) {
         return ResponseEntity.ok().body(service.findByCodeContaining(code).stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @GetMapping(path = "/v1/territorial_division/description/{description}", produces = "application/json")
-    @ApiOperation(value = "Find a territorial_division by description", response = TerritorialDivisionEntity.class)
+    @ApiOperation(value = "Find a territorial_division by description", response = CityEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the territorial_division"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<List<TerrirorialDivision>>findByDescription(@PathVariable(value = "description") String description) {
+    public ResponseEntity<List<City>>findByDescription(@PathVariable(value = "description") String description) {
         return ResponseEntity.ok().body(service.findByDescriptionContaining(description).stream().map(this::convertToDto).collect(Collectors.toList()));
     }
 
     @PostMapping(path = "/v1/territorial_division", produces = "application/json")
-    @ApiOperation(value = "Create territorial_division", response = TerritorialDivisionEntity.class)
+    @ApiOperation(value = "Create territorial_division", response = CityEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "territorial division successfully created"),
             @ApiResponse(code = 401, message = "You are not authorized to create territorial_divisions"),
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden")
     })
-    public ResponseEntity<TerrirorialDivision> create(@RequestBody TerrirorialDivision dto) {
-        TerritorialDivisionEntity entity = convertToEntity(dto);
+    public ResponseEntity<City> create(@RequestBody City dto) {
+        CityEntity entity = convertToEntity(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.create(entity)));
     }
 
     @PutMapping(path = "/v1/territorial_division", produces = "application/json")
-    @ApiOperation(value = "Update territorial division", response = TerritorialDivisionEntity.class)
+    @ApiOperation(value = "Update territorial division", response = CityEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 202, message = "territorial division successfully updated"),
             @ApiResponse(code = 401, message = "You are not authorized to update territorial_divisions"),
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<TerrirorialDivision> update(@RequestBody TerrirorialDivision updateDto) {
-        TerritorialDivisionEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + updateDto.getId()));
+    public ResponseEntity<City> update(@RequestBody City updateDto) {
+        CityEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + updateDto.getId()));
         entity.setDescription(updateDto.getDescription());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }
 
     @DeleteMapping(path = "/v1/territorial_division/{id}", produces = "application/json")
-    @ApiOperation(value = "Delete territorial division by id", response = TerrirorialDivision.class)
+    @ApiOperation(value = "Delete territorial division by id", response = City.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "territorial division successfully deleted"),
             @ApiResponse(code = 401, message = "You are not authorized to delete territorial_divisions"),
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<TerrirorialDivision> delete(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<City> delete(@PathVariable(value = "id") Long id) {
         if (!service.existsById(id)) {
             throw new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id);
         }
@@ -129,11 +129,11 @@ public class TerritorialDivisionController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
-    private TerrirorialDivision convertToDto(TerritorialDivisionEntity entity) {
-        return modelMapper.map(entity, TerrirorialDivision.class);
+    private City convertToDto(CityEntity entity) {
+        return modelMapper.map(entity, City.class);
     }
 
-    private TerritorialDivisionEntity convertToEntity(TerrirorialDivision dto) {
-        return modelMapper.map(dto, TerritorialDivisionEntity.class);
+    private CityEntity convertToEntity(City dto) {
+        return modelMapper.map(dto, CityEntity.class);
     }
 }

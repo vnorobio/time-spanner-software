@@ -2,8 +2,7 @@ package com.neytor.timespannersoftware.service;
 
 import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.SpotEntity;
-import com.neytor.timespannersoftware.model.SpotEntity;
-import com.neytor.timespannersoftware.model.TerritorialDivisionEntity;
+import com.neytor.timespannersoftware.model.CityEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,7 @@ public interface SpotService {
 
     List<SpotEntity> findByLocation(LocationEntity entity);
 
-    List<SpotEntity> findByTerritorialDivision(TerritorialDivisionEntity entity);
+    List<SpotEntity> findByCity(CityEntity entity);
 
     SpotEntity create(SpotEntity entity);
 

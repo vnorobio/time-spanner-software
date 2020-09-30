@@ -1,11 +1,6 @@
 package com.neytor.timespannersoftware.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users_profiles")
@@ -16,20 +11,22 @@ public class UserProfileEntity {
     @Column(name = "user_profile_id")
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    private UserEntity user;
 
-    @Column(name = "profile_id")
-    private Long profileId;
+    @ManyToOne
+    @JoinColumn(name = "profile_id", referencedColumnName = "profile_id", insertable = false, updatable = false)
+    private ProfileEntity profile;
 
     public UserProfileEntity() {
         // Empty constructor
     }
 
-    public UserProfileEntity(Long id, Long userId, Long profileId) {
+    public UserProfileEntity(Long id, UserEntity user, ProfileEntity profile) {
         this.id = id;
-        this.userId = userId;
-        this.profileId = profileId;
+        this.user = user;
+        this.profile = profile;
     }
 
     public Long getId() {
@@ -40,19 +37,19 @@ public class UserProfileEntity {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public Long getProfileId() {
-        return profileId;
+    public ProfileEntity getProfile() {
+        return profile;
     }
 
-    public void setProfileId(Long profileId) {
-        this.profileId = profileId;
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
     }
 }
