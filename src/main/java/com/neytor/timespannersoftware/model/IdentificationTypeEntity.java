@@ -33,11 +33,12 @@ public class IdentificationTypeEntity {
         // Empty constructor
     }
 
-    public IdentificationTypeEntity(Long id, String code, String description, String shortenedForm) {
+    public IdentificationTypeEntity(Long id, String code, String description, String shortenedForm, CountryEntity country) {
         this.id = id;
         this.code = code;
         this.description = description;
         this.shortenedForm = shortenedForm;
+        this.country = country;
     }
 
     public Long getId() {
@@ -70,5 +71,13 @@ public class IdentificationTypeEntity {
 
     public void setShortenedForm(String shortenedForm) {
         this.shortenedForm = shortenedForm;
+    }
+
+    public CountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryEntity country) {
+        this.country = country;
     }
 }
