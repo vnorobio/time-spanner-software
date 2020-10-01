@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ConceptService {
+    List<ConceptEntity> findAll();
+
     Optional<ConceptEntity> findById(Long id);
 
     Optional<ConceptEntity> findByCode(String code);

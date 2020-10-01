@@ -18,6 +18,11 @@ public class ConceptServiceImpl implements ConceptService{
     }
 
     @Override
+    public List<ConceptEntity> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public Optional<ConceptEntity> findById(Long id) {
         return repository.findById(id);
     }
