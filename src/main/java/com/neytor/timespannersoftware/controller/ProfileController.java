@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.Profile;
+import com.neytor.timespannersoftware.model.dto.Profile;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.ProfileEntity;
 import com.neytor.timespannersoftware.service.ProfileService;

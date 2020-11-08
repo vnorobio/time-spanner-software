@@ -1,26 +1,26 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.CountryEntity;
+import com.neytor.timespannersoftware.model.dto.Country;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CountryService {
-    List<CountryEntity> findAll();
+    List< Country > findAll();
 
-    Optional<CountryEntity> findById(Long id);
+    Optional<Country> findById(Long id);
 
-    Optional<CountryEntity> findByName(String name);
+    Optional<Country> findByName(String name);
 
-    Optional<CountryEntity> findByNumericCode(Integer numericCode);
+    Optional<Country> findByNumericCode(Integer numericCode);
 
-    Optional<CountryEntity> findByAlpha2Code(String alpha2Code);
+    Optional<Country> findByAlpha2Code(String alpha2Code);
 
-    Optional<CountryEntity> findByAlpha3Code(String alpha3Code);
+    Optional<Country> findByAlpha3Code(String alpha3Code);
 
-    CountryEntity create(CountryEntity country);
+    Country create(Country country);
 
-    CountryEntity update(CountryEntity country);
+    Country update(Country country);
 
     void delete(Long id);
 

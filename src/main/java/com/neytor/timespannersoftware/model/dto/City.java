@@ -1,6 +1,6 @@
-package com.neytor.timespannersoftware.dto;
+package com.neytor.timespannersoftware.model.dto;
 
-public class IdentificationType {
+public class City {
 
     private Long id;
 
@@ -8,17 +8,14 @@ public class IdentificationType {
 
     private String description;
 
-    private String shortenedForm;
-
-    public IdentificationType() {
+    public City() {
         // Empty constructor
     }
 
-    public IdentificationType(Long id, String code, String description, String shortenedForm) {
+    public City(Long id, String code, String description) {
         this.id = id;
         this.code = code;
         this.description = description;
-        this.shortenedForm = shortenedForm;
     }
 
     public Long getId() {
@@ -43,13 +40,5 @@ public class IdentificationType {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getShortenedForm() {
-        return shortenedForm;
-    }
-
-    public void setShortenedForm(String shortenedForm) {
-        this.shortenedForm = shortenedForm;
     }
 }

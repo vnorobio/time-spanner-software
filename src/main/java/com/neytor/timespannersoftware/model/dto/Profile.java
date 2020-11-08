@@ -1,20 +1,17 @@
-package com.neytor.timespannersoftware.dto;
+package com.neytor.timespannersoftware.model.dto;
 
-public class City {
+public class Profile {
 
     private Long id;
 
-    private String code;
-
     private String description;
 
-    public City() {
+    public Profile() {
         // Empty constructor
     }
 
-    public City(Long id, String code, String description) {
+    public Profile(Long id, String description) {
         this.id = id;
-        this.code = code;
         this.description = description;
     }
 
@@ -24,14 +21,6 @@ public class City {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getDescription() {

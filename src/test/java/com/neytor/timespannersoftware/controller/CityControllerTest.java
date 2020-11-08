@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.City;
+import com.neytor.timespannersoftware.model.dto.City;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;

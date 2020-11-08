@@ -2,11 +2,11 @@ package com.neytor.timespannersoftware.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neytor.timespannersoftware.dto.City;
-import com.neytor.timespannersoftware.dto.Contract;
-import com.neytor.timespannersoftware.dto.EmployeesGroup;
-import com.neytor.timespannersoftware.dto.IdentificationType;
-import com.neytor.timespannersoftware.dto.Person;
+import com.neytor.timespannersoftware.model.dto.City;
+import com.neytor.timespannersoftware.model.dto.Contract;
+import com.neytor.timespannersoftware.model.dto.EmployeesGroup;
+import com.neytor.timespannersoftware.model.dto.IdentificationType;
+import com.neytor.timespannersoftware.model.dto.Person;
 import com.neytor.timespannersoftware.model.ContractEntity;
 import com.neytor.timespannersoftware.service.ContractService;
 import org.junit.jupiter.api.Test;

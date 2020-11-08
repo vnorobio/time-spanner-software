@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.Date;
+import com.neytor.timespannersoftware.model.dto.Date;
 import com.neytor.timespannersoftware.model.DateEntity;
 import com.neytor.timespannersoftware.service.DateService;
 import io.swagger.annotations.Api;
@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RestController

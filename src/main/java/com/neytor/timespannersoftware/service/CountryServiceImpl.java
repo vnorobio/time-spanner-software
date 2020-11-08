@@ -1,12 +1,15 @@
 package com.neytor.timespannersoftware.service;
 
 import com.neytor.timespannersoftware.model.CountryEntity;
+import com.neytor.timespannersoftware.model.dto.Country;
+import com.neytor.timespannersoftware.model.mapper.CountryMapper;
 import com.neytor.timespannersoftware.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -14,57 +17,65 @@ public class CountryServiceImpl implements CountryService {
     private final CountryRepository repository;
 
     @Autowired
-    public CountryServiceImpl(CountryRepository repository) {
+    public CountryServiceImpl( CountryRepository repository ) {
         this.repository = repository;
     }
 
     @Override
-    public List<CountryEntity> findAll() {
-        return this.repository.findAll();
+    public List< Country > findAll( ) {
+        return this.repository.findAll( ).stream( ).map( CountryMapper::convertToDto ).collect( Collectors.toList( ) );
     }
 
     @Override
-    public Optional<CountryEntity> findById(Long id) {
-        return this.repository.findById(id);
+    public Optional< Country > findById( Long id ) {
+        return this.repository.findById( id )
+                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
     }
 
     @Override
-    public Optional<CountryEntity> findByName(String name) {
-        return this.repository.findByName(name);
+    public Optional< Country > findByName( String name ) {
+        return this.repository.findByName( name )
+                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
     }
 
     @Override
-    public Optional<CountryEntity> findByNumericCode(Integer numericCode) {
-        return this.repository.findByNumericCode(numericCode);
+    public Optional< Country > findByNumericCode( Integer numericCode ) {
+        return this.repository.findByNumericCode( numericCode )
+                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
     }
 
     @Override
-    public Optional<CountryEntity> findByAlpha2Code(String alpha2Code) {
-        return this.repository.findByAlpha2Code(alpha2Code);
+    public Optional< Country > findByAlpha2Code( String alpha2Code ) {
+        return this.repository.findByAlpha2Code( alpha2Code )
+                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
     }
 
     @Override
-    public Optional<CountryEntity> findByAlpha3Code(String alpha3Code) {
-        return this.repository.findByAlpha3Code(alpha3Code);
+    public Optional< Country > findByAlpha3Code( String alpha3Code ) {
+        return this.repository.findByAlpha3Code( alpha3Code )
+                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
     }
 
     @Override
-    public CountryEntity create(CountryEntity country) {
-        return this.repository.save(country);
+    public Country create( Country country ) {
+        CountryEntity entity = this.repository.save(CountryMapper.convertToEntity( country ));
+        return CountryMapper.convertToDto(entity);
+
     }
 
     @Override
-    public CountryEntity update(CountryEntity country) {
-        return this.repository.save(country);
+    public Country update( Country country ) {
+        CountryEntity entity = this.repository.save(CountryMapper.convertToEntity( country ));
+        return CountryMapper.convertToDto(entity);
     }
 
     @Override
-    public void delete(Long id) {
-        this.repository.deleteById(id);
+    public void delete( Long id ) {
+        this.repository.deleteById( id );
     }
 
     @Override
-    public Boolean existsById(Long id) {
-        return this.repository.existsById(id);
+    public Boolean existsById( Long id ) {
+        return this.repository.existsById( id );
     }
 }

@@ -1,7 +1,7 @@
 package com.neytor.timespannersoftware.controller;
 
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
-import com.neytor.timespannersoftware.dto.User;
+import com.neytor.timespannersoftware.model.dto.User;
 import com.neytor.timespannersoftware.model.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
 import io.swagger.annotations.Api;

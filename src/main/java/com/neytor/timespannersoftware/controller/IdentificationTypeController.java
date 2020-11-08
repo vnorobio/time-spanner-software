@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.IdentificationType;
+import com.neytor.timespannersoftware.model.dto.IdentificationType;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
 import com.neytor.timespannersoftware.service.IdentificationTypeService;

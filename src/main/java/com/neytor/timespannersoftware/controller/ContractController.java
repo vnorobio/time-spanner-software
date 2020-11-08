@@ -1,6 +1,6 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.dto.Contract;
+import com.neytor.timespannersoftware.model.dto.Contract;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.ContractEntity;

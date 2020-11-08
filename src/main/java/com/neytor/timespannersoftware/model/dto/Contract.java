@@ -1,4 +1,4 @@
-package com.neytor.timespannersoftware.dto;
+package com.neytor.timespannersoftware.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
