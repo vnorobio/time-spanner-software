@@ -131,7 +131,7 @@ public class ContractController {
         entity.setSalary(updateDto.getSalary());
         entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
         entity.setEmployeesGroup(modelMapper.map(updateDto.getEmployeesGroup(), EmployeesGroupEntity.class));
-        entity.setCity(modelMapper.map(updateDto.getTerrirorialDivision(), CityEntity.class));
+        entity.setCity(modelMapper.map(updateDto.getCity(), CityEntity.class));
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
     }

@@ -1,9 +1,11 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.repository.EstateRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +32,9 @@ public class EstateServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity entity = new EstateEntity(1L,"codigo","descripcion", countryEntity);
-        EstateEntity entity2 = new EstateEntity(2L,"codigo2","descripcion2", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        EstateEntity entity = generator.nextObject( EstateEntity.class );
+        EstateEntity entity2 = generator.nextObject( EstateEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -46,8 +48,8 @@ public class EstateServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity entity = new EstateEntity(1L,"codigo","descripcion", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        EstateEntity entity = generator.nextObject( EstateEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -75,8 +77,8 @@ public class EstateServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity entity = new EstateEntity(2L,"codigo","descripcion", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        EstateEntity entity = generator.nextObject( EstateEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

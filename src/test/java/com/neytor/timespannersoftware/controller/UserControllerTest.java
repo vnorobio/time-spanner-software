@@ -1,8 +1,10 @@
 package com.neytor.timespannersoftware.controller;
 
+import com.neytor.timespannersoftware.model.dto.Contract;
 import com.neytor.timespannersoftware.model.dto.User;
 import com.neytor.timespannersoftware.model.UserEntity;
 import com.neytor.timespannersoftware.service.UserService;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -50,8 +52,9 @@ class UserControllerTest {
     @Test
     void findAll() throws Exception{
         // given
-        UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
-        UserEntity user2 = new UserEntity(2L, "java", "Gupta", "Lokesh", "Lokeshjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
+        UserEntity user2 = generator.nextObject( UserEntity.class );
         List<UserEntity> users = Arrays.asList(user1,user2);
 
         given(service.findAll()).willReturn(users);
@@ -70,7 +73,8 @@ class UserControllerTest {
 
    @Test
     void finById() throws Exception{
-       UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+       EasyRandom generator = new EasyRandom();
+       UserEntity user1 = generator.nextObject( UserEntity.class );
        given(service.findById(2L)).willReturn(Optional.of(user1));
 
        ResponseEntity<User> responseEntity = controller.finById(2L);
@@ -85,7 +89,8 @@ class UserControllerTest {
 
     @Test
     void finByLogin() throws Exception{
-        UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
         given(service.findByLogin("howtodoinjava")).willReturn(Optional.of(user1));
 
         ResponseEntity<User> responseEntity = controller.findByLogin("howtodoinjava");
@@ -99,7 +104,8 @@ class UserControllerTest {
 
     @Test
     void finByEmail() throws Exception{
-        UserEntity user1 = new UserEntity(2L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
         given(service.findByEmail("howtodoinjava@gmail.com")).willReturn(Optional.of(user1));
 
         ResponseEntity<User> responseEntity = controller.findByEmail("howtodoinjava@gmail.com");
@@ -113,7 +119,8 @@ class UserControllerTest {
 
     @Test
     void create() throws Exception{
-        UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
         given(service.create(any(UserEntity.class))).willReturn(user1);
 
        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/user/").content(USER_JSON)
@@ -126,8 +133,9 @@ class UserControllerTest {
 
     @Test
     void update() throws Exception {
-        UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
-        User userDto = new User(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
+        User userDto = generator.nextObject( User.class );
         given(service.findById(1L)).willReturn(Optional.of(user1));
         given(service.update(user1)).willReturn(user1);
 
@@ -144,7 +152,8 @@ class UserControllerTest {
 
     @Test
     void delete() throws Exception  {
-        UserEntity user1 = new UserEntity(1L, "howtodoinjava", "Lokesh", "Gupta", "howtodoinjava@gmail.com",true);
+        EasyRandom generator = new EasyRandom();
+        UserEntity user1 = generator.nextObject( UserEntity.class );
         given(service.existsById(1L)).willReturn(Boolean.TRUE);
         doNothing().when(service).delete(1L);
 

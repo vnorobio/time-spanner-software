@@ -5,6 +5,7 @@ import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.service.CityService;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -71,9 +72,8 @@ public class CityControllerTest {
 
     @Test
     void finById() throws Exception{
-        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
-        CityEntity entity1 = new CityEntity(1L,"codigo","descripcion", estateEntity, countryEntity);
+        EasyRandom generator = new EasyRandom();
+        City entity1 = generator.nextObject( City.class );
         given(service.findById(2L)).willReturn(Optional.of(entity1));
 
         ResponseEntity<City> responseEntity = controller.finById(2L);
@@ -88,10 +88,9 @@ public class CityControllerTest {
 
     @Test
     void findByDescription() throws Exception{
-        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
-        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1" ,estateEntity, countryEntity);
-        CityEntity entity2 = new CityEntity(2L,"codigo2","descripcion2", estateEntity, countryEntity);
+        EasyRandom generator = new EasyRandom();
+        City entity1 = generator.nextObject( City.class );
+        City entity2 = generator.nextObject( City.class );
         List entities = Arrays.asList(entity1,entity2);
         given(service.findByDescriptionContaining("descripcion")).willReturn(entities);
 
@@ -106,10 +105,9 @@ public class CityControllerTest {
 
     @Test
     void create() throws Exception{
-        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
-        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1", estateEntity, countryEntity);
-        given(service.create(any(CityEntity.class))).willReturn(entity1);
+        EasyRandom generator = new EasyRandom();
+        City entity1 = generator.nextObject( City.class );
+        given(service.create(any(City.class))).willReturn(entity1);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -121,14 +119,12 @@ public class CityControllerTest {
 
     @Test
     void update() throws Exception {
-        CountryEntity countryEntity = new CountryEntity(1L,"Colombia",520,"co","col");
-        EstateEntity estateEntity = new EstateEntity(1L,"estate1","Desc estate", countryEntity);
-        CityEntity entity1 = new CityEntity(1L,"codigo1","descripcion1", estateEntity, countryEntity);
-        City cityDto = new City(1L,"codigo1","descripcion1" );
+        EasyRandom generator = new EasyRandom();
+        City entity1 = generator.nextObject( City.class );
         given(service.findById(1L)).willReturn(Optional.of(entity1));
         given(service.update(entity1)).willReturn(entity1);
 
-        ResponseEntity<City> responseEntity = controller.update(cityDto);
+        ResponseEntity<City> responseEntity = controller.update(entity1);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/catalogs/v1/business_unit/").content(BUSINESSUNIT_JSON)
                 .contentType(MediaType.APPLICATION_JSON)

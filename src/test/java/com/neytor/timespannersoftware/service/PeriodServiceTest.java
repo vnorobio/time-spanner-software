@@ -1,9 +1,11 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.PeriodEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.repository.PeriodRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,12 +32,9 @@ public class PeriodServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        PeriodEntity entity = new PeriodEntity();
-        entity.setId(1L);
-        entity.setCode("codigo");
-        PeriodEntity entity2 = new PeriodEntity();
-        entity2.setId(2L);
-        entity2.setCode("codigo2");
+        EasyRandom generator = new EasyRandom();
+        PeriodEntity entity = generator.nextObject( PeriodEntity.class );
+        PeriodEntity entity2 = generator.nextObject( PeriodEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -49,9 +48,8 @@ public class PeriodServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        PeriodEntity entity = new PeriodEntity();
-        entity.setId(1L);
-        entity.setCode("codigo");
+        EasyRandom generator = new EasyRandom();
+        PeriodEntity entity = generator.nextObject( PeriodEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -79,9 +77,8 @@ public class PeriodServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        PeriodEntity entity = new PeriodEntity();
-        entity.setId(2L);
-        entity.setCode("codigo");
+        EasyRandom generator = new EasyRandom();
+        PeriodEntity entity = generator.nextObject( PeriodEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

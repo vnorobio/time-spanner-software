@@ -1,7 +1,9 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
 import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.repository.LocationRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,8 +30,9 @@ public class LocationServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        LocationEntity entity = new LocationEntity(1L,"codigo","descripcion", "Street", "4444444");
-        LocationEntity entity2 = new LocationEntity(2L,"codigo2","descripcion2", "Road", "5555555");
+        EasyRandom generator = new EasyRandom();
+        LocationEntity entity = generator.nextObject( LocationEntity.class );
+        LocationEntity entity2 = generator.nextObject( LocationEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -43,7 +46,8 @@ public class LocationServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        LocationEntity entity = new LocationEntity(1L,"codigo","descripcion", "Street", "4444444");;
+        EasyRandom generator = new EasyRandom();
+        LocationEntity entity = generator.nextObject( LocationEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -71,7 +75,8 @@ public class LocationServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        LocationEntity entity = new LocationEntity(2L,"codigo","descripcion", "Street", "4444444");
+        EasyRandom generator = new EasyRandom();
+        LocationEntity entity = generator.nextObject( LocationEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

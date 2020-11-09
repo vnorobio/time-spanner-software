@@ -3,12 +3,15 @@ package com.neytor.timespannersoftware.service;
 import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.model.dto.City;
+import com.neytor.timespannersoftware.model.mapper.CityMapper;
 import com.neytor.timespannersoftware.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -21,48 +24,55 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityEntity> findAll() {
-        return repository.findAll();
+    public List<City> findAll() {
+        return repository.findAll().stream()
+                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
     }
 
     @Override
-    public List<CityEntity> findByEstate(EstateEntity entity) {
-        return repository.findByEstate(entity);
+    public List<City> findByEstate(EstateEntity entity) {
+        return repository.findByEstate(entity).stream()
+                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
     }
 
     @Override
-    public List<CityEntity> findByCountry(CountryEntity entity) {
-        return repository.findByCountry(entity);
+    public List<City> findByCountry(CountryEntity entity) {
+        return repository.findByCountry(entity).stream()
+                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
     }
 
     @Override
-    public Optional<CityEntity> findById(Long id) {
-        return repository.findById(id);
+    public Optional<City> findById(Long id) {
+        return repository.findById(id).flatMap( cityEntity -> Optional.of( CityMapper.convertToDto( cityEntity ) ) );
     }
 
     @Override
-    public Optional<CityEntity> findByCode(String code) {
-        return repository.findByCode(code);
+    public Optional<City> findByCode(String code) {
+        return repository.findByCode(code).flatMap( cityEntity -> Optional.of( CityMapper.convertToDto( cityEntity ) ) );
     }
 
     @Override
-    public List<CityEntity> findByCodeContaining(String code) {
-        return repository.findByCodeContaining(code);
+    public List<City> findByCodeContaining(String code) {
+        return repository.findByCodeContaining(code).stream()
+                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
     }
 
     @Override
-    public List<CityEntity> findByDescriptionContaining(String description) {
-        return repository.findByDescriptionContaining(description);
+    public List<City> findByDescriptionContaining(String description) {
+        return repository.findByDescriptionContaining(description).stream()
+                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
     }
 
     @Override
-    public CityEntity create(CityEntity entity) {
-        return repository.save(entity);
+    public City create( City entity) {
+        CityEntity cityEntity = this.repository.save(CityMapper.convertToEntity( entity ));
+        return CityMapper.convertToDto(cityEntity);
     }
 
     @Override
-    public CityEntity update(CityEntity entity) {
-        return repository.save(entity);
+    public City update(City entity) {
+        CityEntity cityEntity = this.repository.save(CityMapper.convertToEntity( entity ));
+        return CityMapper.convertToDto(cityEntity);
     }
 
     @Override

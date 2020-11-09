@@ -1,9 +1,11 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.model.ContractEntity;
 import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.repository.EmployeesGroupRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,10 +32,9 @@ public class EmployeesGroupServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        EmployeesGroupEntity entity = new EmployeesGroupEntity(1L,"codigo","descripcion");
-        EmployeesGroupEntity entity2 = new EmployeesGroupEntity(2L,"codigo2","descripcion2");
+        EasyRandom generator = new EasyRandom();
+        EmployeesGroupEntity entity = generator.nextObject( EmployeesGroupEntity.class );
+        EmployeesGroupEntity entity2 = generator.nextObject( EmployeesGroupEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -47,9 +48,8 @@ public class EmployeesGroupServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        EmployeesGroupEntity entity = new EmployeesGroupEntity(1L,"codigo","descripcion");
+        EasyRandom generator = new EasyRandom();
+        EmployeesGroupEntity entity = generator.nextObject( EmployeesGroupEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -77,9 +77,8 @@ public class EmployeesGroupServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        EmployeesGroupEntity entity = new EmployeesGroupEntity(2L,"codigo","descripcion");
+        EasyRandom generator = new EasyRandom();
+        EmployeesGroupEntity entity = generator.nextObject( EmployeesGroupEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

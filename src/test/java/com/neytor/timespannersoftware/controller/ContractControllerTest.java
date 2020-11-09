@@ -9,6 +9,7 @@ import com.neytor.timespannersoftware.model.dto.IdentificationType;
 import com.neytor.timespannersoftware.model.dto.Person;
 import com.neytor.timespannersoftware.model.ContractEntity;
 import com.neytor.timespannersoftware.service.ContractService;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -59,10 +60,8 @@ public class ContractControllerTest {
         this.mockMvc = mockMvc;
         this.controller = controller;
         ObjectMapper mapper = new ObjectMapper();
-        Person person = new Person(1l,"Jhon",null,"Doe",null,"Doe Jhon",new IdentificationType(),"1234567890",1,0,"Some address","jhon@somedomain.com","444444");
-        EmployeesGroup employeesGroup = new EmployeesGroup(1l,"EG Code","EG Description");
-        City city = new City(1L,"BU Code","BU description");
-        Contract contract = new Contract(1l,"DoeJhon-1",person,1, LocalDate.of(2020,1,1),LocalDate.of(2020,1,31),new BigDecimal(2000000),1,employeesGroup, city);
+        EasyRandom generator = new EasyRandom();
+        Contract contract = generator.nextObject( Contract.class );
         CONTRACT_JSON = mapper.writeValueAsString(contract);
     }
 
@@ -174,8 +173,9 @@ public class ContractControllerTest {
 
     @Test
     void update() throws Exception {
+        EasyRandom generator = new EasyRandom();
+        Contract contractDto = generator.nextObject( Contract.class );
         ContractEntity entity1 = new ContractEntity( );
-        Contract contractDto = new Contract();
         given(service.findById(1L)).willReturn(Optional.of(entity1));
         given(service.update(entity1)).willReturn(entity1);
 

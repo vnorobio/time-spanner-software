@@ -48,7 +48,7 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<List<City>> findAll() {
-        return ResponseEntity.ok().body(service.findAll().stream().map(this::convertToDto).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     @GetMapping(path = "/v1/territorial_division/id/{id}", produces = "application/json")
@@ -60,7 +60,7 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<City> finById(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.ok().body(convertToDto(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id))));
+        return ResponseEntity.ok().body(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id)));
     }
 
     @GetMapping(path = "/v1/territorial_division/code/{code}", produces = "application/json")
@@ -72,7 +72,7 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<List<City>>findByCode(@PathVariable(value = "code") String code) {
-        return ResponseEntity.ok().body(service.findByCodeContaining(code).stream().map(this::convertToDto).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(service.findByCodeContaining(code));
     }
 
     @GetMapping(path = "/v1/territorial_division/description/{description}", produces = "application/json")
@@ -84,7 +84,7 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<List<City>>findByDescription(@PathVariable(value = "description") String description) {
-        return ResponseEntity.ok().body(service.findByDescriptionContaining(description).stream().map(this::convertToDto).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(service.findByDescriptionContaining(description));
     }
 
     @PostMapping(path = "/v1/territorial_division", produces = "application/json")
@@ -95,8 +95,7 @@ public class CityController {
             @ApiResponse(code = 403, message = "The Operation you were trying is forbidden")
     })
     public ResponseEntity<City> create(@RequestBody City dto) {
-        CityEntity entity = convertToEntity(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.create(entity)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
     @PutMapping(path = "/v1/territorial_division", produces = "application/json")
@@ -108,9 +107,10 @@ public class CityController {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
     public ResponseEntity<City> update(@RequestBody City updateDto) {
-        CityEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + updateDto.getId()));
-        entity.setDescription(updateDto.getDescription());
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(convertToDto(service.update(entity)));
+         if (!service.existsById( updateDto.getId() )){
+            throw new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + updateDto.getId());
+        }
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.update(updateDto));
     }
 
     @DeleteMapping(path = "/v1/territorial_division/{id}", produces = "application/json")
@@ -129,11 +129,4 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
-    private City convertToDto(CityEntity entity) {
-        return modelMapper.map(entity, City.class);
-    }
-
-    private CityEntity convertToEntity(City dto) {
-        return modelMapper.map(dto, CityEntity.class);
-    }
 }

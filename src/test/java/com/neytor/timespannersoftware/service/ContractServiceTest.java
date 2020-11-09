@@ -1,10 +1,8 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.CityEntity;
-import com.neytor.timespannersoftware.model.ContractEntity;
-import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
-import com.neytor.timespannersoftware.model.PersonEntity;
+import com.neytor.timespannersoftware.model.*;
 import com.neytor.timespannersoftware.repository.ContractRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,11 +31,9 @@ public class ContractServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        CityEntity city = new CityEntity();
-        PersonEntity person = new PersonEntity();
-        EmployeesGroupEntity employees = new EmployeesGroupEntity();
-        ContractEntity entity = new ContractEntity(1L, "reference", person, 1, new Date(), null, new BigDecimal(200), 1, employees, city);
-        ContractEntity entity2 = new ContractEntity(2L, "reference", person, 1, new Date(), null, new BigDecimal(200), 1, employees, city);
+        EasyRandom generator = new EasyRandom();
+        ContractEntity entity = generator.nextObject( ContractEntity.class );
+        ContractEntity entity2 = generator.nextObject( ContractEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -51,10 +47,8 @@ public class ContractServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CityEntity city = new CityEntity();
-        PersonEntity person = new PersonEntity();
-        EmployeesGroupEntity employees = new EmployeesGroupEntity();
-        ContractEntity entity = new ContractEntity(1L, "reference", person, 1, new Date(), null, new BigDecimal(200), 1, employees, city);
+        EasyRandom generator = new EasyRandom();
+        ContractEntity entity = generator.nextObject( ContractEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -82,10 +76,8 @@ public class ContractServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CityEntity city = new CityEntity();
-        PersonEntity person = new PersonEntity();
-        EmployeesGroupEntity employees = new EmployeesGroupEntity();
-        ContractEntity entity = new ContractEntity(2L, "reference", person, 1, new Date(), null, new BigDecimal(200), 1, employees, city);
+        EasyRandom generator = new EasyRandom();
+        ContractEntity entity = generator.nextObject( ContractEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

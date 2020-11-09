@@ -4,6 +4,7 @@ import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.repository.IdentificationTypeRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,9 @@ public class IdentificationTypeTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        IdentificationTypeEntity entity = new IdentificationTypeEntity(1L,"codigo","descripcion", "cod", countryEntity);
-        IdentificationTypeEntity entity2 = new IdentificationTypeEntity(2L,"codigo2","descripcion2", "cod2", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        IdentificationTypeEntity entity = generator.nextObject( IdentificationTypeEntity.class );
+        IdentificationTypeEntity entity2 = generator.nextObject( IdentificationTypeEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -46,8 +47,8 @@ public class IdentificationTypeTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        IdentificationTypeEntity entity = new IdentificationTypeEntity(1L,"codigo","descripcion", "cod", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        IdentificationTypeEntity entity = generator.nextObject( IdentificationTypeEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -75,8 +76,8 @@ public class IdentificationTypeTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        IdentificationTypeEntity entity = new IdentificationTypeEntity(2L,"codigo","descripcion", "cod", countryEntity);
+        EasyRandom generator = new EasyRandom();
+        IdentificationTypeEntity entity = generator.nextObject( IdentificationTypeEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

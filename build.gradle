@@ -29,7 +29,10 @@ dependencies {
 	compile 'org.modelmapper:modelmapper:2.3.7'
 	compile 'com.google.code.gson:gson:2.8.6'
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
+// https://mvnrepository.com/artifact/org.jeasy/easy-random-core
+	testCompile group: 'org.jeasy', name: 'easy-random-core', version: '4.0.0'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

@@ -3,7 +3,9 @@ package com.neytor.timespannersoftware.service;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.model.dto.Country;
 import com.neytor.timespannersoftware.repository.CountryRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,12 +32,13 @@ public class CountryServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-        CountryEntity entity = new CountryEntity(1L,"Colombia",57, "co", "col");
-        CountryEntity entity2 = new CountryEntity(1L,"Peru",33, "pe", "per");
+        EasyRandom generator = new EasyRandom();
+        Country entity = generator.nextObject( Country.class );
+        Country entity2 = generator.nextObject( Country.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
-        List<CountryEntity> entities = service.findAll();
+        List<Country> entities = service.findAll();
 
         // Assert the response
         Assertions.assertEquals(2, entities.size(), "findAll should return 2 widgets");
@@ -45,11 +48,12 @@ public class CountryServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CountryEntity entity = new CountryEntity(1L,"Colombia",57, "co", "col");
+        EasyRandom generator = new EasyRandom();
+        Country entity = generator.nextObject( Country.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
-        Optional<CountryEntity> returnedEntity = service.findById(1l);
+        Optional<Country> returnedEntity = service.findById(1l);
 
         // Assert the response
         Assertions.assertTrue(returnedEntity.isPresent(), "CountryEntity was not found");
@@ -63,7 +67,7 @@ public class CountryServiceTest {
         doReturn(Optional.empty()).when(repository).findById(1l);
 
         // Execute the service call
-        Optional<CountryEntity> returnedEntity = service.findById(1l);
+        Optional<Country> returnedEntity = service.findById(1l);
 
         // Assert the response
         Assertions.assertFalse(returnedEntity.isPresent(), "Widget should not be found");
@@ -73,13 +77,12 @@ public class CountryServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        CountryEntity entity = new CountryEntity(2L,"Colombia",57, "co", "col");
+        EasyRandom generator = new EasyRandom();
+        Country entity = generator.nextObject( Country.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call
-        CountryEntity returnedEntity = service.create(entity);
+        Country returnedEntity = service.create(entity);
 
         // Assert the response
         Assertions.assertNotNull(returnedEntity, "The saved widget should not be null");

@@ -3,7 +3,9 @@ package com.neytor.timespannersoftware.service;
 import com.neytor.timespannersoftware.model.ConceptEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.model.UserEntity;
 import com.neytor.timespannersoftware.repository.ConceptRepository;
+import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,9 +33,9 @@ public class ConceptServiceTest {
     @DisplayName("Test findAll Success")
     void testFindAll(){
         // Setup our mock repository
-
-        ConceptEntity entity = new ConceptEntity(1L, "codigo","descripcion", new BigDecimal(1));
-        ConceptEntity entity2 = new ConceptEntity(2L,"codigo2","descripcion2",new BigDecimal(2));
+        EasyRandom generator = new EasyRandom();
+        ConceptEntity entity = generator.nextObject( ConceptEntity.class );
+        ConceptEntity entity2 = generator.nextObject( ConceptEntity.class );
         doReturn(Arrays.asList(entity, entity2)).when(repository).findAll();
 
         // Execute the service call
@@ -47,9 +49,8 @@ public class ConceptServiceTest {
     @DisplayName("Test findById Success")
     void testFindById(){
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        ConceptEntity entity = new ConceptEntity(1L, "codigo","descripcion", new BigDecimal(1));
+        EasyRandom generator = new EasyRandom();
+        ConceptEntity entity = generator.nextObject( ConceptEntity.class );
         doReturn(Optional.of(entity)).when(repository).findById(1l);
 
         // Execute the service call
@@ -77,9 +78,8 @@ public class ConceptServiceTest {
     @DisplayName("Test create entity")
     void testCreate() {
         // Setup our mock repository
-        CountryEntity countryEntity = new CountryEntity();
-        EstateEntity estateEntity = new EstateEntity();
-        ConceptEntity entity = new ConceptEntity(2L,"codigo","descripcion", new BigDecimal(2));
+        EasyRandom generator = new EasyRandom();
+        ConceptEntity entity = generator.nextObject( ConceptEntity.class );
         doReturn(entity).when(repository).save(org.mockito.ArgumentMatchers.any());
 
         // Execute the service call

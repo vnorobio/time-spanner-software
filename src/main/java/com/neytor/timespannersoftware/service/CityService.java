@@ -1,30 +1,30 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.model.dto.City;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CityService {
-    List<CityEntity> findAll();
+    List< City > findAll();
 
-    List<CityEntity> findByEstate(EstateEntity entity);
+    List<City> findByEstate(EstateEntity entity);
 
-    List<CityEntity> findByCountry(CountryEntity entity);
+    List<City> findByCountry(CountryEntity entity);
 
-    Optional<CityEntity> findById(Long id);
+    Optional<City> findById(Long id);
 
-    Optional<CityEntity> findByCode(String code);
+    Optional<City> findByCode(String code);
 
-    List<CityEntity> findByCodeContaining(String code);
+    List<City> findByCodeContaining(String code);
 
-    List<CityEntity> findByDescriptionContaining(String description);
+    List<City> findByDescriptionContaining(String description);
 
-    CityEntity create(CityEntity entity);
+    City create(City entity);
 
-    CityEntity update(CityEntity entity);
+    City update(City entity);
 
     void delete(Long id);
 
