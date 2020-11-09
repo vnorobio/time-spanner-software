@@ -1,5 +1,7 @@
 package com.neytor.timespannersoftware.model;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "profiles")
+@Data
 public class ProfileEntity {
 
     @Id
@@ -18,28 +21,4 @@ public class ProfileEntity {
 
     private String description;
 
-    public ProfileEntity() {
-        // Empty constructor
-    }
-
-    public ProfileEntity(Long id, String description) {
-        this.id = id;
-        this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

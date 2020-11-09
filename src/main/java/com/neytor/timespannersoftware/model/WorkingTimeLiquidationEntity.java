@@ -1,11 +1,14 @@
 package com.neytor.timespannersoftware.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "working_time_liquidations")
+@Data
 public class WorkingTimeLiquidationEntity {
 
     @Id
@@ -52,118 +55,4 @@ public class WorkingTimeLiquidationEntity {
     @JoinColumn(name = "liquidation_value", referencedColumnName = "liquidation_value", insertable = false, updatable = false)
     private BigDecimal liquidationValue;
 
-    public WorkingTimeLiquidationEntity() {
-        // Empty constructor
-    }
-
-    public WorkingTimeLiquidationEntity(Long id, LocalDate date, ScheduleEntity schedule, ScheduleDetailEntity detail, SpotEntity spot, PersonEntity person, ContractEntity contract, ConceptEntity concept, BigDecimal appliedRatio, BigDecimal baseSalary, Long amountOfTime, BigDecimal liquidationValue) {
-        this.id = id;
-        this.date = date;
-        this.schedule = schedule;
-        this.detail = detail;
-        this.spot = spot;
-        this.person = person;
-        this.contract = contract;
-        this.concept = concept;
-        this.appliedRatio = appliedRatio;
-        this.baseSalary = baseSalary;
-        this.amountOfTime = amountOfTime;
-        this.liquidationValue = liquidationValue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public ScheduleEntity getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(ScheduleEntity schedule) {
-        this.schedule = schedule;
-    }
-
-    public ScheduleDetailEntity getDetail() {
-        return detail;
-    }
-
-    public void setDetail(ScheduleDetailEntity detail) {
-        this.detail = detail;
-    }
-
-    public SpotEntity getSpot() {
-        return spot;
-    }
-
-    public void setSpot(SpotEntity spot) {
-        this.spot = spot;
-    }
-
-    public PersonEntity getPerson() {
-        return person;
-    }
-
-    public void setPerson(PersonEntity person) {
-        this.person = person;
-    }
-
-    public ContractEntity getContract() {
-        return contract;
-    }
-
-    public void setContract(ContractEntity contract) {
-        this.contract = contract;
-    }
-
-    public ConceptEntity getConcept() {
-        return concept;
-    }
-
-    public void setConcept(ConceptEntity concept) {
-        this.concept = concept;
-    }
-
-    public BigDecimal getAppliedRatio() {
-        return appliedRatio;
-    }
-
-    public void setAppliedRatio(BigDecimal appliedRatio) {
-        this.appliedRatio = appliedRatio;
-    }
-
-    public BigDecimal getBaseSalary() {
-        return baseSalary;
-    }
-
-    public void setBaseSalary(BigDecimal baseSalary) {
-        this.baseSalary = baseSalary;
-    }
-
-    public Long getAmountOfTime() {
-        return amountOfTime;
-    }
-
-    public void setAmountOfTime(Long amountOfTime) {
-        this.amountOfTime = amountOfTime;
-    }
-
-    public BigDecimal getLiquidationValue() {
-        return liquidationValue;
-    }
-
-    public void setLiquidationValue(BigDecimal liquidationValue) {
-        this.liquidationValue = liquidationValue;
-    }
 }

@@ -1,9 +1,12 @@
 package com.neytor.timespannersoftware.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "locations")
+@Data
 public class LocationEntity {
 
     @Id
@@ -20,55 +23,4 @@ public class LocationEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public LocationEntity() {
-        // Empty constructor
-    }
-
-    public LocationEntity(Long id, String code, String description, String address, String phoneNumber) {
-        this.id = id;
-        this.code = code;
-        this.description = description;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

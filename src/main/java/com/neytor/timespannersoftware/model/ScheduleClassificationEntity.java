@@ -1,10 +1,13 @@
 package com.neytor.timespannersoftware.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "schedule_classifications")
+@Data
 public class ScheduleClassificationEntity {
 
     @Id
@@ -20,37 +23,4 @@ public class ScheduleClassificationEntity {
     @JoinColumn(name = "time_classification_id", referencedColumnName = "time_classification_id", insertable = false, updatable = false)
     private TimeClassificationEntity timeClassification;
 
-    public ScheduleClassificationEntity() {
-        // Empty constructor
-    }
-
-    public ScheduleClassificationEntity(Long id, ScheduleDetailEntity scheduleDetail, TimeClassificationEntity timeClassification) {
-        this.id = id;
-        this.scheduleDetail = scheduleDetail;
-        this.timeClassification = timeClassification;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ScheduleDetailEntity getScheduleDetail() {
-        return scheduleDetail;
-    }
-
-    public void setScheduleDetail(ScheduleDetailEntity scheduleDetail) {
-        this.scheduleDetail = scheduleDetail;
-    }
-
-    public TimeClassificationEntity getTimeClassification() {
-        return timeClassification;
-    }
-
-    public void setTimeClassification(TimeClassificationEntity timeClassification) {
-        this.timeClassification = timeClassification;
-    }
 }
