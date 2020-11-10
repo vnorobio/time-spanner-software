@@ -1,17 +1,20 @@
 package com.neytor.timespannersoftware.model.dto;
 
+import com.neytor.timespannersoftware.model.CountryEntity;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Value;
-
-import javax.persistence.*;
 
 @Value
 @Builder
-public class Profile {
+public class Estate {
 
     private Long id;
 
+    private String code;
+
     private String description;
+
+    private CountryEntity country;
+
 
 }

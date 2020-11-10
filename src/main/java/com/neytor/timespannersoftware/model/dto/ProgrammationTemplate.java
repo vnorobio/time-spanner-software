@@ -8,10 +8,18 @@ import javax.persistence.*;
 
 @Value
 @Builder
-public class Profile {
+public class ProgrammationTemplate {
 
     private Long id;
 
+    private String code;
+
     private String description;
+
+    private int timeOffType;
+
+    private Long ordinaryTimeLapse; 
+
+    private Long restTime;
 
 }

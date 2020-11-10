@@ -5,7 +5,6 @@ import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.dto.Country;
 import com.neytor.timespannersoftware.model.mapper.CountryMapper;
 import com.neytor.timespannersoftware.repository.CountryRepository;
-import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,17 +1,21 @@
 package com.neytor.timespannersoftware.model.dto;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Value;
 
-import javax.persistence.*;
+import java.math.BigDecimal;
+
 
 @Value
 @Builder
-public class Profile {
+public class Concept {
 
     private Long id;
 
+    private String code;
+
     private String description;
+
+    private BigDecimal ratio;
 
 }
