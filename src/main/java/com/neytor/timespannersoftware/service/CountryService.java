@@ -10,7 +10,7 @@ public interface CountryService {
 
     Optional<Country> findById(Long id);
 
-    Optional<Country> findByName(String name);
+    List< Country > findByName(String name);
 
     Optional<Country> findByNumericCode(Integer numericCode);
 

@@ -67,9 +67,8 @@ public class CountryController {
             @ApiResponse( code = 403, message = "Accessing the resource you were trying to reach is forbidden" ),
             @ApiResponse( code = 404, message = "The resource you were trying to reach is not found" )
     } )
-    public ResponseEntity< Country > findByName( @PathVariable( value = "name" ) String name ) {
-        return ResponseEntity.ok( )
-                .body( service.findByName( name ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_NAME + name ) ) );
+    public ResponseEntity< List<Country > > findByName( @PathVariable( value = "name" ) String name ) {
+        return ResponseEntity.ok( ).body( service.findByName( name) );
     }
 
     @GetMapping( path = "/v1/country/code/{code}", produces = "application/json" )

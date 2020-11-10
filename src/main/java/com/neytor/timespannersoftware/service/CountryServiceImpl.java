@@ -23,7 +23,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List< Country > findAll( ) {
-        return this.repository.findAll( ).stream( ).map( CountryMapper::convertToDto ).collect( Collectors.toList( ) );
+        List<CountryEntity> entities = repository.findAll( );
+        return entities.stream( ).map( CountryMapper::convertToDto ).collect( Collectors.toList( ) );
     }
 
     @Override
@@ -33,9 +34,9 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public Optional< Country > findByName( String name ) {
-        return this.repository.findByName( name )
-                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
+    public List< Country > findByName( String name ) {
+        List<CountryEntity> entities = this.repository.findByNameContaining( name );
+        return entities.stream( ).map( CountryMapper::convertToDto ).collect( Collectors.toList( ) );
     }
 
     @Override
