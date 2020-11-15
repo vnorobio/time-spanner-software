@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class WorkingTimeLiquidationMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static WorkingTimeLiquidation convertToDto( WorkingTimeLiquidationEntity entity ) {
         return modelMapper.map(entity, WorkingTimeLiquidation.class);

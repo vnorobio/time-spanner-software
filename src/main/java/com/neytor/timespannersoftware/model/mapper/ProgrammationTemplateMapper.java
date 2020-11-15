@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class ProgrammationTemplateMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static ProgrammationTemplate convertToDto( ProgrammationTemplateEntity entity ) {
         return modelMapper.map(entity, ProgrammationTemplate.class);

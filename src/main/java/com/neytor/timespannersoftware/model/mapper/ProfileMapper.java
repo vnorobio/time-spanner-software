@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class ProfileMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Profile convertToDto( ProfileEntity entity ) {
         return modelMapper.map(entity, Profile.class);

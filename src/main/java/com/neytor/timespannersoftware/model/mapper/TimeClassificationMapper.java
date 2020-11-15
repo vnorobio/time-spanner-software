@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class TimeClassificationMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static TimeClassification convertToDto( TimeClassificationEntity entity ) {
         return modelMapper.map(entity, TimeClassification.class);

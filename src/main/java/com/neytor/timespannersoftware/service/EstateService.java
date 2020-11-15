@@ -1,27 +1,27 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.CountryEntity;
-import com.neytor.timespannersoftware.model.EstateEntity;
+import com.neytor.timespannersoftware.model.dto.Country;
+import com.neytor.timespannersoftware.model.dto.Estate;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EstateService {
-    List<EstateEntity> findAll();
+    List<Estate> findAll();
 
-    List<EstateEntity> findByCountry(CountryEntity entity);
+    List< Estate > findByCountry( Country dto);
 
-    Optional<EstateEntity> findById(Long id);
+    Optional<Estate> findById(Long id);
 
-    Optional<EstateEntity> findByCode(String code);
+    Optional<Estate> findByCode(String code);
 
-    List<EstateEntity> findByCodeContaining(String code);
+    List<Estate> findByCodeContaining(String code);
 
-    List<EstateEntity> findByDescriptionContaining(String description);
+    List<Estate> findByDescriptionContaining(String description);
 
-    EstateEntity create(EstateEntity entity);
+    Estate create(Estate dto);
 
-    EstateEntity update(EstateEntity entity);
+    Estate update(Estate dto);
 
     void delete(Long id);
 

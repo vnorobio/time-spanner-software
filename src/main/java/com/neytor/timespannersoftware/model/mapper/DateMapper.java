@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class DateMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Date convertToDto( DateEntity entity ) {
         return modelMapper.map(entity, Date.class);

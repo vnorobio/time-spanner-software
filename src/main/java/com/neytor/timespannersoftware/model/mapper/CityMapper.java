@@ -6,10 +6,16 @@ import org.modelmapper.ModelMapper;
 
 public class CityMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static City convertToDto( CityEntity entity ) {
-        return modelMapper.map(entity, City.class);
+        return City.builder()
+                .id( entity.getId( ) )
+                .code( entity.getCode( ) )
+                .description( entity.getDescription( ) )
+                .estate( EstateMapper.convertToDto( entity.getEstate() ) )
+                .country( CountryMapper.convertToDto( entity.getCountry() ) )
+                .build();
     }
 
     public static CityEntity convertToEntity( City dto ) {

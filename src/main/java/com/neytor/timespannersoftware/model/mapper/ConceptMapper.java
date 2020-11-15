@@ -6,10 +6,15 @@ import org.modelmapper.ModelMapper;
 
 public class ConceptMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Concept convertToDto( ConceptEntity entity ) {
-        return modelMapper.map(entity, Concept.class);
+        return Concept.builder()
+                .id(entity.getId())
+                .code( entity.getCode( ) )
+                .description( entity.getDescription( ) )
+                .ratio( entity.getRatio() )
+                .build();
     }
 
     public static ConceptEntity convertToEntity( Concept dto ) {

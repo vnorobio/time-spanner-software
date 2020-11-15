@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class ScheduleDetailMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static ScheduleDetail convertToDto( ScheduleDetailEntity entity ) {
         return modelMapper.map(entity, ScheduleDetail.class);

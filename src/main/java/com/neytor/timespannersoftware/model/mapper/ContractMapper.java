@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class ContractMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Contract convertToDto( ContractEntity entity ) {
         return modelMapper.map(entity, Contract.class);

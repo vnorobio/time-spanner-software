@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class EmployeesGroupMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static EmployeesGroup convertToDto( EmployeesGroupEntity entity ) {
         return modelMapper.map(entity, EmployeesGroup.class);

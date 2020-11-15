@@ -14,7 +14,7 @@ public class Estate {
 
     private String description;
 
-    private CountryEntity country;
+    private Country country;
 
 
 }

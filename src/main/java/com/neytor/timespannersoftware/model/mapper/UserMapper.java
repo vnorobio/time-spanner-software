@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class UserMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static User convertToDto( UserEntity entity ) {
         return modelMapper.map(entity, User.class);

@@ -13,4 +13,8 @@ public class City {
 
     private String description;
 
+    private Estate estate;
+
+    private Country country;
+
 }

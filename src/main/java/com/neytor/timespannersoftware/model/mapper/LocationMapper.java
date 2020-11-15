@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class LocationMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Location convertToDto( LocationEntity entity ) {
         return modelMapper.map(entity, Location.class);

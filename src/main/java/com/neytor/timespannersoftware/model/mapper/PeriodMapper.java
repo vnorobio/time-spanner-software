@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class PeriodMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Period convertToDto( PeriodEntity entity ) {
         return modelMapper.map(entity, Period.class);

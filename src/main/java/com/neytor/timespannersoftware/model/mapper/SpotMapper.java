@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class SpotMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static Spot convertToDto( SpotEntity entity ) {
         return modelMapper.map(entity, Spot.class);

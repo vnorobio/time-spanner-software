@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 public class TimeSpanMapper {
 
-    private static ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
     public static TimeSpan convertToDto( TimeSpanEntity entity ) {
         return modelMapper.map(entity, TimeSpan.class);

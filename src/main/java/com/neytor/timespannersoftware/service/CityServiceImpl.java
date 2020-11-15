@@ -25,8 +25,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public List<City> findAll() {
-        return repository.findAll().stream()
-                .map( City -> CityMapper.convertToDto( City ) ).collect( Collectors.toList() );
+        List<CityEntity> entities = repository.findAll( );
+        return entities.stream().map( CityMapper::convertToDto ).collect( Collectors.toList() );
     }
 
     @Override
@@ -43,7 +43,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Optional<City> findById(Long id) {
-        return repository.findById(id).flatMap( cityEntity -> Optional.of( CityMapper.convertToDto( cityEntity ) ) );
+        return repository.findById(id)
+                .flatMap( cityEntity -> Optional.of( CityMapper.convertToDto( cityEntity ) ) );
     }
 
     @Override

@@ -25,7 +25,6 @@ import java.util.Optional;
 public class CountryServiceTest {
 
     private CountryFactory factory;
-    private List< CountryEntity > countryDtoList;
 
     @MockBean
     private CountryRepository repository;
