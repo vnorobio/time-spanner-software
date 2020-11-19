@@ -34,7 +34,7 @@ public class ScheduleDetailEntity {
     @Column(name = "span_type")
     private int spanType;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", columnDefinition = "DATE")
     private LocalDate startDate;
 
     @Column(name = "start_time")
@@ -42,7 +42,7 @@ public class ScheduleDetailEntity {
 
     private Long duration;
 
-    @Column(name = "ending_date")
+    @Column(name = "ending_date", columnDefinition = "DATE")
     private LocalDate endingDate;
 
     @Column(name = "ending_time")

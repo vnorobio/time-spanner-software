@@ -22,20 +22,20 @@ public class PeriodEntity {
 
     private Integer year;
 
-    private int periodicity;
+    private Integer periodicity;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", columnDefinition = "DATE")
     private LocalDate startDate;
 
-    private int duration;
+    private Integer duration;
 
-    @Column(name = "ending_date")
+    @Column(name = "ending_date", columnDefinition = "DATE")
     private LocalDate endingDate;
 
     @Column(name = "projected_interval")
-    private int projectedInterval;
+    private Integer projectedInterval;
 
-    @Column(name = "projection_start_date")
+    @Column(name = "projection_start_date", columnDefinition = "DATE")
     private LocalDate projectionStartDate;
 
 }

@@ -24,6 +24,7 @@ public class DateEntity {
 
     private String code;
 
+    @Column(name = "date", columnDefinition = "DATE")
     private LocalDate date;
 
     private Integer year;

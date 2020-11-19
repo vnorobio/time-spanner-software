@@ -16,7 +16,7 @@ public class WorkingTimeLiquidationEntity {
     @Column(name = "working_time_liquidation_id")
     private Long id;
 
-    @Column(name = "liquidation_date")
+    @Column(name = "liquidation_date", columnDefinition = "DATE")
     private LocalDate date;
 
     @ManyToOne

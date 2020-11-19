@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -34,13 +35,11 @@ public class ContractEntity {
     @Column(name = "contract_type")
     private int contractType;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "start_date")
-    private Date startDate;
+    @Column(name = "start_date", columnDefinition = "DATE")
+    private LocalDate startDate;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "ending_date")
-    private Date endingDate;
+    @Column(name = "ending_date", columnDefinition = "DATE")
+    private LocalDate endingDate;
 
     private BigDecimal salary;
 
