@@ -25,8 +25,4 @@ public class Period {
 
     private LocalDate endingDate;
 
-    private int projectedInterval;
-
-    private LocalDate projectionStartDate;
-
 }

@@ -19,12 +19,6 @@ public class Date {
 
     private Integer month;
 
-    private Integer fortnightOfMonth;
-
-    private Integer fortnightOfYear;
-
-    private Integer weekOfMonth;
-
     private Integer weekOfYear;
 
     private Integer dayOfWeek;

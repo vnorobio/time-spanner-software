@@ -1300,8 +1300,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: start_day
-                  type: tinyint
+                  name: start_date
+                  type: date
                   constraints:
                     nullable: false
               - column:
@@ -1315,8 +1315,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: ending_day
-                  type: tinyint
+                  name: ending_date
+                  type: date
                   constraints:
                     nullable: false
               - column:
@@ -1486,7 +1486,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: working-hours_concept
+                  name: working_hours_concept
                   type: int
                   constraints:
                     nullable: false
@@ -1523,7 +1523,7 @@ databaseChangeLog:
       author: vnorobio
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: working-hours_concept
+            baseColumnNames: working_hours_concept
             baseTableName: parameters
             constraintName: fk_working-hours_concept
             referencedColumnNames: concept_id
@@ -1593,7 +1593,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: programmation_sequence_code
+                  name: code
                   type: varchar(255)
                   constraints:
                     nullable: false

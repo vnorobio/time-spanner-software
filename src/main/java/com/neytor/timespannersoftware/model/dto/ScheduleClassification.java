@@ -1,9 +1,9 @@
 package com.neytor.timespannersoftware.model.dto;
 
-import com.neytor.timespannersoftware.model.ScheduleDetailEntity;
-import com.neytor.timespannersoftware.model.TimeClassificationEntity;
 import lombok.Builder;
 import lombok.Value;
+
+import java.time.LocalDate;
 
 @Value
 @Builder
@@ -11,8 +11,23 @@ public class ScheduleClassification {
 
     private Long id;
 
-    private ScheduleDetailEntity scheduleDetail;
+    private Schedule schedule;
 
-    private TimeClassificationEntity timeClassification;
+    private ScheduleDetail scheduleDetail;
 
+    private LocalDate startDate;
+
+    private Long startTime;
+
+    private Long duration;
+
+    private LocalDate endingDate;
+
+    private Long endingTime;
+
+    private Boolean isOvertime;
+
+    private Boolean isNigth;
+
+    private Boolean isCompensatory;
 }

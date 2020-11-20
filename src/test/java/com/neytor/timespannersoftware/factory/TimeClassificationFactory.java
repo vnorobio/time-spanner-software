@@ -1,7 +1,5 @@
 package com.neytor.timespannersoftware.factory;
 
-import com.neytor.timespannersoftware.model.TimeClassificationEntity;
-import com.neytor.timespannersoftware.model.dto.TimeClassification;
 import org.jeasy.random.EasyRandom;
 
 import java.util.List;

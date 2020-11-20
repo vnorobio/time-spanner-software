@@ -5,9 +5,13 @@ import lombok.Value;
 
 @Value
 @Builder
-public class TimeClassification {
+public class TimeSpanClassification {
 
     private Long id;
+
+    private ProgrammationTemplate   programmationTemplate;
+
+    private TimeSpan   timeSpan;
 
     private int startDay;
 

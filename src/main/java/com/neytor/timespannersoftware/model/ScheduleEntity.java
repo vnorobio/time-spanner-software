@@ -32,8 +32,11 @@ public class ScheduleEntity {
     @Column(name = "time_off_type")
     private int timeOffType;
 
-    @Column(name = "ordinary_time_lapse")
-    private Long ordinaryTimeLapse;
+    @Column(name = "total_time")
+    private Long totalTime;
+
+    @Column(name = "working_time")
+    private Long workingTime;
 
     @Column(name = "rest_time")
     private Long restTime;

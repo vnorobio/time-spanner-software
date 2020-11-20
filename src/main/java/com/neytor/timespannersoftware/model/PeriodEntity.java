@@ -32,10 +32,4 @@ public class PeriodEntity {
     @Column(name = "ending_date", columnDefinition = "DATE")
     private LocalDate endingDate;
 
-    @Column(name = "projected_interval")
-    private Integer projectedInterval;
-
-    @Column(name = "projection_start_date", columnDefinition = "DATE")
-    private LocalDate projectionStartDate;
-
 }

@@ -33,15 +33,6 @@ public class DateEntity {
 
     private Integer month;
 
-    @Column(name = "fortnight_of_month")
-    private Integer fortnightOfMonth;
-
-    @Column(name = "fortnight_of_year")
-    private Integer fortnightOfYear;
-
-    @Column(name = "week_of_month")
-    private Integer weekOfMonth;
-
     @Column(name = "week_of_year")
     private Integer weekOfYear;
 
