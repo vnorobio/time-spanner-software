@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/catalogs")
 @Api("contracts")
 public class ContractController {
-
+/*
     public static final String NOT_CONTRACT_FOUND_WITH_ID = "Not contract found with id: ";
     public static final String NOT_CONTRACT_FOUND_WITH_REFERENCE = "Not contract found with reference: ";
     private final ContractService service;
@@ -126,7 +127,7 @@ public class ContractController {
     public ResponseEntity<Contract> update(@RequestBody Contract updateDto) {
         ContractEntity entity = service.findById(updateDto.getId()).orElseThrow(() -> new EntityNotFoundException(NOT_CONTRACT_FOUND_WITH_ID + updateDto.getId()));
         entity.setContractType(updateDto.getContractType());
-        entity.setStartDate(Date.valueOf(updateDto.getStartDate()));
+        entity.setStartDate(LocalDate.from(updateDto.getStartDate()));
         entity.setEndingDate(Date.valueOf(updateDto.getEndingDate()));
         entity.setSalary(updateDto.getSalary());
         entity.setPayrollPeriodicity(updateDto.getPayrollPeriodicity());
@@ -158,5 +159,5 @@ public class ContractController {
 
     private ContractEntity convertToEntity(Contract dto) {
         return modelMapper.map(dto, ContractEntity.class);
-    }
+    }*/
 }

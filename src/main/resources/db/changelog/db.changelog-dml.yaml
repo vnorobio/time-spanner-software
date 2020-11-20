@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-countries-1
+      author: vnorobio
+      changes:
+        -  insert:
+             dbms:  '!h2, postgresql, mysql'
+             schemaName:  public
+             tableName: countries
+             columns:
+               - column:
+                   name: country_name
+                   value: Colombia
+               - column:
+                   name: numeric_code
+                   value: 170
+               - column:
+                   name: alpha_2_code
+                   value: CO
+               - column:
+                   name: alpha_3_code
+                   value: COL

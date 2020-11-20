@@ -1,0 +1,1659 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200419-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: active
+                  type: boolean
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: users
+  - changeSet:
+      id: 20200419-2-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: login
+            constraintName: uc_user_login
+            tableName: users
+  - changeSet:
+      id: 20200419-3-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uc_user_email
+            tableName: users
+  - changeSet:
+      id: 20200526-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: profiles
+            columns:
+              - column:
+                  name: profile_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: profiles
+  - changeSet:
+      id: 20200526-2-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: users_profiles
+            columns:
+              - column:
+                  name: user_profile_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profile_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: user_profiles
+  - changeSet:
+      id: 20200526-3-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: users_profiles
+            constraintName: fk_profile_user
+            referencedColumnNames: user_id
+            referencedTableName: users
+  - changeSet:
+      id: 20200526-4-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: profile_id
+            baseTableName: users_profiles
+            constraintName: fk_user_profile
+            referencedColumnNames: profile_id
+            referencedTableName: profiles
+  - changeSet:
+      id: 20200526-5-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: user_id, profile_id
+            constraintName: uc_user_profile
+            tableName: users_profiles
+  - changeSet:
+      id: 20200526-6-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: companies
+            columns:
+              - column:
+                  name: company_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: company_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: companies
+  - changeSet:
+      id: 20200616-1-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: country_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: country_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: numeric_code
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alpha_2_code
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alpha_3_code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: countries
+  - changeSet:
+      id: 20200616-2-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: country_name
+            constraintName: uc_country_name
+            tableName: countries
+  - changeSet:
+      id: 20200616-3-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: country_name
+            constraintName: uc_numeric_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-4-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: alpha_2_code
+            constraintName: uc_alpha_2_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-5-vno
+      author: vnorobio
+      changes:
+        - addUniqueConstraint:
+            columnNames: alpha_3_code
+            constraintName: uc_alpha_3_code
+            tableName: countries
+  - changeSet:
+      id: 20200616-6-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: identification_type
+            columns:
+              - column:
+                  name: identification_type_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(127)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: shortened_form
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: identification_type
+  - changeSet:
+      id: 20200616-7-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: country_id
+            baseTableName: identification_type
+            constraintName: fk_identification_country
+            referencedColumnNames: country_id
+            referencedTableName: countries
+  - changeSet:
+      id: 20200616-8-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: persons
+            columns:
+              - column:
+                  name: person_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: first_surname
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_surname
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: full_name
+                  type: varchar(1000)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: identification_type
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: marital_status
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: persons
+  - changeSet:
+      id: 20200616-9-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: identification_type
+            baseTableName: persons
+            constraintName: fk_identification_person
+            referencedColumnNames: identification_type_id
+            referencedTableName: identification_type
+  - changeSet:
+      id: 20200720-10-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: employees_groups
+            columns:
+              - column:
+                  name: employees_group_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: employees_groups
+  - changeSet:
+      id: 20200720-11-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: estates
+            columns:
+              - column:
+                  name: estate_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: estates
+  - changeSet:
+      id: 20200720-12-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: country_id
+            baseTableName: estates
+            constraintName: fk_estate_country
+            referencedColumnNames: country_id
+            referencedTableName: countries
+  - changeSet:
+      id: 20200720-13-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: cities
+            columns:
+              - column:
+                  name: city_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estate_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: cities
+  - changeSet:
+      id: 20200720-14-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: country_id
+            baseTableName: cities
+            constraintName: fk_city_country
+            referencedColumnNames: country_id
+            referencedTableName: countries
+  - changeSet:
+      id: 20200720-15-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estate_id
+            baseTableName: cities
+            constraintName: fk_city_estate
+            referencedColumnNames: estate_id
+            referencedTableName: estates
+  - changeSet:
+      id: 20200720-16-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: contracts
+            columns:
+              - column:
+                  name: contract_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: reference
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_date
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: salary
+                  type: decimal(20,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payroll_periodicity
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employees_group_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: contracts
+  - changeSet:
+      id: 20200720-17-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: employees_group_id
+            baseTableName: contracts
+            constraintName: fk_employees_group_contract
+            referencedColumnNames: employees_group_id
+            referencedTableName: employees_groups
+  - changeSet:
+      id: 20200720-18-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: city_id
+            baseTableName: contracts
+            constraintName: fk_city_contract
+            referencedColumnNames: city_id
+            referencedTableName: cities
+  - changeSet:
+      id: 20200816-19-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: dates
+            columns:
+              - column:
+                  name: date_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: semester
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: month
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: week_of_year
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: day_of_week
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: day_of_month
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: day_of_year
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_holiday
+                  type: boolean
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: dates
+  - changeSet:
+      id: 20200816-20-vno
+      author: vnorobio
+      changes:
+        - addDefaultValue:
+            tableName: dates
+            columnName:  is_holiday
+            defaultValueBoolean:  false
+  - changeSet:
+      id: 20200816-21-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: periods
+            columns:
+              - column:
+                  name: period_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: previous_period
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: year
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: periodicity
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_date
+                  type: date
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: periods
+  - changeSet:
+      id: 20200816-22-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: previous_period
+            baseTableName: periods
+            constraintName: fk_previous_period
+            referencedColumnNames: period_id
+            referencedTableName: periods
+  - changeSet:
+      id: 20200816-23-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: locations
+            columns:
+              - column:
+                  name: location_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: locations
+  - changeSet:
+      id: 20200816-24-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: spots
+            columns:
+              - column:
+                  name: spot_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: spots
+  - changeSet:
+      id: 20200816-25-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: spots
+            constraintName: fk_spot_location
+            referencedColumnNames: location_id
+            referencedTableName: locations
+  - changeSet:
+      id: 20200816-26-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: city_id
+            baseTableName: spots
+            constraintName: fk_spot_city
+            referencedColumnNames: city_id
+            referencedTableName: cities
+  - changeSet:
+      id: 20200816-27-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: programmation_templates
+            columns:
+              - column:
+                  name: programmation_template_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_off_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: working_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rest_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: programmation_templates
+  - changeSet:
+      id: 20200816-28-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: time_spans
+            columns:
+              - column:
+                  name: time_span_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: span_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: programmation_template_id
+                  type: int
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: time_spans
+  - changeSet:
+      id: 20200816-29-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: programmation_template_id
+            baseTableName: time_spans
+            constraintName: fk_time_span_template
+            referencedColumnNames: programmation_template_id
+            referencedTableName: programmation_templates
+  - changeSet:
+      id: 20200920-30-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedules
+            columns:
+              - column:
+                  name: schedule_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_off_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: working_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rest_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: template_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: schedules
+  - changeSet:
+      id: 20200920-31-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: schedules
+            constraintName: fk_schedule_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-32-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: schedules
+            constraintName: fk_schedule_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-33-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: schedules
+            constraintName: fk_schedule_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-34-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedule_details
+            columns:
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: span_type
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: schedule_details
+  - changeSet:
+      id: 20200920-35-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_schedule
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-36-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-37-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-38-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: schedule_details
+            constraintName: fk_detail_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-40-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: concepts
+            columns:
+              - column:
+                  name: concept_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ratio
+                  type: decimal(10,5)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: concepts
+  - changeSet:
+      id: 20200920-41-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: working_time_liquidations
+            columns:
+              - column:
+                  name: working_time_liquidation_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: liquidation_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: spot_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: concept_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: applied_ratio
+                  type: decimal(10,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_salary
+                  type: decimal(25,5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount_of_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: liquidation_value
+                  type: decimal(25,5)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: working_time_liquidations
+  - changeSet:
+      id: 20200920-42-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_schedule
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-43-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_detail_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_schedule_detail
+            referencedColumnNames: schedule_detail_id
+            referencedTableName: schedule_details
+  - changeSet:
+      id: 20200920-44-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: spot_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_spot
+            referencedColumnNames: spot_id
+            referencedTableName: spots
+  - changeSet:
+      id: 20200920-45-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_person
+            referencedColumnNames: person_id
+            referencedTableName: persons
+  - changeSet:
+      id: 20200920-46-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: contract_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_contract
+            referencedColumnNames: contract_id
+            referencedTableName: contracts
+  - changeSet:
+      id: 20200920-47-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: concept_id
+            baseTableName: working_time_liquidations
+            constraintName: fk_liquidation_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20200920-48-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: schedule_classifications
+            columns:
+              - column:
+                  name: schedule_classification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_detail_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_overtime
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_nigth
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_compensatory
+                  type: boolean
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: schedule_classifications
+  - changeSet:
+      id: 20201119-49-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_classifications
+            constraintName: fk_classifications_schedule
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-49-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_detail_id
+            baseTableName: schedule_classifications
+            constraintName: fk_classification_schedule_detail
+            referencedColumnNames: schedule_detail_id
+            referencedTableName: schedule_details
+  - changeSet:
+      id: 20200920-50-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: schedule_id
+            baseTableName: schedule_classifications
+            constraintName: fk_schedule_detail_classification
+            referencedColumnNames: schedule_id
+            referencedTableName: schedules
+  - changeSet:
+      id: 20200920-51-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: time_span_classifications
+            columns:
+              - column:
+                  name: time_span_classification_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: programmation_template_id
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: time_span_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_day
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ending_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_overtime
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_nigth
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_compensatory
+                  type: boolean
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 20200920-52-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: time_span_id
+            baseTableName: time_span_classifications
+            constraintName: fk_classification_time_span
+            referencedColumnNames: time_span_id
+            referencedTableName: time_spans
+  - changeSet:
+      id: 20200920-53-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: programmation_template_id
+            baseTableName: time_span_classifications
+            constraintName: fk_time_classification_template
+            referencedColumnNames: programmation_template_id
+            referencedTableName: programmation_templates
+  - changeSet:
+      id: 20201119-54-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: parameters
+            columns:
+              - column:
+                  name: parameters_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: maximum_work_time_per_day
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: maximum_work_time_per_week
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manimum_rest_time_per_week
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: working-hours_concept
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: overtime_surcharge_concept
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: night_surcharge_concept
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: holiday_surcharge_concept
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sunday_surcharge_concept
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: compensation_surcharge_concept
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: parameters
+  - changeSet:
+      id: 20201119-55-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: working-hours_concept
+            baseTableName: parameters
+            constraintName: fk_working-hours_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-56-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: overtime_surcharge_concept
+            baseTableName: parameters
+            constraintName: fk_overtime_surcharge_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-57-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: night_surcharge_concept
+            baseTableName: parameters
+            constraintName: fk_night_surcharge_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-58-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: holiday_surcharge_concept
+            baseTableName: parameters
+            constraintName: fk_holiday_surcharge_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-59-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: sunday_surcharge_concept
+            baseTableName: parameters
+            constraintName: fk_sunday_surcharge_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-60-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: compensation_surcharge_concept
+            baseTableName: parameters
+            constraintName: fk_compensation_surcharge_concept
+            referencedColumnNames: concept_id
+            referencedTableName: concepts
+  - changeSet:
+      id: 20201119-61-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: programmation_sequences
+            columns:
+              - column:
+                  name: programmation_sequence_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: programmation_sequence_code
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: programmation_sequences
+  - changeSet:
+      id: 20201119-62-vno
+      author: vnorobio
+      changes:
+        - createTable:
+            tableName: sequence_details
+            columns:
+              - column:
+                  name: sequence_detail_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: programmation_sequence_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: programmation_template_id
+                  type: int
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: sequence_details
+  - changeSet:
+      id: 20201119-63-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: programmation_sequence_id
+            baseTableName: sequence_details
+            constraintName: fk_programmation_sequence_details
+            referencedColumnNames: programmation_sequence_id
+            referencedTableName: programmation_sequences
+  - changeSet:
+      id: 20201119-64-vno
+      author: vnorobio
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: programmation_template_id
+            baseTableName: sequence_details
+            constraintName: fk_template_sequence_details
+            referencedColumnNames: programmation_template_id
+            referencedTableName: programmation_templates
