@@ -1,9 +1,9 @@
 package com.neytor.timespannersoftware.model.dto;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 @Value
+@AllArgsConstructor
 @Builder
 public class Country {
 
@@ -16,5 +16,8 @@ public class Country {
     private String alpha2Code;
 
     private String alpha3Code;
+
+
+
 
 }

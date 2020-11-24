@@ -9,7 +9,12 @@ public class IdentificationTypeMapper {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static IdentificationType convertToDto( IdentificationTypeEntity entity ) {
-        return modelMapper.map(entity, IdentificationType.class);
+        return IdentificationType.builder()
+                .id(entity.getId())
+                .code(entity.getCode())
+                .shortenedForm(entity.getShortenedForm())
+                .description(entity.getDescription())
+                .build();
     }
 
     public static IdentificationTypeEntity convertToEntity( IdentificationType dto ) {

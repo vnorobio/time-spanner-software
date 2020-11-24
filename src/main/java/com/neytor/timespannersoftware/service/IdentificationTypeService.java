@@ -1,24 +1,22 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
+import com.neytor.timespannersoftware.model.dto.IdentificationType;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IdentificationTypeService {
-    List<IdentificationTypeEntity> findAll();
+    List<IdentificationType> findAll();
 
-    Optional<IdentificationTypeEntity> findById(Long id);
+    Optional<IdentificationType> findById(Long id);
 
-    Optional<IdentificationTypeEntity> findByCode(String code);
+    Optional<IdentificationType> findByCode(String code);
 
-    Optional<IdentificationTypeEntity> findByDescription(String description);
+    Optional<IdentificationType> findByShortenedForm(String shortenedForm);
 
-    Optional<IdentificationTypeEntity> findByShortenedForm(String shortenedForm);
+    IdentificationType create(IdentificationType identificationType);
 
-    IdentificationTypeEntity create(IdentificationTypeEntity identificationType);
-
-    IdentificationTypeEntity update(IdentificationTypeEntity identificationType);
+    IdentificationType update(IdentificationType identificationType);
 
     void delete(Long id);
 

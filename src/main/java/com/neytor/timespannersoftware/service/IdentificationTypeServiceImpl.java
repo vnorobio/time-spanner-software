@@ -1,12 +1,16 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.IdentificationTypeEntity;
+import com.neytor.timespannersoftware.model.dto.IdentificationType;
+import com.neytor.timespannersoftware.model.mapper.IdentificationTypeMapper;
 import com.neytor.timespannersoftware.repository.IdentificationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class IdentificationTypeServiceImpl implements IdentificationTypeService{
@@ -19,38 +23,41 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService{
     }
 
     @Override
-    public List<IdentificationTypeEntity> findAll() {
-        return repository.findAll();
+    public List<IdentificationType> findAll() {
+        List<IdentificationTypeEntity> entities = repository.findAll();
+        return entities.stream()
+                .map(entity -> IdentificationTypeMapper.convertToDto(entity))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<IdentificationTypeEntity> findById(Long id) {
-        return repository.findById(id);
+    public Optional<IdentificationType> findById(Long id) {
+        IdentificationTypeEntity entity = repository.findById(id).orElseThrow(() ->new EntityNotFoundException("There's no entity with id: " + id));
+        return Optional.of(IdentificationTypeMapper.convertToDto(entity));
     }
 
     @Override
-    public Optional<IdentificationTypeEntity> findByCode(String code) {
-        return repository.findByCode(code);
+    public Optional<IdentificationType> findByCode(String code) {
+        IdentificationTypeEntity entity = repository.findByCode(code).orElseThrow(() ->new EntityNotFoundException("There's no entity with code: " + code));
+        return Optional.of(IdentificationTypeMapper.convertToDto(entity));
     }
 
     @Override
-    public Optional<IdentificationTypeEntity> findByDescription(String description) {
-        return repository.findByDescription(description);
+    public Optional<IdentificationType> findByShortenedForm(String shortenedForm) {
+        IdentificationTypeEntity entity = repository.findByShortenedForm(shortenedForm).orElseThrow(() ->new EntityNotFoundException("There's no entity with shortened form: " + shortenedForm));
+        return Optional.of(IdentificationTypeMapper.convertToDto(entity));
     }
 
     @Override
-    public Optional<IdentificationTypeEntity> findByShortenedForm(String shortenedForm) {
-        return repository.findByShortenedForm(shortenedForm);
+    public IdentificationType create(IdentificationType identificationType) {
+        IdentificationTypeEntity entity = repository.save( IdentificationTypeMapper.convertToEntity(identificationType));
+        return IdentificationTypeMapper.convertToDto(entity);
     }
 
     @Override
-    public IdentificationTypeEntity create(IdentificationTypeEntity identificationType) {
-        return repository.save(identificationType);
-    }
-
-    @Override
-    public IdentificationTypeEntity update(IdentificationTypeEntity identificationType) {
-        return repository.save(identificationType);
+    public IdentificationType update(IdentificationType identificationType) {
+        IdentificationTypeEntity entity = repository.save( IdentificationTypeMapper.convertToEntity(identificationType));
+        return IdentificationTypeMapper.convertToDto(entity);
     }
 
     @Override

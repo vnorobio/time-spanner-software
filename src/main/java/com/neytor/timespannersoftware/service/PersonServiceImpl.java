@@ -1,12 +1,16 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.PersonEntity;
+import com.neytor.timespannersoftware.model.dto.Person;
+import com.neytor.timespannersoftware.model.mapper.PersonMapper;
 import com.neytor.timespannersoftware.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService{
@@ -19,28 +23,42 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public List<PersonEntity> findAll() {
-        return repository.findAll();
+    public List<Person> findAll() {
+        List<PersonEntity> entities = repository.findAll();
+        return entities.stream().map(entity -> PersonMapper.convertToDto(entity)).collect(Collectors.toList());
     }
 
     @Override
-    public List<PersonEntity> findByFullNameContaining(String fullName) {
-        return repository.findByFullNameContaining(fullName);
+    public List<Person > findByFullNameContaining(String fullName) {
+        List<PersonEntity> entities = repository.findByFullNameContaining(fullName);
+        return entities.stream().map(entity -> PersonMapper.convertToDto(entity)).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<PersonEntity> findById(Long id) {
-        return repository.findById(id);
+    public List<Person > findByIdentificationNumberContaining(String identification) {
+        List<PersonEntity> entities = repository.findByIdentificationNumberContaining(identification);
+        return entities.stream().map(entity -> PersonMapper.convertToDto(entity)).collect(Collectors.toList());
     }
 
     @Override
-    public PersonEntity create(PersonEntity person) {
-        return repository.save(person);
+    public Optional<Person > findById(Long id) {
+        PersonEntity entity = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el id: " + id));
+        Person dto = PersonMapper.convertToDto(entity);
+        return Optional.of(dto);
     }
 
     @Override
-    public PersonEntity update(PersonEntity person) {
-        return repository.save(person);
+    public Person  create(Person  person) {
+        PersonEntity entity = repository.save(PersonMapper.convertToEntity(person));
+        Person dto = PersonMapper.convertToDto(entity);
+        return dto;
+    }
+
+    @Override
+    public Person  update(Person  person) {
+        PersonEntity entity = repository.save(PersonMapper.convertToEntity(person));
+        Person dto = PersonMapper.convertToDto(entity);
+        return dto;
     }
 
     @Override

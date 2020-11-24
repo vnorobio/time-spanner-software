@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.6.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'org.springframework.boot' version '2.3.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 	id "org.sonarqube" version "2.8"
 	id 'jacoco'
@@ -12,27 +12,33 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'org.springframework.boot:spring-boot-starter'
-	runtimeOnly 'org.postgresql:postgresql'
-	compile 'io.springfox:springfox-swagger2:2.9.2'
-	compile 'io.springfox:springfox-swagger-ui:2.9.2'
-	compile 'com.google.cloud.sql:postgres-socket-factory:1.0.16'
-	compile 'org.modelmapper:modelmapper:2.3.7'
-	compile 'com.google.code.gson:gson:2.8.6'
 	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+	compile 'org.springdoc:springdoc-openapi-ui:1.5.0'
+
+	//compile 'com.google.cloud.sql:postgres-socket-factory:1.0.16'
+	compile 'org.modelmapper:modelmapper:2.3.7'
+
+	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+	testCompile 'org.mockito:mockito-junit-jupiter:3.6.0'
+
+
 // https://mvnrepository.com/artifact/org.jeasy/easy-random-core
-	testCompile group: 'org.jeasy', name: 'easy-random-core', version: '4.0.0'
+	//testCompile group: 'org.jeasy', name: 'easy-random-core', version: '4.0.0'
+	testImplementation 'org.jeasy:easy-random-bean-validation:4.2.0'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -60,6 +66,7 @@ jacocoTestReport {
 jacoco {
 	toolVersion = "0.8.5"
 	reportsDir = file("$buildDir/reports/jacoco")
+
 }
 
 jacocoTestReport {

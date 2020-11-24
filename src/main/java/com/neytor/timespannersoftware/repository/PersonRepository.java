@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
     List<PersonEntity> findByFullNameContaining(String fullName);
+    List<PersonEntity> findByIdentificationNumberContaining(String identification);
 
 }

@@ -1,21 +1,23 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.PersonEntity;
+import com.neytor.timespannersoftware.model.dto.Person;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PersonService {
 
-    List<PersonEntity> findAll();
+    List<Person > findAll();
 
-    List<PersonEntity>  findByFullNameContaining(String fullName);
+    List<Person >  findByFullNameContaining(String fullName);
 
-    Optional<PersonEntity> findById(Long id);
+    List<Person > findByIdentificationNumberContaining(String identification);
 
-    PersonEntity create(PersonEntity person);
+    Optional<Person> findById(Long id);
 
-    PersonEntity update(PersonEntity person);
+    Person  create(Person  person);
+
+    Person  update(Person  person);
 
     void delete(Long id);
 
