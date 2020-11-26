@@ -1,6 +1,8 @@
 package com.neytor.timespannersoftware.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +10,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "schedule_details")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ScheduleDetailEntity {
 
     @Id

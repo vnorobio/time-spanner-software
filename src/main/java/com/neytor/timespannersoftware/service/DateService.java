@@ -2,7 +2,6 @@ package com.neytor.timespannersoftware.service;
 
 import com.neytor.timespannersoftware.model.DateEntity;
 
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;

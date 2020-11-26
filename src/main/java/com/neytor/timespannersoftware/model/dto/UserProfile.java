@@ -2,13 +2,12 @@ package com.neytor.timespannersoftware.model.dto;
 
 import com.neytor.timespannersoftware.model.ProfileEntity;
 import com.neytor.timespannersoftware.model.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Value;
 
-import javax.persistence.*;
-
 @Value
+@AllArgsConstructor
 @Builder
 public class UserProfile {
 

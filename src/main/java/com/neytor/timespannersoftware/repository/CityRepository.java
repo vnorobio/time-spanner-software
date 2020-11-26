@@ -1,7 +1,7 @@
 package com.neytor.timespannersoftware.repository;
 
-import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.CityEntity;
+import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

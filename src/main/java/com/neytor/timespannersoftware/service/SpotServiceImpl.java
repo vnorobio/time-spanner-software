@@ -1,8 +1,8 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.SpotEntity;
-import com.neytor.timespannersoftware.model.CityEntity;
 import com.neytor.timespannersoftware.repository.SpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.LocationEntity;
 import com.neytor.timespannersoftware.model.PeriodEntity;
 import com.neytor.timespannersoftware.repository.PeriodRepository;
 import org.springframework.beans.factory.annotation.Autowired;

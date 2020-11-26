@@ -1,6 +1,7 @@
 package com.neytor.timespannersoftware.model.dto;
 
 import com.neytor.timespannersoftware.model.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Value
+@AllArgsConstructor
 @Builder
 public class WorkingTimeLiquidation {
 

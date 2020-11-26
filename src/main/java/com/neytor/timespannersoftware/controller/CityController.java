@@ -3,7 +3,6 @@ package com.neytor.timespannersoftware.controller;
 import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.dto.City;
 import com.neytor.timespannersoftware.service.CityService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
