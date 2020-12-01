@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  app:
+    container_name: time-spanner-backend
+    image: time-spanner-backend
+    build: ./
+    ports:
+      - "8084:8084"
+    depends_on:
+      - dbpostgresql
+  dbpostgresql:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=S3nc1ll4
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=db_time_spanner

@@ -42,30 +42,30 @@ public class CountryController {
         return ResponseEntity.ok( ).body( service.findAll( ) );
     }
 
-    @GetMapping( path = "/country/by-id/{id}", produces = "application/json" )
+    @GetMapping( path = "/countries/by-id/{id}", produces = "application/json" )
     public ResponseEntity< Country > finById( @PathVariable( value = "id" ) Long id ) {
         return ResponseEntity.ok( )
                 .body( service.findById( id ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_ID + id ) ) );
     }
 
-    @GetMapping( path = "/country/by-name/{name}", produces = "application/json" )
+    @GetMapping( path = "/countries/by-name/{name}", produces = "application/json" )
     public ResponseEntity< List<Country > > findByName( @PathVariable( value = "name" ) String name ) {
         return ResponseEntity.ok( ).body( service.findByName( name) );
     }
 
-    @GetMapping( path = "/country/by-code/{code}", produces = "application/json" )
+    @GetMapping( path = "/countries/by-code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByNumericCode( @PathVariable( value = "code" ) Integer code ) {
         return ResponseEntity.ok( )
                 .body( service.findByNumericCode( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_ID + code ) ) );
     }
 
-    @GetMapping( path = "/country/by-alpha2code/{code}", produces = "application/json" )
+    @GetMapping( path = "/countries/by-alpha2code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByAlpha2Code( @PathVariable( value = "code" ) String code ) {
         return ResponseEntity.ok( )
                 .body( service.findByAlpha2Code( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_NAME + code ) ) );
     }
 
-    @GetMapping( path = "/country/by-alpha3code/{code}", produces = "application/json" )
+    @GetMapping( path = "/countries/by-alpha3code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByAlpha3Code( @PathVariable( value = "code" ) String code ) {
         return ResponseEntity.ok( )
                 .body( service.findByAlpha3Code( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_NAME + code ) ) );
@@ -80,7 +80,7 @@ public class CountryController {
     @PutMapping( path = "/countries", produces = "application/json" )
     public ResponseEntity< Country > update( @RequestBody Country updateDto ) {
 
-        if (service.existsById(updateDto.getId( ))){
+        if (!service.existsById(updateDto.getId( ))){
             throw new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_ID + updateDto.getId( ) );
         }
 
