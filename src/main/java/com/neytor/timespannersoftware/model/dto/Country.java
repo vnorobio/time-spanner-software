@@ -3,15 +3,12 @@ package com.neytor.timespannersoftware.model.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import lombok.Builder;
 import lombok.NonNull;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.Value;
 
-
-@Getter
-@ToString
-@SuperBuilder(toBuilder = true)
+@Value
+@Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Country {
 
