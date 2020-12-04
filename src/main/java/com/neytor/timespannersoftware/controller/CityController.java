@@ -27,15 +27,10 @@ public class CityController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @GetMapping(path = "/city/by-id/{id}", produces = "application/json")
+    @GetMapping(path = "/cities/by-id/{id}", produces = "application/json")
     public ResponseEntity<City> finById(@PathVariable(value = "id") Long id) {
         return ResponseEntity.ok()
                 .body(service.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id)));
-    }
-
-    @GetMapping(path = "/cities/by-code/{code}", produces = "application/json")
-    public ResponseEntity<List<City>>findByCode(@PathVariable(value = "code") String code) {
-        return ResponseEntity.ok().body(service.findByCodeContaining(code));
     }
 
     @GetMapping(path = "/cities/by-description/{description}", produces = "application/json")
@@ -43,12 +38,12 @@ public class CityController {
         return ResponseEntity.ok().body(service.findByDescriptionContaining(description));
     }
 
-    @PostMapping(path = "/city", produces = "application/json")
+    @PostMapping(path = "/cities", produces = "application/json")
     public ResponseEntity<City> create(@RequestBody City dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
-    @PutMapping(path = "/city", produces = "application/json")
+    @PutMapping(path = "/cities", produces = "application/json")
     public ResponseEntity<City> update(@RequestBody City updateDto) {
          if (!service.existsById( updateDto.getId() )){
             throw new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + updateDto.getId());
@@ -56,7 +51,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.update(updateDto));
     }
 
-    @DeleteMapping(path = "/city/by-id/{id}", produces = "application/json")
+    @DeleteMapping(path = "/cities/by-id/{id}", produces = "application/json")
     public ResponseEntity<City> delete(@PathVariable(value = "id") Long id) {
         if (!service.existsById(id)) {
             throw new EntityNotFoundException(NOT_TERRITORIAL_DIVISION_FOUND_WITH_ID + id);

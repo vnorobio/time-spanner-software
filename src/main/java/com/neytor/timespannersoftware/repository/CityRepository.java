@@ -14,6 +14,5 @@ public interface CityRepository extends JpaRepository<CityEntity, Long> {
     Optional<CityEntity> findByCode(String code);
     List<CityEntity> findByEstate(EstateEntity entity);
     List<CityEntity> findByCountry(CountryEntity entity);
-    List<CityEntity> findByCodeContaining(String code);
     List<CityEntity> findByDescriptionContaining(String description);
 }
