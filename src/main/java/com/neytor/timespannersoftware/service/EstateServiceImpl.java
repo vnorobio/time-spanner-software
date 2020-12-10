@@ -1,5 +1,6 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.EstateEntity;
 import com.neytor.timespannersoftware.model.dto.Country;
 import com.neytor.timespannersoftware.model.dto.Estate;
@@ -36,20 +37,14 @@ public class EstateServiceImpl implements EstateService {
 
     @Override
     public Optional<Estate> findById(Long id) {
-        Optional<EstateEntity> optEntity = repository.findById(id);
-        Optional<Estate> optEstate =  optEntity.isPresent()
-                ? Optional.ofNullable( EstateMapper.convertToDto( optEntity.get( ) ) )
-                : Optional.empty();
-        return optEstate;
+        EstateEntity entity = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el id: " + id));
+        return Optional.of(EstateMapper.convertToDto(entity));
     }
 
     @Override
     public Optional<Estate> findByCode(String code) {
-        Optional<EstateEntity> optEntity = repository.findByCode(code);
-        Optional<Estate> optEstate =  optEntity.isPresent()
-                ? Optional.ofNullable( EstateMapper.convertToDto( optEntity.get( ) ) )
-                : Optional.empty();
-        return optEstate;
+        EstateEntity entity = repository.findByCode(code).orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el codigo: " + code));
+        return Optional.of(EstateMapper.convertToDto(entity));
     }
 
     @Override

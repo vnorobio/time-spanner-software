@@ -45,7 +45,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findAllShouldReturnPersonsList() {
+    void shouldReturnPersonsListWhenFindAll() {
         List<PersonEntity> entities = generator.objects( PersonEntity.class, 10 ).collect( Collectors.toList());
         when(repository.findAll()).thenReturn(entities);
 
@@ -56,7 +56,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findByFullNameContainingShouldReturnPersonsList() {
+    void shouldReturnPersonsListWhenFindByFullNameContaining() {
         List<PersonEntity> entities = generator.objects( PersonEntity.class, 10 ).collect( Collectors.toList());
         when(repository.findByFullNameContaining(anyString())).thenReturn(entities);
 
@@ -67,7 +67,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findByIdentificationNumberContainingShouldReturnPersonsList() {
+    void shouldReturnPersonsListFindByIdentificationNumberContaining() {
         List<PersonEntity> entities = generator.objects( PersonEntity.class, 10 ).collect( Collectors.toList());
         when(repository.findByIdentificationNumberContaining(anyString())).thenReturn(entities);
 
@@ -78,7 +78,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findByIdShouldReturnResult() {
+    void shouldReturnResultWhenFindById() {
         PersonEntity entity = generator.nextObject( PersonEntity.class );
         when(repository.findById(anyLong())).thenReturn(Optional.of(entity));
 
@@ -89,7 +89,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findByIdShouldThrowEntityNotFoundException() {
+    void shouldThrowEntityNotFoundExceptionWhenFindById() {
         when(repository.findById(anyLong())).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> {
@@ -99,7 +99,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void createShouldReturnPersonInformation() {
+    void shouldReturnCreatedPersonWhenCreate() {
         PersonEntity entity = generator.nextObject( PersonEntity.class );
 
         when(repository.save(any())).thenReturn(entity);
@@ -111,7 +111,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void update() {
+    void shouldReturnUpdatedPersonWhenUpdate() {
         PersonEntity entity = generator.nextObject( PersonEntity.class );
 
         when(repository.save(any())).thenReturn(entity);
@@ -123,7 +123,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void deleteShouldCallRepositoryDeleteById() {
+    void shouldCallRepositoryWhenDeleteById() {
         doNothing().when(repository).deleteById(anyLong());
 
         service.delete(anyLong());
@@ -132,9 +132,12 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void existsById() {
+    void shouldCallRepositoryWhenExistsById() {
         when(repository.existsById(anyLong())).thenReturn(Boolean.TRUE);
+
         boolean response = service.existsById(anyLong());
+
         assertTrue(response);
+        verify(repository, atLeastOnce()).existsById(anyLong());
     }
 }

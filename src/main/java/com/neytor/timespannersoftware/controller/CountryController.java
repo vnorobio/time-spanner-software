@@ -26,8 +26,8 @@ public class CountryController {
     @Autowired
     public CountryController( CountryService service) {
         this.service = service;
-
     }
+
     @Operation(summary = "to list all countries")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -42,41 +42,100 @@ public class CountryController {
         return ResponseEntity.ok( ).body( service.findAll( ) );
     }
 
+    @Operation(summary = "to find a country by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved country",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to access is not available",
+                    content = @Content)
+    })
     @GetMapping( path = "/countries/by-id/{id}", produces = "application/json" )
     public ResponseEntity< Country > finById( @PathVariable( value = "id" ) Long id ) {
         return ResponseEntity.ok( )
                 .body( service.findById( id ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_ID + id ) ) );
     }
 
+    @Operation(summary = "to list countries by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved list",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to access is not available",
+                    content = @Content)
+    })
     @GetMapping( path = "/countries/by-name/{name}", produces = "application/json" )
     public ResponseEntity< List<Country > > findByName( @PathVariable( value = "name" ) String name ) {
         return ResponseEntity.ok( ).body( service.findByName( name) );
     }
 
+    @Operation(summary = "to find a country by code")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved country",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to access is not available",
+                    content = @Content)
+    })
     @GetMapping( path = "/countries/by-code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByNumericCode( @PathVariable( value = "code" ) Integer code ) {
         return ResponseEntity.ok( )
                 .body( service.findByNumericCode( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_ID + code ) ) );
     }
 
+    @Operation(summary = "to find a country by alpha 2 code")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved country",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to access is not available",
+                    content = @Content)
+    })
     @GetMapping( path = "/countries/by-alpha2code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByAlpha2Code( @PathVariable( value = "code" ) String code ) {
         return ResponseEntity.ok( )
                 .body( service.findByAlpha2Code( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_NAME + code ) ) );
     }
 
+    @Operation(summary = "to find a country by alpha 3 code")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Successfully retrieved country",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to access is not available",
+                    content = @Content)
+    })
     @GetMapping( path = "/countries/by-alpha3code/{code}", produces = "application/json" )
     public ResponseEntity< Country > findByAlpha3Code( @PathVariable( value = "code" ) String code ) {
         return ResponseEntity.ok( )
                 .body( service.findByAlpha3Code( code ).orElseThrow( ( ) -> new EntityNotFoundException( NOT_COUNTRY_FOUND_WITH_NAME + code ) ) );
     }
 
-
+    @Operation(summary = "to register a new country")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Successfully created country",
+                    content = {@Content(mediaType = "application/json")}),
+    })
     @PostMapping( path = "/countries", produces = "application/json" )
     public ResponseEntity< Country > create( @RequestBody Country dto ) {
         return ResponseEntity.status( HttpStatus.CREATED ).body( service.create( dto ) );
     }
 
+    @Operation(summary = "to update a country")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202",
+                    description = "Changes where accepted",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to update is not available",
+                    content = @Content)
+    })
     @PutMapping( path = "/countries", produces = "application/json" )
     public ResponseEntity< Country > update( @RequestBody Country updateDto ) {
 
@@ -87,6 +146,15 @@ public class CountryController {
         return ResponseEntity.status( HttpStatus.ACCEPTED ).body( service.update( updateDto ) );
     }
 
+    @Operation(summary = "to delete a country")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Not content",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404",
+                    description = "The resource you were trying to delete is not available",
+                    content = @Content)
+    })
     @DeleteMapping( path = "/countries/by-id/{id}", produces = "application/json" )
     public ResponseEntity< Country > delete( @PathVariable( value = "id" ) Long id ) {
         if ( !service.existsById( id ) ) {

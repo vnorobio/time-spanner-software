@@ -1,9 +1,9 @@
 package com.neytor.timespannersoftware.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.neytor.timespannersoftware.model.dto.City;
 import com.neytor.timespannersoftware.model.dto.Estate;
-import com.neytor.timespannersoftware.service.CityService;
+import com.neytor.timespannersoftware.model.dto.Estate;
+import com.neytor.timespannersoftware.service.EstateService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,17 +38,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-public class CityControllerTest {
+public class EstateControllerTest {
 
     private EasyRandom generator = new EasyRandom();
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @InjectMocks
-    private CityController controller;
+    private EstateController controller;
 
     @Mock
-    CityService service;
+    EstateService service;
 
     private MockMvc mockMvc;
 
@@ -58,12 +58,12 @@ public class CityControllerTest {
     }
 
     @Test
-    void shouldReturnCityListWhenFindAll() throws Exception {
-        List<City> dtoList = generator.objects(City.class, 10).collect(Collectors.toList());
+    void shouldReturnEstateListWhenFindAll() throws Exception {
+        List<Estate> dtoList = generator.objects(Estate.class, 10).collect(Collectors.toList());
 
         BDDMockito.given(service.findAll()).willReturn(dtoList);
 
-        mockMvc.perform(get("/api/v1/configuration/cities"))
+        mockMvc.perform(get("/api/v1/configuration/estates"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -71,11 +71,11 @@ public class CityControllerTest {
     }
 
     @Test
-    void shouldReturnCityWhenFinById() throws Exception {
-        City dto = generator.nextObject(City.class);
+    void shouldReturnEstateWhenFinById() throws Exception {
+        Estate dto = generator.nextObject(Estate.class);
         BDDMockito.given(service.findById(anyLong())).willReturn(Optional.of(dto));
 
-        mockMvc.perform(get("/api/v1/configuration/cities/by-id/{id}", dto.getId()))
+        mockMvc.perform(get("/api/v1/configuration/estates/by-id/{id}", dto.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -85,22 +85,22 @@ public class CityControllerTest {
 
     @Test
     void shouldYieldStatus4xxWhenFinById() throws Exception {
-        City dto = generator.nextObject(City.class);
+        Estate dto = generator.nextObject(Estate.class);
         BDDMockito.given(service.findById(anyLong())).willReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/v1/configuration/cities/by-id/{id}", dto.getId()))
+        mockMvc.perform(get("/api/v1/configuration/estates/by-id/{id}", dto.getId()))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
 
     }
 
     @Test
-    void shouldReturnCityListWhenFindByDescription() throws Exception {
-        City dto = generator.nextObject(City.class);
-        List<City> dtoList = Arrays.asList(dto);
+    void shouldReturnEstateListWhenFindByDescription() throws Exception {
+        Estate dto = generator.nextObject(Estate.class);
+        List<Estate> dtoList = Arrays.asList(dto);
         BDDMockito.given(service.findByDescriptionContaining(anyString())).willReturn(dtoList);
 
-        mockMvc.perform(get("/api/v1/configuration/cities/by-description/{description}", dto.getDescription()))
+        mockMvc.perform(get("/api/v1/configuration/estates/by-description/{description}", dto.getDescription()))
                 // Validate the response code and content type
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -109,28 +109,26 @@ public class CityControllerTest {
     }
 
     @Test
-    void shouldReturnCreatedCityWhenPostCities() throws Exception {
+    void shouldReturnCreatedEstateWhenPostEstates() throws Exception {
         Estate estate = generator.nextObject((Estate.class));
 
-        City requestDto= City.builder()
+        Estate requestDto= Estate.builder()
                 .code("Code")
                 .description("Description")
-                .estate(estate)
                 .country(estate.getCountry())
                 .build();
 
-        City responseDto = City.builder()
+        Estate responseDto = Estate.builder()
                 .id(1L)
                 .code("Code")
                 .description("Description")
-                .estate(estate)
                 .country(estate.getCountry())
                 .build();
 
         String json = objectMapper.writeValueAsString(requestDto);
-        BDDMockito.given(service.create(any(City.class))).willReturn(responseDto);
+        BDDMockito.given(service.create(any(Estate.class))).willReturn(responseDto);
 
-        mockMvc.perform(post("/api/v1/configuration/cities/")
+        mockMvc.perform(post("/api/v1/configuration/estates/")
                 .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(json).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -138,30 +136,28 @@ public class CityControllerTest {
     }
 
     @Test
-    void shouldReturnUpdatedCityWhenPutCities() throws Exception {
+    void shouldReturnUpdatedEstateWhenPutEstates() throws Exception {
         Estate estate = generator.nextObject((Estate.class));
 
-        City requestDto= City.builder()
+        Estate requestDto= Estate.builder()
                 .id(1L)
                 .code("Code")
                 .description("Description")
-                .estate(estate)
                 .country(estate.getCountry())
                 .build();
 
-        City responseDto = City.builder()
+        Estate responseDto = Estate.builder()
                 .id(1L)
                 .code("Code")
                 .description("New description")
-                .estate(estate)
                 .country(estate.getCountry())
                 .build();
 
         String json = objectMapper.writeValueAsString(requestDto);
         given(service.existsById(anyLong())).willReturn(Boolean.TRUE);
-        BDDMockito.given(service.update(any(City.class))).willReturn(responseDto);
+        BDDMockito.given(service.update(any(Estate.class))).willReturn(responseDto);
 
-        mockMvc.perform(put("/api/v1/configuration/cities/")
+        mockMvc.perform(put("/api/v1/configuration/estates/")
                 .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(json).accept(MediaType.APPLICATION_JSON))
                 // Validate the response code and content type
@@ -171,21 +167,20 @@ public class CityControllerTest {
     }
 
     @Test
-    void shouldYieldStatus4xxWhenPutCities() throws Exception {
+    void shouldYieldStatus4xxWhenPutEstates() throws Exception {
         Estate estate = generator.nextObject((Estate.class));
 
-        City requestDto= City.builder()
+        Estate requestDto= Estate.builder()
                 .id(1L)
                 .code("Code")
                 .description("Description")
-                .estate(estate)
                 .country(estate.getCountry())
                 .build();
 
         String json = objectMapper.writeValueAsString(requestDto);
         given(service.existsById(anyLong())).willReturn(Boolean.FALSE);
 
-        mockMvc.perform(put("/api/v1/configuration/cities/")
+        mockMvc.perform(put("/api/v1/configuration/estates/")
                 .contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                 .content(json).accept(MediaType.APPLICATION_JSON))
                 // Validate the response code and content type
@@ -195,22 +190,22 @@ public class CityControllerTest {
     }
 
     @Test
-    public void shouldYieldStatusNoContentWhenDeleteCities() throws Exception {
+    public void shouldYieldStatusNoContentWhenDeleteEstates() throws Exception {
         Long id = 1l;
         given(service.existsById(anyLong())).willReturn(Boolean.TRUE);
         doNothing().when(service).delete(anyLong());
 
-        mockMvc.perform(delete("/api/v1/configuration/cities/by-id/{id}", id) )
+        mockMvc.perform(delete("/api/v1/configuration/estates/by-id/{id}", id) )
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    public void shouldYieldStatus4xxWhenDeleteCities() throws Exception {
+    public void shouldYieldStatus4xxWhenDeleteEstates() throws Exception {
         Long id = 1l;
         given(service.existsById(anyLong())).willReturn(Boolean.FALSE);
 
-        mockMvc.perform(delete("/api/v1/configuration/cities/by-id/{id}", id) )
+        mockMvc.perform(delete("/api/v1/configuration/estates/by-id/{id}", id) )
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }

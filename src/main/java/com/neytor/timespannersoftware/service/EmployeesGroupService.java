@@ -1,24 +1,24 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.EmployeesGroupEntity;
+import com.neytor.timespannersoftware.model.dto.EmployeesGroup;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmployeesGroupService {
-    List<EmployeesGroupEntity> findAll();
+    List<EmployeesGroup> findAll();
 
-    Optional<EmployeesGroupEntity> findById(Long id);
+    Optional<EmployeesGroup> findById(Long id);
 
-    Optional<EmployeesGroupEntity> findByCode(String code);
+    Optional<EmployeesGroup> findByCode(String code);
 
-    List<EmployeesGroupEntity> findByCodeContaining(String code);
+    List<EmployeesGroup> findByCodeContaining(String code);
 
-    List<EmployeesGroupEntity> findByDescriptionContaining(String description);
+    List<EmployeesGroup> findByDescriptionContaining(String description);
 
-    EmployeesGroupEntity create(EmployeesGroupEntity employeesGroupEntity);
+    EmployeesGroup create(EmployeesGroup dto);
 
-    EmployeesGroupEntity update(EmployeesGroupEntity employeesGroupEntity);
+    EmployeesGroup update(EmployeesGroup dto);
 
     void delete(Long id);
 

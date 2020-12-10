@@ -1,5 +1,6 @@
 package com.neytor.timespannersoftware.service;
 
+import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.CountryEntity;
 import com.neytor.timespannersoftware.model.dto.Country;
 import com.neytor.timespannersoftware.model.mapper.CountryMapper;
@@ -29,8 +30,9 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Optional< Country > findById( Long id ) {
-        return this.repository.findById( id )
-                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
+        CountryEntity entity = repository.findById( id )
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el id: " + id));
+        return Optional.of( CountryMapper.convertToDto( entity ) );
     }
 
     @Override
@@ -41,20 +43,23 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Optional< Country > findByNumericCode( Integer numericCode ) {
-        return this.repository.findByNumericCode( numericCode )
-                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
+        CountryEntity entity = repository.findByNumericCode( numericCode )
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el codigo: " + numericCode));
+        return Optional.of( CountryMapper.convertToDto( entity ) );
     }
 
     @Override
     public Optional< Country > findByAlpha2Code( String alpha2Code ) {
-        return this.repository.findByAlpha2Code( alpha2Code )
-                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
+        CountryEntity entity = repository.findByAlpha2Code( alpha2Code )
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el codigo: " + alpha2Code));
+        return Optional.of( CountryMapper.convertToDto( entity ) );
     }
 
     @Override
     public Optional< Country > findByAlpha3Code( String alpha3Code ) {
-        return this.repository.findByAlpha3Code( alpha3Code )
-                .flatMap( countryEntity -> Optional.of( CountryMapper.convertToDto( countryEntity ) ) );
+        CountryEntity entity = repository.findByAlpha3Code( alpha3Code )
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro la entidad con el codigo: " + alpha3Code));
+        return Optional.of( CountryMapper.convertToDto( entity ) );
     }
 
     @Override

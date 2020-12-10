@@ -9,7 +9,11 @@ public class EmployeesGroupMapper {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static EmployeesGroup convertToDto( EmployeesGroupEntity entity ) {
-        return modelMapper.map(entity, EmployeesGroup.class);
+        return EmployeesGroup.builder()
+                .id(entity.getId())
+                .code(entity.getCode())
+                .description(entity.getDescription())
+                .build();
     }
 
     public static EmployeesGroupEntity convertToEntity( EmployeesGroup dto ) {

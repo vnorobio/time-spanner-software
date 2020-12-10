@@ -187,7 +187,7 @@ public class CountryControllerTest {
 
     @Test
     public void shouldReturnSavedCountryWhenPostCountries() throws Exception {
-        Country requiestDto = Country.builder()
+        Country requestDto = Country.builder()
                 .numericCode(999999)
                 .alpha2Code("99")
                 .alpha3Code("999")
@@ -202,7 +202,7 @@ public class CountryControllerTest {
                 .name("Fake name")
                 .build();
 
-        String json = objectMapper.writeValueAsString(requiestDto);
+        String json = objectMapper.writeValueAsString(requestDto);
         given(service.create(any(Country.class))).willReturn(responseDto);
 
         mockMvc.perform(post("/api/v1/configuration/countries/")
