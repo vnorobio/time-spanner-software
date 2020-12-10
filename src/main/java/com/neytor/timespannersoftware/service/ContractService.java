@@ -1,26 +1,26 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.ContractEntity;
+import com.neytor.timespannersoftware.model.dto.Contract;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ContractService {
-    List<ContractEntity> findAll();
+    List<Contract> findAll();
 
-    Optional<ContractEntity> findById(Long id);
+    Optional<Contract> findById(Long id);
 
-    Optional<ContractEntity> findByReference(String reference);
+    Optional<Contract> findByReference(String reference);
 
-    List<ContractEntity> findByIdentificationNumber(String identificationNumber);
+    List<Contract> findByIdentificationNumber(String identificationNumber);
 
-    List<ContractEntity> findByIdentificationNumberContaining(String identificationNumber);
+    List<Contract> findByIdentificationNumberContaining(String identificationNumber);
 
-    List<ContractEntity> findByFullNameContaining(String fullName);
+    List<Contract> findByFullNameContaining(String fullName);
 
-    ContractEntity create(ContractEntity contractEntity);
+    Contract create(Contract dto);
 
-    ContractEntity update(ContractEntity contractEntity);
+    Contract update(Contract dto);
 
     void delete(Long id);
 

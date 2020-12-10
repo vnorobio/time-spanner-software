@@ -93,6 +93,9 @@ public class PersonController {
     })
     @PutMapping(path = "/persons", produces = "application/json")
     public ResponseEntity<Person> update(@RequestBody Person updateDto) {
+        if (!service.existsById(updateDto.getId())) {
+            throw new EntityNotFoundException(NOT_PERSON_FOUND_WITH_ID + updateDto.getId());
+        }
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.update(updateDto));
     }
 
