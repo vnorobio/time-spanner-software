@@ -1,6 +1,5 @@
 package com.neytor.timespannersoftware.controller;
 
-import com.neytor.timespannersoftware.exception.EntityNotFoundException;
 import com.neytor.timespannersoftware.model.dto.Contract;
 import com.neytor.timespannersoftware.service.ContractService;
 import io.swagger.v3.oas.annotations.Operation;

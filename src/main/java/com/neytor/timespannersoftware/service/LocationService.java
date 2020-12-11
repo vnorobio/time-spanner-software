@@ -1,25 +1,25 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.LocationEntity;
+import com.neytor.timespannersoftware.model.dto.Location;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface LocationService {
 
-    List<LocationEntity> findAll();
+    List<Location> findAll();
 
-    Optional<LocationEntity> findById(Long id);
+    Optional<Location> findById(Long id);
 
-    Optional<LocationEntity> findByCode(String code);
+    Optional<Location> findByCode(String code);
 
-    List<LocationEntity> findByCodeContaining(String code);
+    List<Location> findByCodeContaining(String code);
 
-    List<LocationEntity> findByDescriptionContaining(String description);
+    List<Location> findByDescriptionContaining(String description);
 
-    LocationEntity create(LocationEntity locationEntity);
+    Location create(Location dto);
 
-    LocationEntity update(LocationEntity locationEntity);
+    Location update(Location dto);
 
     void delete(Long id);
 

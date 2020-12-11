@@ -1,31 +1,31 @@
 package com.neytor.timespannersoftware.service;
 
-import com.neytor.timespannersoftware.model.CityEntity;
-import com.neytor.timespannersoftware.model.LocationEntity;
-import com.neytor.timespannersoftware.model.SpotEntity;
+import com.neytor.timespannersoftware.model.dto.City;
+import com.neytor.timespannersoftware.model.dto.Location;
+import com.neytor.timespannersoftware.model.dto.Spot;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface SpotService {
 
-    List<SpotEntity> findAll();
+    List<Spot> findAll();
     
-    Optional<SpotEntity> findById(Long id);
+    Optional<Spot> findById(Long id);
 
-    Optional<SpotEntity> findByCode(String code);
+    Optional<Spot> findByCode(String code);
 
-    List<SpotEntity> findByCodeContains(String code);
+    List<Spot> findByCodeContains(String code);
 
-    List<SpotEntity>  findByDescriptionContaining(String description);
+    List<Spot>  findByDescriptionContaining(String description);
 
-    List<SpotEntity> findByLocation(LocationEntity entity);
+    List<Spot> findByLocation(Location dto);
 
-    List<SpotEntity> findByCity(CityEntity entity);
+    List<Spot> findByCity(City entity);
 
-    SpotEntity create(SpotEntity entity);
+    Spot create(Spot entity);
 
-    SpotEntity update(SpotEntity entity);
+    Spot update(Spot entity);
 
     void delete(Long id);
 

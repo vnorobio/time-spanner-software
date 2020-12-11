@@ -9,7 +9,13 @@ public class SpotMapper {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static Spot convertToDto( SpotEntity entity ) {
-        return modelMapper.map(entity, Spot.class);
+        return Spot.builder()
+                .id(entity.getId())
+                .code(entity.getCode())
+                .description(entity.getDescription())
+                .location(LocationMapper.convertToDto(entity.getLocation()))
+                .city(CityMapper.convertToDto(entity.getCity()))
+                .build();
     }
 
     public static SpotEntity convertToEntity( Spot dto ) {

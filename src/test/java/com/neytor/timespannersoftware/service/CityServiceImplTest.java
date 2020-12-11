@@ -161,7 +161,7 @@ public class CityServiceImplTest {
     }
 
     @Test
-    void delete() {
+    void shouldCallRepositoryWhenDelete() {
         doNothing().when(repository).deleteById(anyLong());
 
         service.delete(1l);

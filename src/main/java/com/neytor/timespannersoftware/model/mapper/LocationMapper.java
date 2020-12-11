@@ -9,7 +9,13 @@ public class LocationMapper {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static Location convertToDto( LocationEntity entity ) {
-        return modelMapper.map(entity, Location.class);
+        return Location.builder()
+                .id(entity.getId())
+                .code(entity.getCode())
+                .description(entity.getDescription())
+                .address(entity.getAddress())
+                .phoneNumber(entity.getPhoneNumber())
+                .build();
     }
 
     public static LocationEntity convertToEntity( Location dto ) {
